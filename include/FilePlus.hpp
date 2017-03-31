@@ -14,7 +14,7 @@ namespace stdplus
 
     inline void createFolder(const std::string & path)
     {
-        mkdir(path.c_str());
+        _mkdir(path.c_str());
     }
 
 }

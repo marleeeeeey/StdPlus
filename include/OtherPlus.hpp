@@ -12,7 +12,7 @@ namespace stdplus
 
     inline char waitKeyboardKey()
     {
-        char val = getch();
+        char val = _getch();
         val = tolower(val);
 
         return val;

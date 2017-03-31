@@ -9,7 +9,7 @@ namespace stdplus
 {
     inline std::string dateStr()
     {
-        time_t t = time(0);   // get time now
+        time_t t = ::time(0);   // get time now
         tm timeInfo;
         localtime_s(&timeInfo, &t);
 

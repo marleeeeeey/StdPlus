@@ -111,14 +111,14 @@ namespace stdplus
     }
 
 
-    inline std::vector<std::string> splitByLenght(std::string str, std::size_t line_sz)
+    inline std::vector<std::string> splitByLenght(std::string str, size_t line_sz)
     {
         if (str.size() <= line_sz)
             return{ str };
 
         std::vector<std::string> result;
 
-        for (int i = 0; i < str.size() - line_sz; i += line_sz)
+        for (size_t i = 0; i < str.size() - line_sz; i += line_sz)
         {
             result.push_back(str.substr(i, line_sz));
         }
