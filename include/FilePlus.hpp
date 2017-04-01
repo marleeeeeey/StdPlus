@@ -22,16 +22,20 @@ namespace stdplus
     inline void writeVecToStream(std::ostream & os, const std::vector<T> vec, 
         bool isReplaceDotToComma = true, const std::string sep = "\t")
     {
-        for_each(vec.begin(), vec.end(),
+        for_each(vec.begin(), vec.end()-1,
             [&](const T & d)
         {
             std::string str = to_string(d);
             if (isReplaceDotToComma)
-                std::replace(str.begin(), str.end(), '.', ',');
+                std::replace(str.begin(), str.end(), '.', ',');            
             os << str << sep;
         });
+        
+        std::string str = to_string(vec.back());
+        if (isReplaceDotToComma)
+            std::replace(str.begin(), str.end(), '.', ',');
 
-        os << std::endl;
+        os << str;
     }
 
     template<typename T>
