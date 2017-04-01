@@ -7,14 +7,14 @@
 
 // ********************* PRINT FUNCTION ***********************************
 
-#define AFUNSIG       funSigPrepare(__FUNCSIG__) 
-#define AFILENAME     fileNamePrepare(__FILE__) 
-#define AFILELINE     to_string(__LINE__)
+#define AFUNSIG       stdplus::funSigPrepare(__FUNCSIG__) 
+#define AFILENAME     stdplus::fileNamePrepare(__FILE__) 
+#define AFILELINE     stdplus::to_string(__LINE__)
 #define APOSFILE      (AFILENAME + "(" + AFILELINE + ")")
-#define APAUSE        std::cout << logCnt() << " PAUSE (press any key for continue)"; std::cin.get()
-#define AVAR(var)     std::cout << logCnt() << " VAR " << #var << "=" << to_string(var) << std::endl
-#define AMSG(var)     std::cout << logCnt() << " MSG " <<  (var) << std::endl
-#define AFUN          std::cout << logCnt() << " FUN " << AFUNSIG << std::endl
+#define APAUSE        std::cout << stdplus::logCnt() << " PAUSE (press any key for continue)"; std::cin.get()
+#define AVAR(var)     std::cout << stdplus::logCnt() << " VAR " << #var << "=" << stdplus::to_string(var) << std::endl
+#define AMSG(var)     std::cout << stdplus::logCnt() << " MSG " <<  (var) << std::endl
+#define AFUN          std::cout << stdplus::logCnt() << " FUN " << AFUNSIG << std::endl
 #define ASPLIT        std::cout << "-------------------------------------------------------------------------------------\n"
 #define ASPACE        std::cout << "\n"
 #define ABEEP         std::cout << '\a';
@@ -24,8 +24,8 @@
 // ********************* EASY EXCEPTION AND ERROR *************************
 
 #define ADEBUGMSG(var)   "[ " + to_string(#var) + " ] in file " + APOSFILE + AFUNSIG
-#define AEXCEPT_IF(var)  if(var) throwExcept(ADEBUGMSG(var))
-#define AERR_IF(var)     if(var) throwError (ADEBUGMSG(var))
+#define AEXCEPT_IF(var)  if(var) stdplus::throwExcept(ADEBUGMSG(var))
+#define AERR_IF(var)     if(var) stdplus::throwError (ADEBUGMSG(var))
 
 
 namespace stdplus

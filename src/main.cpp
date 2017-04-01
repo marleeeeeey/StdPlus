@@ -2,7 +2,7 @@
 
 int main()
 {
-    std::cout << stdplus::dateTimeStr();
+    AVAR(stdplus::dateTimeStr());
 
-    std::cin.get();
+	APAUSE;
 }
