@@ -2,6 +2,7 @@
 #define FilePlus_h__
 
 #include "StdInclude.h"
+#include "StringPlus.hpp"
 
 namespace stdplus
 {
@@ -16,6 +17,33 @@ namespace stdplus
     {
         _mkdir(path.c_str());
     }
+
+    template<typename T>
+    inline void writeVecToStream(std::ostream & os, const std::vector<T> vec, 
+        bool isReplaceDotToComma = true, const std::string sep = "\t")
+    {
+        for_each(vec.begin(), vec.end(),
+            [&](const T & d)
+        {
+            std::string str = to_string(d);
+            if (isReplaceDotToComma)
+                std::replace(str.begin(), str.end(), '.', ',');
+            os << str << sep;
+        });
+
+        os << std::endl;
+    }
+
+    template<typename T>
+    inline void appendVecToFile(const std::string & fileName, const std::vector<T> vec, const std::string & lineName = "",
+        bool isReplaceDotToComma = true, const std::string sep = "\t")
+    {
+        std::ofstream ost(fileName, std::ios_base::app);
+        ost << lineName << sep;
+        writeVecToStream(ost, vec, isReplaceDotToComma, sep);
+        ost << std::endl;
+    }
+
 
 }
 

@@ -6,6 +6,35 @@
 namespace stdplus
 {
 
+    inline std::vector<std::string> split(const std::string &s, char delim)
+    {
+        std::stringstream ss(s);
+        std::string item;
+        std::vector<std::string> tokens;
+        while (getline(ss, item, delim))
+        {
+            tokens.push_back(item);
+        }
+        return tokens;
+    }
+
+
+    inline std::vector<std::string> splitByLenght(std::string str, size_t line_sz)
+    {
+        if (str.size() <= line_sz)
+            return{ str };
+
+        std::vector<std::string> result;
+
+        for (size_t i = 0; i < str.size() - line_sz; i += line_sz)
+        {
+            result.push_back(str.substr(i, line_sz));
+        }
+
+        return result;
+    }
+
+
     // trim from left
     inline std::string& ltrim(std::string& s, const char* t = " \t\n\r\f\v")
     {
@@ -91,41 +120,13 @@ namespace stdplus
         return ret;
     }
 
+    // ****************** Special Functions ******************
 
     inline std::string funSigPrepare(std::string fs)
     {
         return removeFromString(fs,
         { "__thiscall ", "__cdecl " });
     }
-
-    inline std::vector<std::string> split(const std::string &s, char delim)
-    {
-        std::stringstream ss(s);
-        std::string item;
-        std::vector<std::string> tokens;
-        while (getline(ss, item, delim))
-        {
-            tokens.push_back(item);
-        }
-        return tokens;
-    }
-
-
-    inline std::vector<std::string> splitByLenght(std::string str, size_t line_sz)
-    {
-        if (str.size() <= line_sz)
-            return{ str };
-
-        std::vector<std::string> result;
-
-        for (size_t i = 0; i < str.size() - line_sz; i += line_sz)
-        {
-            result.push_back(str.substr(i, line_sz));
-        }
-
-        return result;
-    }
-
 
     inline std::string fileNamePrepare(std::string fileName)
     {
