@@ -39,7 +39,7 @@ namespace stdplus
     }
 
     template<typename T>
-    inline void appendVecToFile(const std::string & fileName, const std::vector<T> vec, const std::string & lineName = "",
+    inline void appendVecToFile(const std::string & fileName, const std::vector<T> vec, const std::string & lineName = "NoName",
         bool isReplaceDotToComma = true, const std::string sep = "\t")
     {
         std::ofstream ost(fileName, std::ios_base::app);
