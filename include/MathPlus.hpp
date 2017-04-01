@@ -99,16 +99,37 @@ namespace stdplus
         if (inVec.empty()) return outVec;
 
         std::vector<double> extVec;
-        extVec.push_back(inVec.front());    // + 1
+
+
+        double front = 0;
+        double back = 0;
+        if (inVec.size() == 1)
+        {
+            front = inVec.front();
+            back = inVec.back();
+        }
+        else
+        {
+            auto itFront = inVec.begin();
+            front = *(itFront + 0) - (*(itFront + 1) - *(itFront + 0));
+
+            auto itBack = inVec.rbegin();
+            back = *(itBack + 0) - (*(itBack + 1) - *(itBack + 0));
+        }
+
+        AVAR(front);
+        AVAR(back);
+
+        extVec.push_back(front);    
         extVec.insert(extVec.end(), inVec.begin(), inVec.end());
-        extVec.push_back(inVec.back());     // + 1 --> 1+1 = 2
+        extVec.push_back(back);     
 
         int index = 0;
         for (auto it = extVec.begin(); it < extVec.end() - 2; it++)
         {
-            stdplus::Point p1{ index + 0, *(it + 0) };
-            stdplus::Point p2{ index + 1, *(it + 1) };
-            stdplus::Point p3{ index + 2, *(it + 2) };
+            stdplus::Point p1{ (double)index + 0, *(it + 0) };
+            stdplus::Point p2{ (double)index + 1, *(it + 1) };
+            stdplus::Point p3{ (double)index + 2, *(it + 2) };
             outVec.push_back(derivative(p1, p2, p3));
         }
 
