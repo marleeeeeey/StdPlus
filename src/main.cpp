@@ -2,21 +2,20 @@
 
 int main()
 {
+    std::vector<double> graphic(30);
 
-    std::vector<double> genVars(50);
-
-    std::generate(genVars.begin(), genVars.end(),
+    std::generate(graphic.begin(), graphic.end(),
         []() 
     {
         static double prevVal = 0;
-        prevVal += stdplus::getRandom<double>(-1, 1);
+        prevVal += stdplus::getRandom<double>(-0.5, 0.5);
         return prevVal;
     });
-
-    stdplus::appendVecToFile("test.txt", genVars, "genVars");
     
-    std::vector<double> derVec = stdplus::derivative(genVars);
-    stdplus::appendVecToFile("test.txt", derVec, "derVec");    
+    std::vector<double> derivate = stdplus::derivative(graphic);
 
+
+    stdplus::appendVecToFile("test.txt", graphic, "graphic");
+    stdplus::appendVecToFile("test.txt", derivate, "derivate");   
     APAUSE;
 }
