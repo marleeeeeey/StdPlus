@@ -4,5 +4,5 @@ int main()
 {
     AVAR(stdplus::dateTimeStr());
 
-	APAUSE;
+    APAUSE;
 }
