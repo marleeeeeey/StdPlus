@@ -2,6 +2,9 @@
 
 int main()
 {
+
+
+
     std::vector<double> graphic(30);
 
     std::generate(graphic.begin(), graphic.end(),
