@@ -18,17 +18,17 @@ void derivativeTest()
     stdplus::appendVecToFile("test.txt", derivate, "derivate");
 }
 
-int main()
+void sinTest()
 {
-    enum { e_vectorSize = 50 };
+    enum { e_vectorSize = 200 };
 
     std::vector<double> values(e_vectorSize);
     std::iota(values.begin(), values.end(), -e_vectorSize / 2);
 
     stdplus::appendVecToFile("test.txt", values, "before");
 
-    for_each(values.begin(), values.end(), 
-        [](double & d) { d = pow(d, 2); });
+    for_each(values.begin(), values.end(),
+        [](double & d) { d = sin(d / 10); });
 
 
     stdplus::appendVecToFile("test.txt", values, "after");
@@ -37,6 +37,11 @@ int main()
     std::vector<double> derivate = stdplus::derivative(values);
 
     stdplus::appendVecToFile("test.txt", derivate, "derivate");
+}
+
+int main()
+{
+    sinTest();
 
     APAUSE;
 }
