@@ -5,6 +5,21 @@
 
 namespace stdplus
 {
+
+	template<typename Tin, typename Tout>
+	std::vector<Tout> convert(const std::vector<Tin> & dataIn)
+	{
+		std::vector<Tout> dataOut;
+
+		for_each(dataIn.begin(), dataIn.end(),
+			[&dataOut](const Tin & d)
+		{
+			dataOut.push_back((Tout)d);
+		});
+
+		return dataOut;
+	}
+
     template<class T>
     std::vector<T> to_vector(const T * begin, const size_t size)
     {
