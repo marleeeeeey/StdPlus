@@ -23,7 +23,7 @@
 
 // ********************* EASY EXCEPTION AND ERROR *************************
 
-#define ADEBUGMSG(var)   "[ " + to_string(#var) + " ] in file " + APOSFILE + AFUNSIG
+#define ADEBUGMSG(var)   "[ " + stdplus::to_string(#var) + " ] in file " + APOSFILE + AFUNSIG
 #define AEXCEPT_IF(var)  if(var) stdplus::throwExcept(ADEBUGMSG(var))
 #define AERR_IF(var)     if(var) stdplus::throwError (ADEBUGMSG(var))
 
