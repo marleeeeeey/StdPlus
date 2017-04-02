@@ -43,5 +43,18 @@ int main()
 {
     sinTest();
 
+	std::vector<int> ints =
+	{
+		10, 20, 40, 23,5,1,2,35,1,65,3,7542,7457,2
+	};
+	
+	AVAR(ints);
+
+	ints = stdplus::evenly(ints, 2);
+
+	AVAR(ints);
+
     APAUSE;
+
+
 }
