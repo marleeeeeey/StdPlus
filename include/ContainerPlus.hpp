@@ -34,6 +34,25 @@ namespace stdplus
         return os;
     }
 
+    
+	template<typename T>
+	std::vector<T> evenly(const std::vector<T> vec, int dev)
+	{
+		int size = vec.size();
+		int step = size / dev;
+		std::vector<T> result;
+
+		for (int i = 0; i < size; i += step)
+		{
+			result.push_back(vec.at(i));
+			if (result.size() == dev)
+				break;
+		}
+
+		return result;
+	}
+
+    
 }
 
 #endif // ContainerPlus_h__
