@@ -21,6 +21,17 @@ namespace stdplus
 		return sum / v.size();
 	}
 
+	template<typename T>
+	double meanAbs(const std::vector<T> & v)
+	{
+		double sum = std::accumulate(v.begin(), v.end(), 0.0,
+			[](double & acc, const double & val)
+		{
+			return acc += abs(val);			 
+		});
+		return sum / v.size();
+	}
+
 
     template<class T>
     T getRandom(const T & min, const T & max)

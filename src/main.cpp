@@ -53,14 +53,21 @@ void evenlyTest()
 	AVAR(ints);
 }
 
-int main()
+void meanTest()
 {
 	std::vector<double> rg = stdplus::randomGraphic(100);
 	double mean = stdplus::mean(rg);
 	std::vector<double> m(rg.size(), mean);
+	double meanAbs = stdplus::meanAbs(rg);
+	std::vector<double> mAbs(rg.size(), meanAbs);
 	stdplus::appendVecToFile("test.txt", rg, "Graphic");
 	stdplus::appendVecToFile("test.txt", m, "Mean");
+	stdplus::appendVecToFile("test.txt", mAbs, "MeanAbs");
+}
 
+int main()
+{
+	meanTest();
 
     APAUSE;
 }
