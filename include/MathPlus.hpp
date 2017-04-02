@@ -3,16 +3,57 @@
 
 #include "StdInclude.h"
 #include "MacrosPlus.hpp"
+#include "persistence1d.hpp"
 
 namespace stdplus
 {
-        
+
     struct Point
     {
         double x;
         double y;
     };
 
+
+	inline std::vector<double> getBoolGraphic(std::vector<int> &indexes, double val = 1)
+	{
+		std::sort(indexes.begin(), indexes.end());
+
+		std::vector<double> result;
+
+		for (const auto & minIndex : indexes)
+		{
+			while (result.size() < minIndex)
+			{
+				result.push_back(0);
+			}
+			result.push_back(val);
+		}
+
+		return result;
+	}
+
+
+        
+	inline std::vector<double> minExtremsGraphic(const std::vector<p1d::TPairedExtrema> & extrems)
+	{
+		std::vector<int> indexes;
+
+		for (auto & extrem : extrems)
+			indexes.push_back(extrem.MinIndex);
+
+		return getBoolGraphic(indexes);
+	}
+
+	inline std::vector<double> maxExtremsGraphic(const std::vector<p1d::TPairedExtrema> & extrems)
+	{
+		std::vector<int> indexes;
+
+		for (auto & extrem : extrems)
+			indexes.push_back(extrem.MaxIndex);
+
+		return getBoolGraphic(indexes);
+	}
 
 	template<typename T>
 	double mean(const std::vector<T> & v)
