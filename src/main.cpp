@@ -39,22 +39,28 @@ void sinTest()
     stdplus::appendVecToFile("test.txt", derivate, "derivate");
 }
 
-int main()
+void evenlyTest()
 {
-    sinTest();
-
 	std::vector<int> ints =
 	{
 		10, 20, 40, 23,5,1,2,35,1,65,3,7542,7457,2
 	};
-	
+
 	AVAR(ints);
 
 	ints = stdplus::evenly(ints, 2);
 
 	AVAR(ints);
+}
+
+int main()
+{
+	std::vector<double> rg = stdplus::randomGraphic(100);
+	double mean = stdplus::mean(rg);
+	std::vector<double> m(rg.size(), mean);
+	stdplus::appendVecToFile("test.txt", rg, "Graphic");
+	stdplus::appendVecToFile("test.txt", m, "Mean");
+
 
     APAUSE;
-
-
 }

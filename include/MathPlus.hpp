@@ -6,12 +6,21 @@
 
 namespace stdplus
 {
-
+        
     struct Point
     {
         double x;
         double y;
     };
+
+
+	template<typename T>
+	double mean(const std::vector<T> & v)
+	{
+		double sum = std::accumulate(v.begin(), v.end(), 0.0);
+		return sum / v.size();
+	}
+
 
     template<class T>
     T getRandom(const T & min, const T & max)
@@ -36,7 +45,22 @@ namespace stdplus
 
         return (T)ret;
     }
-    
+
+
+	inline std::vector<double> randomGraphic(size_t s, double step = 0.5)
+	{
+		std::vector<double> graphic(s);
+
+		std::generate(graphic.begin(), graphic.end(),
+			[&step]()
+		{
+			static double prevVal = 0;
+			prevVal += stdplus::getRandom<double>(-step, step);
+			return prevVal;
+		});
+
+		return graphic;
+	}    
 }
 
 
