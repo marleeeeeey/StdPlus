@@ -15,6 +15,34 @@ namespace stdplus
     };
 
 
+
+	std::vector<int> isolatedIndex(std::vector<double> d, double val)
+	{
+		std::sort(d.begin(), d.end());
+		std::vector<int> result;
+
+		if (d.empty()) return result;
+
+		result.push_back(0);
+
+		for (size_t i = 1; i < d.size() - 1; i++)
+		{
+			double prev = d.at(i - 1);
+			double cur = d.at(i + 0);
+			double next = d.at(i + 1);
+
+			double dPrev = abs(cur - prev);
+			double dNext = abs(next - cur);
+
+			if (dPrev >= val && dNext >= val)
+				result.push_back(i);
+		}
+
+		result.push_back(d.size() - 1);
+
+		return result;
+	}
+
 	inline std::vector<double> getBoolGraphic(std::vector<int> &indexes, double val = 1)
 	{
 		std::sort(indexes.begin(), indexes.end());
@@ -42,7 +70,7 @@ namespace stdplus
 		for (auto & extrem : extrems)
 			indexes.push_back(extrem.MinIndex);
 
-		return getBoolGraphic(indexes);
+		return getBoolGraphic(indexes, -1000);
 	}
 
 	inline std::vector<double> maxExtremsGraphic(const std::vector<p1d::TPairedExtrema> & extrems)
@@ -52,7 +80,7 @@ namespace stdplus
 		for (auto & extrem : extrems)
 			indexes.push_back(extrem.MaxIndex);
 
-		return getBoolGraphic(indexes);
+		return getBoolGraphic(indexes, +1000);
 	}
 
 	template<typename T>
@@ -192,10 +220,7 @@ namespace stdplus
             auto itBack = inVec.rbegin();
             back = *(itBack + 0) - (*(itBack + 1) - *(itBack + 0));
         }
-
-        AVAR(front);
-        AVAR(back);
-
+		
         extVec.push_back(front);    
         extVec.insert(extVec.end(), inVec.begin(), inVec.end());
         extVec.push_back(back);     
