@@ -36,12 +36,16 @@ namespace stdplus
         if (vec.empty())
             return os;
 
+
+
         int index = 0;
         for (const auto & el : vec)
         {
-            os << std::endl;
-            os << "Vector index [" << std::setw(2) << index << "]" << std::endl;
-            os << el;
+// 			os << std::endl;
+// 			os << "Vector index [" << std::setw(2) << index << "]" << std::endl;
+// 			os << el;
+
+			os << el << ", ";
 
             index++;
         }
