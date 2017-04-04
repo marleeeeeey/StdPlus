@@ -8,6 +8,11 @@
 
 #include "MacrosPlus.hpp"
 
+
+#define ABIND_INT(var, initValue) (var) = stdplus::Keyboard<int>::get(#var, (initValue))
+#define ABIND_DBL(var, initValue) (var) = stdplus::Keyboard<double>::get(#var, (initValue))
+
+
 namespace stdplus
 {
     class IKeyboardAction
@@ -22,7 +27,7 @@ namespace stdplus
         }
 
         inline std::string name() const { return m_name; }
-        inline char keyChar() const { return m_keyChar; }
+        inline char keyChar() const { return m_keyChar; }      
 
         virtual std::string toString() = 0;
 
@@ -76,12 +81,22 @@ namespace stdplus
 
         T  & m_refData;
         T	 m_step;
-
+            
     };
 
+    // *************************** Storage and work with KeyboardActions ***************************
+    
     class KeyboardControl
     {
     public:
+        typedef void(*Callback)(void *);
+
+        inline static void setCallBack(Callback cb, void * data = nullptr)
+        {
+            m_callBack     = cb; 
+            m_callBackData = data;
+        }
+
         static KeyboardControl & instanse()
         {
             static KeyboardControl keyboardControl;
@@ -93,6 +108,7 @@ namespace stdplus
         {
             KeyboardControl & kc = KeyboardControl::instanse();
             IKeyboardAction * act = new KeyboardAction<T>(name, keyChar, refData, step);
+            AMSG("add new action " + act->toString());
             return kc.addAction(act, false);
         }
 
@@ -105,6 +121,17 @@ namespace stdplus
                 {
                     return pOldAction;
                 }
+            }
+
+            return nullptr;
+        }
+
+        IKeyboardAction * isExistKeyAction(char keyChar)
+        {
+            for (IKeyboardAction * pOldAction : m_actions)
+            {
+                if (pOldAction->keyChar() == keyChar)
+                    return pOldAction;
             }
 
             return nullptr;
@@ -176,6 +203,7 @@ namespace stdplus
 
                 if (m_isStop) break;
 
+                // core
                 {
                     std::lock_guard<std::mutex> guard(m_mutexActions);
 
@@ -184,13 +212,21 @@ namespace stdplus
                         char lower = tolower(keyAction->keyChar());
                         char upper = toupper(keyAction->keyChar());
 
-                        if (ch == upper)
-                            keyAction->valueDown();
+                        if (ch == lower || ch == upper)
+                        {
+                            if (ch == upper)
+                                keyAction->valueDown();
+                            else
+                                keyAction->valueUp();
 
-                        if (ch == lower)
-                            keyAction->valueUp();
+                            if (m_callBack)
+                                m_callBack(m_callBackData);
+                        }
+
                     }
                 }
+
+
             }
 
             AMSG("Stop " + AFUNSIG);
@@ -211,14 +247,39 @@ namespace stdplus
         bool                           m_isStop = false;
         char                           m_keyHelp = 'h';
         char                           m_keyExit = 27;
+        static Callback                m_callBack;
+        static void *                  m_callBackData;
     };
 
+    KeyboardControl::Callback KeyboardControl::m_callBack = nullptr;
+    void * KeyboardControl::m_callBackData                = nullptr;
+
+    // **************************** storage values data in heap ****************************
+
+    // storage values data in heap
     template<typename T>
     class Keyboard
     {
     public:
-        static T get(const std::string & name, char keyChar, T step = 1, T initValue = default(T))
+        static T get(const std::string & name, T initValue = 0, char keyChar = '\0', T step = 1)
         {
+            if (keyChar == 0)
+            {
+                const char startKey = 'a';
+                const char endKey   = 'z';
+
+                for (char ch = startKey; ch <= endKey; ch++)
+                {
+                    if (!KeyboardControl::instanse().isExistKeyAction(ch))
+                    {
+                        keyChar = ch;
+                        break;
+                    }
+                }
+
+                AEXCEPT_IF(keyChar == 0);
+            }
+
             IKeyboardAction * pAction = KeyboardControl::instanse().isExistAction(name, keyChar);
 
             if (pAction == nullptr)
@@ -239,6 +300,7 @@ namespace stdplus
     std::vector<T *> Keyboard<T>::m_values;
 
 }
+
 
 #endif // KeyboardControl_h__
 

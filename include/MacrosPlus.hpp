@@ -11,6 +11,7 @@
 #define AFILENAME     stdplus::fileNamePrepare(__FILE__) 
 #define AFILELINE     stdplus::to_string(__LINE__)
 #define APOSFILE      (AFILENAME + "(" + AFILELINE + ")")
+#define AFUNPOS       AFUNSIG + " " + APOSFILE
 #define APAUSE        std::cout << stdplus::logCnt() << " PAUSE (press any key for continue)"; std::cin.get()
 #define AVAR(var)     std::cout << stdplus::logCnt() << " VAR " << #var << "=" << stdplus::to_string(var) << std::endl
 #define AMSG(var)     std::cout << stdplus::logCnt() << " MSG " <<  (var) << std::endl
@@ -24,6 +25,7 @@
 // ********************* EASY EXCEPTION AND ERROR *************************
 
 #define ADEBUGMSG(var)   "[ " + stdplus::to_string(#var) + " ] in file " + APOSFILE + AFUNSIG
+#define AEXCEPT          stdplus::throwExcept(AFUNPOS)
 #define AEXCEPT_IF(var)  if(var) stdplus::throwExcept(ADEBUGMSG(var))
 #define AERR_IF(var)     if(var) stdplus::throwError (ADEBUGMSG(var))
 
