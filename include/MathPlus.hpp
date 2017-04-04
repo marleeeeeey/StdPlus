@@ -16,7 +16,7 @@ namespace stdplus
 
 
 
-	std::vector<int> isolatedIndex(std::vector<double> d, double val)
+	inline std::vector<int> isolatedIndex(std::vector<double> d, double val)
 	{
 		std::sort(d.begin(), d.end());
 		std::vector<int> result;

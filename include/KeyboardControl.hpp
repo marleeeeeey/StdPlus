@@ -97,7 +97,7 @@ namespace stdplus
             m_callBackData = data;
         }
 
-        static KeyboardControl & instanse()
+        inline static KeyboardControl & instanse()
         {
             static KeyboardControl keyboardControl;
             return keyboardControl;
@@ -126,7 +126,7 @@ namespace stdplus
             return nullptr;
         }
 
-        IKeyboardAction * isExistKeyAction(char keyChar)
+        inline IKeyboardAction * isExistKeyAction(char keyChar)
         {
             for (IKeyboardAction * pOldAction : m_actions)
             {
