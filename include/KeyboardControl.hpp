@@ -89,13 +89,6 @@ namespace stdplus
     class KeyboardControl
     {
     public:
-        typedef void(*Callback)(void *);
-
-        inline static void setCallBack(Callback cb, void * data = nullptr)
-        {
-            m_callBack     = cb; 
-            m_callBackData = data;
-        }
 
         inline static KeyboardControl & instanse()
         {
@@ -202,30 +195,19 @@ namespace stdplus
                 }
 
                 if (m_isStop) break;
+                
+                std::lock_guard<std::mutex> guard(m_mutexActions);
 
-                // core
+                for (IKeyboardAction * keyAction : m_actions)
                 {
-                    std::lock_guard<std::mutex> guard(m_mutexActions);
+                    char lower = tolower(keyAction->keyChar());
+                    char upper = toupper(keyAction->keyChar());
 
-                    for (IKeyboardAction * keyAction : m_actions)
-                    {
-                        char lower = tolower(keyAction->keyChar());
-                        char upper = toupper(keyAction->keyChar());
-
-                        if (ch == lower || ch == upper)
-                        {
-                            if (ch == upper)
-                                keyAction->valueDown();
-                            else
-                                keyAction->valueUp();
-
-                            if (m_callBack)
-                                m_callBack(m_callBackData);
-                        }
-
-                    }
+                    if (ch == upper)
+                        keyAction->valueDown();
+                    else if (ch == lower)
+                        keyAction->valueUp();
                 }
-
 
             }
 
@@ -247,12 +229,9 @@ namespace stdplus
         bool                           m_isStop = false;
         char                           m_keyHelp = 'h';
         char                           m_keyExit = 27;
-        static Callback                m_callBack;
-        static void *                  m_callBackData;
+//         static Callback                m_callBack;
+//         static void *                  m_callBackData;
     };
-
-    KeyboardControl::Callback KeyboardControl::m_callBack = nullptr;
-    void * KeyboardControl::m_callBackData                = nullptr;
 
     // **************************** storage values data in heap ****************************
 
