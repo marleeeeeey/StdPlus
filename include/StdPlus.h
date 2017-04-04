@@ -8,5 +8,6 @@
 #include "StringPlus.hpp"
 #include "TimePlus.hpp"
 #include "MacrosPlus.hpp"
+#include "KeyboardControl.hpp"
 
 #endif // StdPlus_h__
