@@ -9,8 +9,10 @@
 #include "MacrosPlus.hpp"
 
 
-#define ABIND_INT(var, initValue) (var) = stdplus::Keyboard<int>::get(#var, (initValue))
-#define ABIND_DBL(var, initValue) (var) = stdplus::Keyboard<double>::get(#var, (initValue))
+#define ABIND_INT(var, initValue)              (var) = stdplus::Keyboard<int>::   get(#var, (initValue), 0,    1)
+#define ABIND_INT_STEP(var, initValue, step)   (var) = stdplus::Keyboard<int>::   get(#var, (initValue), 0, step)
+#define ABIND_DBL(var, initValue)              (var) = stdplus::Keyboard<double>::get(#var, (initValue), 0,    1)
+#define ABIND_DBL_STEP(var, initValue, step)   (var) = stdplus::Keyboard<double>::get(#var, (initValue), 0, step)
 
 
 namespace stdplus
@@ -218,6 +220,7 @@ namespace stdplus
 
         void printAll()
         {
+			ASPLIT;
             for (IKeyboardAction * act : m_actions)
             {
                 AMSG(act->toString());
