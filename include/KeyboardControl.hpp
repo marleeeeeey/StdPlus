@@ -150,14 +150,14 @@ namespace stdplus
         {
             double * pTempValue = new double;
             double & tempValue = *pTempValue;
-            IKeyboardAction * act = new KeyboardAction<double>("__help__", 'h', tempValue, 0);
+            IKeyboardAction * act = new KeyboardAction<double>("__help__", m_keyHelp, tempValue, 0);
             addAction(act);
         }
 
         IKeyboardAction * addAction(IKeyboardAction * pNewAction, bool isExcept = true)
         {
             if (tolower(pNewAction->keyChar()) == m_keyHelp)
-                stdplus::throwExcept("Never used key 'H' for your actions");
+                stdplus::throwExcept("Never used key '" + to_string(m_keyHelp) + "' for your actions");
 
             std::lock_guard<std::mutex> guard(m_mutexActions);
 
@@ -234,10 +234,8 @@ namespace stdplus
         std::mutex                     m_mutexActions;
         std::vector<IKeyboardAction *> m_actions;
         bool                           m_isStop = false;
-        char                           m_keyHelp = 'h';
+        char                           m_keyHelp = 'z';
         char                           m_keyExit = 27;
-//         static Callback                m_callBack;
-//         static void *                  m_callBackData;
     };
 
     // **************************** storage values data in heap ****************************
