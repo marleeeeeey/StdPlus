@@ -58,9 +58,13 @@ namespace stdplus
         {
             std::ostringstream ss;
 
-            ss
-                << "[" << keyChar() << "] "
-                << name() << " = " << stdplus::to_string(value())
+			ss
+				<< "[" << keyChar() << "] "
+				<< std::setw(20) << std::setiosflags(std::ios_base::left) 
+				<< name() 
+				<< " = " 
+				<< std::setw(5) << std::setiosflags(std::ios_base::right) 
+				<< stdplus::to_string(value())
                 ;
 
             return ss.str();
