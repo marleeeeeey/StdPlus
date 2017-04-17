@@ -229,6 +229,7 @@ namespace stdplus
             {
                 AMSG(act->toString());
             }
+            ASPLIT;
         }
 
         std::mutex                     m_mutexActions;
