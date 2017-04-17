@@ -16,6 +16,7 @@
 #define AVAR(var)     std::cout << stdplus::logCnt() << " VAR " << #var << "=" << stdplus::to_string(var) << std::endl
 #define AMSG(var)     std::cout << stdplus::logCnt() << " MSG " <<  (var) << std::endl
 #define AFUN          std::cout << stdplus::logCnt() << " FUN " << AFUNSIG << std::endl
+#define AFUN_COUNTER  static unsigned funCounter___ = 0; funCounter___++; std::cout << stdplus::logCnt() << " AFUN_COUNTER <" << std::setw(5) << funCounter___ << "> " << AFUNSIG << std::endl
 #define ASPLIT        std::cout << "-------------------------------------------------------------------------------------\n"
 #define ASPACE        std::cout << "\n"
 #define ABEEP         std::cout << '\a';
