@@ -9,5 +9,6 @@
 #include "TimePlus.hpp"
 #include "MacrosPlus.hpp"
 #include "KeyboardControl.hpp"
+#include "EarthPlus.hpp"
 
 #endif // StdPlus_h__

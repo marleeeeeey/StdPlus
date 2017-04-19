@@ -65,16 +65,43 @@ void meanTest()
 	stdplus::appendVecToFile("test.txt", mAbs, "MeanAbs");
 }
 
+void appendVecToFileTest()
+{
+    std::vector<double> ds = stdplus::randomGraphic(20, 10);
+    std::sort(ds.begin(), ds.end());
+
+    std::vector<int> isol = stdplus::isolatedIndex(ds, 0);
+
+    stdplus::appendVecToFile("Isolated.txt", ds, "ds");
+    stdplus::appendVecToFile("Isolated.txt", isol, "isol");
+}
+
+void earthTest()
+{
+    using namespace stdplus;
+    
+    AFUN;
+
+    EarthPoint p1{ deg2rad(55.696727), deg2rad(37.896046) };
+    EarthPoint p2{ deg2rad(55.726996), deg2rad(37.918706) };
+
+    // MARLEEEEEEY COMPILE ERROR - NOT WORK ostream<<
+//     AVAR(p1);
+//     AVAR(p2);
+// 
+     EarthDirection ed = getEarthDirection(p1, p2);
+//     AVAR(ed);
+// 
+//     EarthPoint p2_2 = getEarthPoint(p1, ed);
+//     AVAR(p2_2);
+// 
+     EarthPoint p2_3 = p1 + ed;
+//     AVAR(p2_3);
+}
+
 int main()
 {
-	std::vector<double> ds = stdplus::randomGraphic(20, 10);
-	std::sort(ds.begin(), ds.end());
-
-	std::vector<int> isol = stdplus::isolatedIndex(ds, 0);
-
-	stdplus::appendVecToFile("Isolated.txt", ds, "ds");
-	stdplus::appendVecToFile("Isolated.txt", isol, "isol");
-
+    earthTest();
 
     APAUSE;
 }
