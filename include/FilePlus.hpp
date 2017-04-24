@@ -48,10 +48,10 @@ namespace stdplus
         ost << std::endl;
     }
 
-	inline void appendEmptyLineToFile(const std::string & fileName)
+	inline void appendEmptyLineToFile(const std::string & fileName, const std::string & line = "")
 	{
 		std::ofstream ost(fileName, std::ios_base::app);
-		ost << std::endl;
+		ost << line << std::endl;
 	}
 
 }
