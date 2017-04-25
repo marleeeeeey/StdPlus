@@ -149,15 +149,17 @@
     <ClCompile Include="..\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\ContainerPlus.hpp" />
-    <ClInclude Include="..\include\FilePlus.hpp" />
-    <ClInclude Include="..\include\MacrosPlus.hpp" />
-    <ClInclude Include="..\include\MathPlus.hpp" />
-    <ClInclude Include="..\include\OtherPlus.hpp" />
-    <ClInclude Include="..\include\StdInclude.h" />
-    <ClInclude Include="..\include\StringPlus.hpp" />
-    <ClInclude Include="..\include\TimePlus.hpp" />
-    <ClInclude Include="..\include\StdPlus.h" />
+    <ClInclude Include="..\include\StdPlus\ContainerPlus.hpp" />
+    <ClInclude Include="..\include\StdPlus\EarthPlus.hpp" />
+    <ClInclude Include="..\include\StdPlus\FilePlus.hpp" />
+    <ClInclude Include="..\include\StdPlus\KeyboardControl.hpp" />
+    <ClInclude Include="..\include\StdPlus\MacrosPlus.hpp" />
+    <ClInclude Include="..\include\StdPlus\MathPlus.hpp" />
+    <ClInclude Include="..\include\StdPlus\OtherPlus.hpp" />
+    <ClInclude Include="..\include\StdPlus\StdInclude.h" />
+    <ClInclude Include="..\include\StdPlus\StdPlus.h" />
+    <ClInclude Include="..\include\StdPlus\StringPlus.hpp" />
+    <ClInclude Include="..\include\StdPlus\TimePlus.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -23,32 +23,38 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\StdPlus.h">
+    <ClInclude Include="..\include\StdPlus\ContainerPlus.hpp">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\StdPlus\EarthPlus.hpp">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\StdPlus\FilePlus.hpp">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\StdPlus\KeyboardControl.hpp">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\StdPlus\MacrosPlus.hpp">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\StdPlus\MathPlus.hpp">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\StdPlus\OtherPlus.hpp">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\StdPlus\StringPlus.hpp">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\StdPlus\TimePlus.hpp">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\StdPlus\StdInclude.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\StdInclude.h">
+    <ClInclude Include="..\include\StdPlus\StdPlus.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\TimePlus.hpp">
-      <Filter>hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\StringPlus.hpp">
-      <Filter>hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\OtherPlus.hpp">
-      <Filter>hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\MathPlus.hpp">
-      <Filter>hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\MacrosPlus.hpp">
-      <Filter>hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\FilePlus.hpp">
-      <Filter>hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\ContainerPlus.hpp">
-      <Filter>hpp</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
