@@ -189,7 +189,7 @@ namespace stdplus
 
             while (true)
             {
-                char ch = getch();
+                char ch = _getch();
 
                 if (ch == m_keyExit)
                     exit(0);
