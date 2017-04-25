@@ -56,5 +56,14 @@
     <ClInclude Include="..\include\StdPlus\StdPlus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\StdPlus\TestedPLus.hpp">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\StdPlus\WindowsPlus.hpp">
+      <Filter>hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\StdPlus\WindowsMBCS.hpp">
+      <Filter>hpp</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

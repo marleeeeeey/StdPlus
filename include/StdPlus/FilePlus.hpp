@@ -13,11 +13,6 @@ namespace stdplus
     }
 
 
-    inline void createFolder(const std::string & path)
-    {
-        _mkdir(path.c_str());
-    }
-
     template<typename T>
     inline void writeVecToStream(std::ostream & os, const std::vector<T> vec, 
         bool isReplaceDotToComma = true, const std::string sep = "\t")

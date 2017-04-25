@@ -25,8 +25,7 @@
 #include <thread>
 #include <mutex>
 
-#include <ctime>        // SYSTEMTIME
-#include <Windows.h>    // SYSTEMTIME
-#include <direct.h>     // mkdir
+#include <ctime>        
+
 
 #endif // StdInclude_h__

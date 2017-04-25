@@ -22,24 +22,14 @@ namespace stdplus
         return retStr;
     }
 
-    inline std::string timeStr()
-    {
-        using std::setw;
-        using std::setfill;
+#ifndef WindowsPlus_h__
 
-        SYSTEMTIME st;
-        GetSystemTime(&st);
+	inline std::string timeStr()
+	{
+		return "00-00-00-000";
+	}
 
-        std::ostringstream os;
-        os
-            << setw(2) << setfill('0') << st.wHour << "-"
-            << setw(2) << setfill('0') << st.wMinute << "-"
-            << setw(2) << setfill('0') << st.wSecond << "-"
-            << setw(3) << setfill('0') << st.wMilliseconds //<< " "
-            ;
-
-        return os.str();
-    }
+#endif
 
     inline std::string dateTimeStr()
     {

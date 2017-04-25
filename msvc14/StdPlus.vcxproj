@@ -159,7 +159,10 @@
     <ClInclude Include="..\include\StdPlus\StdInclude.h" />
     <ClInclude Include="..\include\StdPlus\StdPlus.h" />
     <ClInclude Include="..\include\StdPlus\StringPlus.hpp" />
+    <ClInclude Include="..\include\StdPlus\TestedPLus.hpp" />
     <ClInclude Include="..\include\StdPlus\TimePlus.hpp" />
+    <ClInclude Include="..\include\StdPlus\WindowsMBCS.hpp" />
+    <ClInclude Include="..\include\StdPlus\WindowsPlus.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
