@@ -1,4 +1,5 @@
 #include "StdPlus/StdPlus.h"
+#include "gtest/gtest.h"
 
 void derivativeTest()
 {
@@ -76,32 +77,27 @@ void appendVecToFileTest()
     stdplus::appendVecToFile("Isolated.txt", isol, "isol");
 }
 
-void earthTest()
+TEST(EarthPoint, MunisAndPlusEquale)
 {
     using namespace stdplus;
-    
-    AFUN;
 
     EarthPoint p1{ deg2rad(55.696727), deg2rad(37.896046) };
     EarthPoint p2{ deg2rad(55.726996), deg2rad(37.918706) };
+    
+    // MARLEEEEEEY COMPILE ERROR 
+    // AVAR(p1);
 
-    // MARLEEEEEEY COMPILE ERROR - NOT WORK ostream<<
-//     AVAR(p1);
-//     AVAR(p2);
-// 
-     EarthDirection ed = getEarthDirection(p1, p2);
-//     AVAR(ed);
-// 
-//     EarthPoint p2_2 = getEarthPoint(p1, ed);
-//     AVAR(p2_2);
-// 
-     EarthPoint p2_3 = p1 + ed;
-//     AVAR(p2_3);
+    EarthDirection ed = getEarthDirection(p1, p2);
+    EarthPoint p2_new = p1 + ed;
+
+    ASSERT_TRUE(p2 == p2_new);
+    ASSERT_FALSE(p2 == p1);
 }
 
-int main()
+int main(int argc, char **argv)
 {
-    earthTest();
-
+    ::testing::InitGoogleTest(&argc, argv);
+    int ret = RUN_ALL_TESTS();
     APAUSE;
+    return ret;
 }

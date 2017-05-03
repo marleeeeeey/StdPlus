@@ -122,6 +122,11 @@ namespace stdplus
 }
 
 
+inline bool operator==(const stdplus::EarthPoint & left, const stdplus::EarthPoint & right)
+{
+    return left.lat_rad == right.lat_rad && left.lon_rad == right.lon_rad;
+}
+
 
 inline stdplus::EarthPoint operator+(const stdplus::EarthPoint & left, const stdplus::EarthPoint & right)
 {
