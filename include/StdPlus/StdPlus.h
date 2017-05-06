@@ -19,6 +19,7 @@
 #include "KeyboardControl.hpp"
 #include "EarthPlus.hpp"
 #include "TestedPlus.hpp"
+//#include "SockLibPlus.hpp"        // use manual include!
 
 
 #endif // StdPlus_h__
