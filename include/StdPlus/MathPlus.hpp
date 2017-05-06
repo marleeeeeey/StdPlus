@@ -51,7 +51,7 @@ namespace stdplus
 
 		for (const auto & minIndex : indexes)
 		{
-			while (result.size() < minIndex)
+			while (static_cast<int>(result.size()) < minIndex)
 			{
 				result.push_back(0);
 			}

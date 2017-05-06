@@ -45,24 +45,25 @@ namespace stdplus
 {
 
     // error codes
-    static const int SL_SUCCESS = 0;
-    static const int SL_ERROR_INIT = -1;
-    static const int SL_ERROR_SOCKET = -2;
-    static const int SL_ERROR_ADDR = -3;
-    static const int SL_ERROR_BIND = -4;
-    static const int SL_ERROR_LISTEN = -5;
-    static const int SL_ERROR_RESOLVE = -6;
-    static const int SL_ERROR_CONNECT = -7;
-    static const int SL_ERROR_ACCEPT = -8;
-    static const int SL_ERROR_POOL = -9;
-    static const int SL_ERROR_SELECT = -10;
-    static const int SL_ERROR_READ = -11;
-    static const int SL_ERROR_WRITE = -12;
-    static const int SL_ERROR_DISCONNECT = -13;
-    static const int SL_ERROR_ALREADY_INIT = -14;
-    static const int SL_ERROR_NOTINIT = -15;
-    static const int SL_TIMEOUT = -16;
-    static const int SL_NUM_ERRORS = 17;
+    static const int SL_SUCCESS                = 0;
+    static const int SL_ERROR_INIT             = -1;
+    static const int SL_ERROR_SOCKET           = -2;
+    static const int SL_ERROR_ADDR             = -3;
+    static const int SL_ERROR_BIND             = -4;
+    static const int SL_ERROR_LISTEN           = -5;
+    static const int SL_ERROR_RESOLVE          = -6;
+    static const int SL_ERROR_CONNECT          = -7;
+    static const int SL_ERROR_ACCEPT           = -8;
+    static const int SL_ERROR_POOL             = -9;
+    static const int SL_ERROR_SELECT           = -10;
+    static const int SL_ERROR_READ             = -11;
+    static const int SL_ERROR_WRITE            = -12;
+    static const int SL_ERROR_DISCONNECT       = -13;
+    static const int SL_ERROR_ALREADY_INIT     = -14;
+    static const int SL_ERROR_NOTINIT          = -15;
+    static const int SL_ERROR_NOT_BLOKING_INIT = -16;
+    static const int SL_TIMEOUT                = -17;
+    static const int SL_NUM_ERRORS             = 18;
 
     static int sl_initialized = 0;
 
@@ -83,6 +84,7 @@ namespace stdplus
         "disconnect error",
         "socklib already initialized",
         "socklib not initialized",
+        "socklib not blocking init error",
         "timeout",
     };
 
@@ -158,7 +160,7 @@ namespace stdplus
     }
 
     // make server TCP/IP socket
-    inline int sl_make_server_socket_ex(const char *host_ip, int port, int backlog)
+    inline int sl_make_server_socket_ex(const char *host_ip, int port, int backlog, bool isNonBlock = false)
     {
         int sock; // socket ID
         struct sockaddr_in saddr; // address of socket
@@ -169,8 +171,18 @@ namespace stdplus
 
         // socket(...)
         sock = (int)socket(AF_INET, SOCK_STREAM, 0); // get socket
+        
         if (sock < 0)
             return SL_ERROR_SOCKET;
+
+        if (isNonBlock)
+        {
+            unsigned long NOT_BLOCKING = 1;
+            int result = ioctlsocket(sock, FIONBIO, &NOT_BLOCKING);
+
+            if (result < 0)
+                return SL_ERROR_NOT_BLOKING_INIT;
+        }
 
         // bind(...)
         memset((void*)&saddr, (int)0, (size_t) sizeof(saddr)); // clear address of socket

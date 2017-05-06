@@ -16,7 +16,7 @@
 
 // ********************** DEBUG PRINT FUNCTIONs ***************************
 
-#ifndef STD_PLUS_DEBUG_OFF
+#ifndef STD_PLUS_DEBUG_PRINT_OFF
 #    define AVAR(var)     std::cout << stdplus::logCnt() << " VAR " << #var << "=" << stdplus::to_string(var) << std::endl
 #    define AMSG(var)     std::cout << stdplus::logCnt() << " MSG " <<  (var) << std::endl
 #    define AFUN          std::cout << stdplus::logCnt() << " FUN " << AFUNSIG << std::endl
@@ -24,7 +24,7 @@
 #    define ASPLIT        std::cout << "-------------------------------------------------------------------------------------\n"
 #    define ASPACE        std::cout << "\n"
 #    define ABEEP         std::cout << '\a';
-#else  // STD_PLUS_DEBUG_OFF
+#else  // STD_PLUS_DEBUG_PRINT_OFF
 #    define AVAR(var)     
 #    define AMSG(var)     
 #    define AFUN          
@@ -32,7 +32,7 @@
 #    define ASPLIT        
 #    define ASPACE        
 #    define ABEEP         
-#endif // STD_PLUS_DEBUG_OFF
+#endif // STD_PLUS_DEBUG_PRINT_OFF
 
 
 
