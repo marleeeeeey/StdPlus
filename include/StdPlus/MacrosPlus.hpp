@@ -5,21 +5,40 @@
 #include "TimePlus.hpp"
 
 
-// ********************* PRINT FUNCTION ***********************************
+// *********************** PREPARE FUNCTIONS ******************************
 
 #define AFUNSIG       stdplus::funSigPrepare(__FUNCSIG__) 
 #define AFILENAME     stdplus::fileNamePrepare(__FILE__) 
 #define AFILELINE     stdplus::to_string(__LINE__)
 #define APOSFILE      (AFILENAME + "(" + AFILELINE + ")")
 #define AFUNPOS       AFUNSIG + " " + APOSFILE
+
+
+// ********************** DEBUG PRINT FUNCTIONs ***************************
+
+#ifndef STD_PLUS_DEBUG_OFF
+#    define AVAR(var)     std::cout << stdplus::logCnt() << " VAR " << #var << "=" << stdplus::to_string(var) << std::endl
+#    define AMSG(var)     std::cout << stdplus::logCnt() << " MSG " <<  (var) << std::endl
+#    define AFUN          std::cout << stdplus::logCnt() << " FUN " << AFUNSIG << std::endl
+#    define AFUN_COUNTER  static unsigned funCounter___ = 0; funCounter___++; std::cout << stdplus::logCnt() << " AFUN_COUNTER <" << std::setw(5) << funCounter___ << "> " << AFUNSIG << std::endl
+#    define ASPLIT        std::cout << "-------------------------------------------------------------------------------------\n"
+#    define ASPACE        std::cout << "\n"
+#    define ABEEP         std::cout << '\a';
+#else  // STD_PLUS_DEBUG_OFF
+#    define AVAR(var)     
+#    define AMSG(var)     
+#    define AFUN          
+#    define AFUN_COUNTER  
+#    define ASPLIT        
+#    define ASPACE        
+#    define ABEEP         
+#endif // STD_PLUS_DEBUG_OFF
+
+
+
+// ************************* LOGIC FUNCTIONs ******************************
+
 #define APAUSE        std::cout << stdplus::logCnt() << " PAUSE (press any key for continue)"; std::cin.get()
-#define AVAR(var)     std::cout << stdplus::logCnt() << " VAR " << #var << "=" << stdplus::to_string(var) << std::endl
-#define AMSG(var)     std::cout << stdplus::logCnt() << " MSG " <<  (var) << std::endl
-#define AFUN          std::cout << stdplus::logCnt() << " FUN " << AFUNSIG << std::endl
-#define AFUN_COUNTER  static unsigned funCounter___ = 0; funCounter___++; std::cout << stdplus::logCnt() << " AFUN_COUNTER <" << std::setw(5) << funCounter___ << "> " << AFUNSIG << std::endl
-#define ASPLIT        std::cout << "-------------------------------------------------------------------------------------\n"
-#define ASPACE        std::cout << "\n"
-#define ABEEP         std::cout << '\a';
 
 
 
@@ -29,6 +48,8 @@
 #define AEXCEPT          stdplus::throwExcept(AFUNPOS)
 #define AEXCEPT_IF(var)  if(var) stdplus::throwExcept(ADEBUGMSG(var))
 #define AERR_IF(var)     if(var) stdplus::throwError (ADEBUGMSG(var))
+
+
 
 
 namespace stdplus

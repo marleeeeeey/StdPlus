@@ -1,8 +1,6 @@
 #ifndef SockLibPLus_h__
 #define SockLibPLus_h__
 
-//#include <string.h>  // memset(), memcpy()
-
 #if (defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__))
 #  define SL_WIN32
 #endif
