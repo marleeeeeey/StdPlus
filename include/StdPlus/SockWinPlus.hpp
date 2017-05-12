@@ -176,29 +176,7 @@ namespace stdplus
         return SL_SUCCESS;
     }
 
-    // accept wrapper (return file descriptor or -1 on error)
-    inline int sl_accept(int server_socket, unsigned *ipaddr)
-    {
-        if (!sl_initialized)
-            return SL_ERROR_NOTINIT;
-
-        struct sockaddr addr;
-        socklen_t addrlen = sizeof(struct sockaddr);
-
-        while (true)
-        {
-            int fd = (int)accept(server_socket, &addr, &addrlen);
-
-            if (fd < 0)
-                return SL_ERROR_ACCEPT; 
-
-            *ipaddr = (unsigned)(((struct sockaddr_in *)&addr)->sin_addr.s_addr);
-
-            return fd; // success, client connected
-        }
-    }
-
-    // select wraper for non block read (return 0:false, 1:true, -1:error)
+    // select wraper for non block read and accept (return 0:false, 1:true, -1:error)
     inline int sl_select(int fd, int msec)
     {
         fd_set fds;
@@ -233,6 +211,35 @@ namespace stdplus
         return 0; // empty
     }
     
+    // accept wrapper (return file descriptor or -1 on error)
+    inline int sl_accept(int server_socket, unsigned *ipaddr, int timeout_ms = -1)
+    {
+        if (timeout_ms >= 0)
+        {
+            int result = sl_select(server_socket, timeout_ms);
+            if (result < 0)
+                return result;
+        }
+
+        if (!sl_initialized)
+            return SL_ERROR_NOTINIT;
+
+        struct sockaddr addr;
+        socklen_t addrlen = sizeof(struct sockaddr);
+
+        while (true)
+        {
+            int fd = (int)accept(server_socket, &addr, &addrlen);
+
+            if (fd < 0)
+                return SL_ERROR_ACCEPT; 
+
+            *ipaddr = (unsigned)(((struct sockaddr_in *)&addr)->sin_addr.s_addr);
+
+            return fd; // success, client connected
+        }
+    }
+
     // read wraper
     inline int sl_read(int fd, void *buf, int size)
     {
