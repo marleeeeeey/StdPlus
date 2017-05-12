@@ -1,10 +1,9 @@
 #pragma once
+#pragma comment(lib, "ws2_32.lib")
 
 #include "SockSharedPlus.hpp"
-
 #include <windows.h>
 #include <winsock.h>
-#pragma comment(lib, "ws2_32.lib")
 
 namespace stdplus
 {    
@@ -60,15 +59,11 @@ namespace stdplus
     // make server TCP/IP socket
     inline int sl_make_server_socket_ex(const char *host_ip, int port, int backlog, bool isNonBlock = false)
     {
-        int sock; // socket ID
-        struct sockaddr_in saddr; // address of socket
-        struct in_addr iaddr;
-
         if (!sl_initialized)
             return SL_ERROR_NOTINIT;
 
         // socket(...)
-        sock = (int)socket(AF_INET, SOCK_STREAM, 0); // get socket
+        int sock = (int)socket(AF_INET, SOCK_STREAM, 0); // get socket
 
         if (sock < 0)
             return SL_ERROR_SOCKET;
@@ -83,7 +78,8 @@ namespace stdplus
         }
 
         // bind(...)
-        memset((void*)&saddr, (int)0, (size_t) sizeof(saddr)); // clear address of socket
+        struct sockaddr_in saddr = { 0 }; // address of socket
+        struct in_addr iaddr;
         if (inet_aton(host_ip, &iaddr) == 0)
         {
             closesocket(sock);
@@ -164,12 +160,11 @@ namespace stdplus
     // close socket
     inline int sl_disconnect(int fd)
     {
-        int ret;
-
         if (!sl_initialized)
             return SL_ERROR_NOTINIT;
 
-        ret = shutdown(fd, SHUT_RDWR);
+        int ret = shutdown(fd, SHUT_RDWR);
+
         if (ret != 0)
             return SL_ERROR_DISCONNECT;
 
@@ -184,16 +179,15 @@ namespace stdplus
     // accept wrapper (return file descriptor or -1 on error)
     inline int sl_accept(int server_socket, unsigned *ipaddr)
     {
-        int fd;
-        struct sockaddr addr;
-        socklen_t addrlen = sizeof(struct sockaddr);
-
         if (!sl_initialized)
             return SL_ERROR_NOTINIT;
 
+        struct sockaddr addr;
+        socklen_t addrlen = sizeof(struct sockaddr);
+
         while (true)
         {
-            fd = (int)accept(server_socket, &addr, &addrlen);
+            int fd = (int)accept(server_socket, &addr, &addrlen);
 
             if (fd < 0)
                 return SL_ERROR_ACCEPT; 
@@ -207,7 +201,6 @@ namespace stdplus
     // select wraper for non block read (return 0:false, 1:true, -1:error)
     inline int sl_select(int fd, int msec)
     {
-        // use select()
         fd_set fds;
         struct timeval to, *pto;
 
@@ -239,16 +232,7 @@ namespace stdplus
 
         return 0; // empty
     }
-
-    // fuse select wraper (always return 1)
-    inline int sl_select_fuse(int fd, int msec)
-    {
-        fd = fd;
-        msec = msec;
-
-        return 1;
-    }
-
+    
     // read wraper
     inline int sl_read(int fd, void *buf, int size)
     {
@@ -274,15 +258,15 @@ namespace stdplus
     // read `size` bytes from stream `fd` to `buf` at once
     inline int sl_read_all(int fd, void *buf, int size)
     {
-        int retv, cnt = 0;
-        char *ptr = (char*)buf;
-
         if (!sl_initialized)
             return SL_ERROR_NOTINIT;
 
+        int cnt = 0;
+        char *ptr = (char*)buf;
+
         while (size > 0)
         {
-            retv = recv(fd, ptr, size, 0);
+            int retv = recv(fd, ptr, size, 0);
 
             if (retv < 0)
                 return SL_ERROR_READ;
@@ -294,13 +278,14 @@ namespace stdplus
             cnt += retv;
             size -= retv;
         }
+
         return cnt;
     }
 
     // read `size` bytes from stream `fd` to `buf` at once with use timeout
     inline int sl_read_all_to(int fd, void *buf, int size, int ms)
     {
-        int retv, cnt = 0;
+        int cnt = 0;
         char *ptr = (char*)buf;
 
         if (!sl_initialized)
@@ -308,7 +293,7 @@ namespace stdplus
 
         while (size > 0)
         {
-            retv = sl_select(fd, ms);
+            int retv = sl_select(fd, ms);
 
             if (retv < 0)
                 return SL_ERROR_SELECT;
@@ -334,15 +319,15 @@ namespace stdplus
     // write `size` bytes to stream `fd` from `buf` at once
     inline int sl_write(int fd, const void *buf, int size)
     {
-        int retv, cnt = 0;
-        char *ptr = (char*)buf;
-
         if (!sl_initialized)
             return SL_ERROR_NOTINIT;
 
+        int cnt = 0;
+        char *ptr = (char*)buf;
+
         while (size > 0)
         {
-            retv = send(fd, (const char *)ptr, size, 0);
+            int retv = send(fd, (const char *)ptr, size, 0);
 
             if (retv < 0)
                     return SL_ERROR_WRITE;
@@ -357,18 +342,16 @@ namespace stdplus
     // make server UDP socket
     inline int sl_udp_make_server_socket(int port)
     {
-        int sock;
-        struct sockaddr_in saddr;
 
         if (!sl_initialized)
             return SL_ERROR_NOTINIT;
 
-        sock = (int)socket(AF_INET, SOCK_DGRAM, 0);
+        int sock = (int)socket(AF_INET, SOCK_DGRAM, 0);
 
         if (sock < 0)
             return SL_ERROR_SOCKET;
 
-        memset(&saddr, 0, sizeof(saddr));
+        struct sockaddr_in saddr = { 0 };
         saddr.sin_addr.s_addr = htonl(INADDR_ANY);
         saddr.sin_port = htons((unsigned short)port);
         saddr.sin_family = AF_INET;
@@ -385,12 +368,10 @@ namespace stdplus
     // make client UDP socket
     inline int sl_udp_make_client_socket()
     {
-        int ret;
-
         if (!sl_initialized)
             return SL_ERROR_NOTINIT;
 
-        ret = (int)socket(AF_INET, SOCK_DGRAM, 0);
+        int ret = (int)socket(AF_INET, SOCK_DGRAM, 0);
         if (ret < 0)
             return SL_ERROR_SOCKET;
         else
@@ -400,15 +381,13 @@ namespace stdplus
     // read datagram from UDP socket (blocked)
     inline int sl_udp_read(int fd, void *buf, int size, unsigned *ipaddr)
     {
-        int ret, len;
-        struct sockaddr_in client;
-
         if (!sl_initialized)
             return SL_ERROR_NOTINIT;
 
-        len = sizeof(client);
+        struct sockaddr_in client;
+        int len = sizeof(client);
 
-        ret = recvfrom(fd, (char *)buf, size, 0, (struct sockaddr *)&client, (socklen_t *)&len);
+        int ret = recvfrom(fd, (char *)buf, size, 0, (struct sockaddr *)&client, (socklen_t *)&len);
 
         if (ret < 0)
         {
@@ -424,13 +403,10 @@ namespace stdplus
     // read datagram from UDP socket (timeout)
     inline int sl_udp_read_to(int fd, void *buf, int size, unsigned *ipaddr, int ms)
     {
-        int ret, len;
-        struct sockaddr_in client;
-
         if (!sl_initialized)
             return SL_ERROR_NOTINIT;
 
-        ret = sl_select(fd, ms);
+        int ret = sl_select(fd, ms);
 
         if (ret < 0)
             return SL_ERROR_SELECT;
@@ -438,7 +414,8 @@ namespace stdplus
         else if (ret == 0)
             return SL_TIMEOUT;
 
-        len = sizeof(client);
+        struct sockaddr_in client;
+        int len = sizeof(client);
 
         ret = recvfrom(fd, (char *)buf, size, 0, (struct sockaddr *)&client, (socklen_t *)&len);
 
@@ -456,19 +433,15 @@ namespace stdplus
     // send datagram to peer via UDP to ip
     inline int sl_udp_sendto(int fd, unsigned ipaddr, int port, const void *buf, int size)
     {
-        struct sockaddr_in to_addr;
-        int ret;
-
         if (!sl_initialized)
             return SL_ERROR_NOTINIT;
-
-        memset(&to_addr, 0, sizeof(to_addr));
-
+        
+        struct sockaddr_in to_addr = { 0 };
         to_addr.sin_family = AF_INET;
         to_addr.sin_port = htons((unsigned short)port);
         to_addr.sin_addr.s_addr = ipaddr;
 
-        ret = sendto(fd, (const char *)buf, size, 0, (struct sockaddr *)&to_addr, sizeof(to_addr));
+        int ret = sendto(fd, (const char *)buf, size, 0, (struct sockaddr *)&to_addr, sizeof(to_addr));
 
         if (ret < 0)
             return SL_ERROR_WRITE;
@@ -479,25 +452,20 @@ namespace stdplus
     // send datagram to peer via UDP to host
     inline int sl_udp_sendto_addr(int fd, const char *host, int port, const void *buf, int size)
     {
-        int ret;
-        struct sockaddr_in to_addr;
-        unsigned ip_addr;
-
         if (!sl_initialized)
             return SL_ERROR_NOTINIT;
 
-        ip_addr = inet_addr(host);
+        unsigned ip_addr = inet_addr(host);
 
         if (ip_addr == INADDR_NONE)
             return SL_ERROR_RESOLVE;
-
-        memset(&to_addr, 0, sizeof(to_addr));
-
+        
+        struct sockaddr_in to_addr = { 0 };
         to_addr.sin_family = AF_INET;
         to_addr.sin_port = htons((unsigned short)port);
         to_addr.sin_addr.s_addr = inet_addr(host);
 
-        ret = sendto(fd, (const char *)buf, size, 0, (struct sockaddr *)&to_addr, sizeof(to_addr));
+        int ret = sendto(fd, (const char *)buf, size, 0, (struct sockaddr *)&to_addr, sizeof(to_addr));
 
         if (ret < 0)
             return SL_ERROR_WRITE;
@@ -508,11 +476,8 @@ namespace stdplus
     // convert dotted ipaddr to numeric
     inline unsigned sl_inet_aton(const char *s)
     {
-        struct in_addr iaddr;
-
-        memset((void *)&iaddr, 0, sizeof(iaddr));
+        struct in_addr iaddr = { 0 };
         inet_aton(s, &iaddr);
-
         return (unsigned)(iaddr.s_addr);
     }
 
@@ -520,9 +485,7 @@ namespace stdplus
     inline const char *sl_inet_ntoa(unsigned ipaddr)
     {
         struct in_addr iaddr;
-
         iaddr.s_addr = ipaddr;
-
         return (const char *)inet_ntoa(iaddr);
     }
 
