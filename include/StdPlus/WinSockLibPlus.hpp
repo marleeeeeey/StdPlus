@@ -1,108 +1,15 @@
-#ifndef SockLibPLus_h__
-#define SockLibPLus_h__
+#pragma once
 
-#if (defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__))
-#  define SL_WIN32
-#endif
+#include "SockSharedPlus.hpp"
 
-#ifdef SL_WIN32
-#   include <windows.h>
-#   include <winsock.h>
-#   ifdef _MSC_VER
-#      pragma comment(lib, "ws2_32.lib")
-#   endif
-#   define SHUT_RDWR 2
-    typedef int socklen_t;
-#else // SL_WIN32
-#  include <errno.h>      // errno
-#  include <sys/time.h>   // select()
-#  include <sys/types.h>  // socket(), setsockopt(), bind()
-#  include <sys/socket.h> // socket(), setsockopt(), bind(), listen(),
-// inet_aton(), accept()
-#  include <unistd.h>     // gethostname(), read(), write(), {select()}
-#  include <netdb.h>      // gethostbyname()
-#  include <arpa/inet.h>  // inet_aton()
-#  include <netinet/in.h> // inet_aton()
-#endif // SL_WIN32
-
-// 
-// #ifdef ECOS
-// #  include <network.h> // select() under eCos
-// #endif // ECOS
-// 
-// #ifndef SL_WIN32
-// #  ifdef SL_USE_POLL
-// #  include <sys/poll.h> // poll()
-// #  else
-// #  include <sys/select.h> // select() [POSIX way]
-// #  endif // SL_USE_POLL
-// #endif // SL_WIN32
-//
-// #define SL_LOCALHOST "127.0.0.1"
-// #define SL_BCAST     "255.255.255.255"
+#include <windows.h>
+#include <winsock.h>
+#pragma comment(lib, "ws2_32.lib")
 
 namespace stdplus
-{
+{    
+    static int sl_initialized = 0;    
 
-    // error codes
-    static const int SL_SUCCESS                = 0;
-    static const int SL_ERROR_INIT             = -1;
-    static const int SL_ERROR_SOCKET           = -2;
-    static const int SL_ERROR_ADDR             = -3;
-    static const int SL_ERROR_BIND             = -4;
-    static const int SL_ERROR_LISTEN           = -5;
-    static const int SL_ERROR_RESOLVE          = -6;
-    static const int SL_ERROR_CONNECT          = -7;
-    static const int SL_ERROR_ACCEPT           = -8;
-    static const int SL_ERROR_POOL             = -9;
-    static const int SL_ERROR_SELECT           = -10;
-    static const int SL_ERROR_READ             = -11;
-    static const int SL_ERROR_WRITE            = -12;
-    static const int SL_ERROR_DISCONNECT       = -13;
-    static const int SL_ERROR_ALREADY_INIT     = -14;
-    static const int SL_ERROR_NOTINIT          = -15;
-    static const int SL_ERROR_NOT_BLOKING_INIT = -16;
-    static const int SL_TIMEOUT                = -17;
-    static const int SL_NUM_ERRORS             = 18;
-
-    static int sl_initialized = 0;
-
-    static const char *sl_errors[] = {
-        "no error",
-        "initialize error",
-        "socket() error",
-        "inet_aton() error",
-        "bind() error",
-        "listen() error",
-        "gethostbyname() error",
-        "connect() error",
-        "accept() error",
-        "pool() error",
-        "select() error",
-        "read error",
-        "write error",
-        "disconnect error",
-        "socklib already initialized",
-        "socklib not initialized",
-        "socklib not blocking init error",
-        "timeout",
-    };
-
-    // returns socklib error string
-    inline char *sl_error_str(int err)
-    {
-        static const char *unknown_error = "unknown error";
-
-        err = (err < 0) ? -err : err;
-
-        if (err > SL_NUM_ERRORS - 1)
-            return (char *)unknown_error;
-
-        return (char *)sl_errors[err];
-    }
-
-
-#ifdef SL_WIN32
     // emulate BSD inet_aton for win32
     inline static int inet_aton(const char *name, struct in_addr *addr)
     {
@@ -113,13 +20,11 @@ namespace stdplus
 
         return (a != (unsigned long)-1);
     }
-#endif // SL_WIN32
 
 
     // initialize network subsystem
     inline int sl_init(void)
     {
-#ifdef SL_WIN32
         WSADATA data;
         WORD ver;
 
@@ -130,7 +35,6 @@ namespace stdplus
 
         if (WSAStartup(ver, &data))
             return SL_ERROR_INIT;
-#endif // SL_WIN32
 
         sl_initialized = 1;
 
@@ -140,10 +44,8 @@ namespace stdplus
     // finalize network subsystem
     inline void sl_term(void)
     {
-#ifdef SL_WIN32
         WSACleanup();
         sl_initialized = 0;
-#endif // SL_WIN32
     }
 
     // get extra error code (useful for win32 WSA functions)
@@ -152,11 +54,7 @@ namespace stdplus
         if (!sl_initialized)
             return SL_ERROR_NOTINIT;
 
-#ifdef SL_WIN32
         return WSAGetLastError();
-#else // SL_WIN32
-        return errno;
-#endif // SL_WIN32
     }
 
     // make server TCP/IP socket
@@ -171,7 +69,7 @@ namespace stdplus
 
         // socket(...)
         sock = (int)socket(AF_INET, SOCK_STREAM, 0); // get socket
-        
+
         if (sock < 0)
             return SL_ERROR_SOCKET;
 
@@ -188,11 +86,7 @@ namespace stdplus
         memset((void*)&saddr, (int)0, (size_t) sizeof(saddr)); // clear address of socket
         if (inet_aton(host_ip, &iaddr) == 0)
         {
-#ifdef SL_WIN32
             closesocket(sock);
-#else // SL_WIN32
-            close(sock);
-#endif // SL_WIN32
             return SL_ERROR_ADDR;
         }
 
@@ -202,26 +96,18 @@ namespace stdplus
         saddr.sin_family = AF_INET;
         if (bind(sock, (struct sockaddr *) &saddr, sizeof(saddr)) != 0)
         {
-#ifdef SL_WIN32
             closesocket(sock);
-#else // SL_WIN32
-            close(sock);
-#endif // SL_WIN32
             return SL_ERROR_BIND;
         }
 
         // listen(...)
         if (listen(sock, backlog) != 0)
         {
-#ifdef SL_WIN32
             closesocket(sock);
-#else // SL_WIN32
-            close(sock);
-#endif // SL_WIN32
             return SL_ERROR_LISTEN;
         }
 
-        return sock; // return vailid server socket for "accept(...)"
+        return sock; // return valid server socket for "accept(...)"
     }
 
     // make server TCP/IP socket (simple)
@@ -233,38 +119,30 @@ namespace stdplus
     // make client TCP/IP socket
     inline int sl_connect_to_server(const char *host, int port)
     {
-        int sock; // socket ID
-        unsigned ip_addr;
-        struct sockaddr_in saddr;
-        struct hostent  *hp;
-
         if (!sl_initialized)
             return SL_ERROR_NOTINIT;
 
         // socket(...)
-        sock = (int)socket(AF_INET, SOCK_STREAM, 0); // get socket
+        int sock = (int)socket(AF_INET, SOCK_STREAM, 0); // get socket
         if (sock < 0)
             return SL_ERROR_SOCKET;
 
         // connect(...)
-        memset((void*)&saddr, (int)0, (size_t) sizeof(saddr)); // clear address of socket
-
-        hp = gethostbyname(host);
+        struct sockaddr_in saddr = { 0 };
+        struct hostent * hp = gethostbyname(host);
         if (hp == NULL)
         {
-            ip_addr = inet_addr(host);
+            unsigned ip_addr = inet_addr(host);
 
             if (ip_addr == INADDR_NONE)
             {
-#ifdef SL_WIN32
                 closesocket(sock);
-#else // SL_WIN32
-                close(sock);
-#endif // SL_WIN32
                 return SL_ERROR_RESOLVE;
             }
             else
+            {
                 saddr.sin_addr.s_addr = ip_addr;
+            }
         }
         else
         {
@@ -276,11 +154,7 @@ namespace stdplus
 
         if (connect(sock, (struct sockaddr *) &saddr, sizeof(saddr)) != 0)
         {
-#ifdef SL_WIN32
             closesocket(sock);
-#else // SL_WIN32
-            close(sock);
-#endif // SL_WIN32
             return SL_ERROR_CONNECT;
         }
 
@@ -299,17 +173,11 @@ namespace stdplus
         if (ret != 0)
             return SL_ERROR_DISCONNECT;
 
-#ifdef SL_WIN32
         ret = closesocket(fd);
+
         if (ret != 0)
             return SL_ERROR_DISCONNECT;
 
-#else // SL_WIN32
-        ret = close(fd); // close file descriptor
-        if (ret != 0)
-            return SL_ERROR_DISCONNECT;
-
-#endif  // SL_WIN32
         return SL_SUCCESS;
     }
 
@@ -323,75 +191,31 @@ namespace stdplus
         if (!sl_initialized)
             return SL_ERROR_NOTINIT;
 
-        while (1)
+        while (true)
         {
             fd = (int)accept(server_socket, &addr, &addrlen);
 
             if (fd < 0)
-            {
-#ifndef SL_WIN32
-                if (errno == EINTR)
-                    continue; // interrupt by signal
-#endif // SL_WIN32
-
-                return SL_ERROR_ACCEPT; // error
-            }
+                return SL_ERROR_ACCEPT; 
 
             *ipaddr = (unsigned)(((struct sockaddr_in *)&addr)->sin_addr.s_addr);
 
             return fd; // success, client connected
-        } // while(1)
+        }
     }
 
     // select wraper for non block read (return 0:false, 1:true, -1:error)
     inline int sl_select(int fd, int msec)
     {
-#ifdef SL_USE_POLL
-        // use poll()
-        struct pollfd fds[1];
-        int retv;
-
-        while (1)
-        {
-            fds->fd = fd;
-            fds->events = POLLIN;
-            fds->revents = 0;
-
-            retv = poll(fds, 1, msec);
-            if (retv < 0)
-            {
-                if (errno == EINTR)
-                    continue; // interrupt by signal
-
-                return SL_ERROR_POOL; // error
-            }
-
-            break;
-        } // while (1)
-
-        if (retv > 0)
-        {
-            if (fds->revents & (POLLERR | POLLHUP | POLLNVAL))
-                return SL_ERROR_POOL; // error
-
-            if (fds->revents & (POLLIN | POLLPRI))
-                return 1; // may non block read
-        } // if (retv > 0)
-
-        return 0; // empty
-#else // !SL_USE_POLL
         // use select()
         fd_set fds;
         struct timeval to, *pto;
 
-        while (1)
+        while (true)
         {
             FD_ZERO(&fds);
-#ifdef SL_WIN32
+
             FD_SET((SOCKET)fd, &fds);
-#else // SL_WIN32
-            FD_SET(fd, &fds);
-#endif // SL_WIN32
 
             if (msec >= 0)
             {
@@ -400,24 +224,20 @@ namespace stdplus
                 pto = &to;
             }
             else // if msec < 0 then wait forewer
+            {
                 pto = (struct timeval *) NULL;
+            }
 
             if (select(fd + 1, &fds, NULL, NULL, pto) < 0)
-            {
-#ifndef SL_WIN32
-                if (errno == EINTR)
-                    continue; // interrupt by signal
-#endif // SL_WIN32
-                return SL_ERROR_SELECT; // error
-            }
+                return SL_ERROR_SELECT;
+
             break;
-        } // while(1)
+        } 
 
         if (FD_ISSET(fd, &fds))
             return 1; // may non block read
 
         return 0; // empty
-#endif // !SL_USE_SELECT
     }
 
     // fuse select wraper (always return 1)
@@ -437,26 +257,16 @@ namespace stdplus
 
         if (size > 0)
         {
-            while (1)
+            while (true)
             {
-#ifdef SL_WIN32
                 size = recv(fd, (char *)buf, size, 0);
-#else // SL_WIN32
-                size = read(fd, buf, (size_t)size);
-#endif  // SL_WIN32
 
                 if (size < 0)
-                {
-#ifndef SL_WIN32
-                    if (errno == EINTR)
-                        continue; // interrupt by signal
-#endif // SL_WIN32
                     return SL_ERROR_READ;
-                } // if (size < 0)
 
                 return size;
-            } // while (1)
-        } // if (size > 0)
+            } 
+        } 
 
         return 0;
     }
@@ -472,19 +282,11 @@ namespace stdplus
 
         while (size > 0)
         {
-#ifdef SL_WIN32
             retv = recv(fd, ptr, size, 0);
-#else // SL_WIN32
-            retv = read(fd, (void*)ptr, (size_t)size);
-#endif // SL_WIN32
+
             if (retv < 0)
-            {
-#ifndef SL_WIN32
-                if (errno == EINTR)
-                    continue; // interrupt by signal
-#endif // SL_WIN32
                 return SL_ERROR_READ;
-            }
+
             else if (retv == 0)
                 return cnt;
 
@@ -509,31 +311,16 @@ namespace stdplus
             retv = sl_select(fd, ms);
 
             if (retv < 0)
-            {
-#ifndef SL_WIN32
-                if (errno == EINTR)
-                    continue; // interrupt by signal
-#endif // SL_WIN32
                 return SL_ERROR_SELECT;
-            }
 
             if (retv == 0)
                 return SL_TIMEOUT;
 
-#ifdef SL_WIN32
             retv = recv(fd, ptr, size, 0);
-#else // SL_WIN32
-            retv = read(fd, (void*)ptr, (size_t)size);
-#endif // SL_WIN32
 
             if (retv < 0)
-            {
-#ifndef SL_WIN32
-                if (errno == EINTR)
-                    continue; // interrupt by signal
-#endif // SL_WIN32
                 return SL_ERROR_READ;
-            }
+
             else if (retv == 0)
                 return cnt;
 
@@ -555,20 +342,11 @@ namespace stdplus
 
         while (size > 0)
         {
-#ifdef SL_WIN32
             retv = send(fd, (const char *)ptr, size, 0);
-#else // SL_WIN32
-            retv = write(fd, (void*)ptr, size);
-#endif // SL_WIN32
+
             if (retv < 0)
-            {
-#ifndef SL_WIN32
-                if (errno == EINTR)
-                    continue;
-                else
-#endif // SL_WIN32
                     return SL_ERROR_WRITE;
-            }
+
             ptr += retv;
             cnt += retv;
             size -= retv;
@@ -586,6 +364,7 @@ namespace stdplus
             return SL_ERROR_NOTINIT;
 
         sock = (int)socket(AF_INET, SOCK_DGRAM, 0);
+
         if (sock < 0)
             return SL_ERROR_SOCKET;
 
@@ -596,11 +375,7 @@ namespace stdplus
 
         if (bind(sock, (struct sockaddr *) &saddr, sizeof(saddr)) < 0)
         {
-#ifdef SL_WIN32
             closesocket(sock);
-#else // SL_WIN32
-            close(sock);
-#endif // SL_WIN32
             return SL_ERROR_BIND;
         }
 
@@ -633,11 +408,7 @@ namespace stdplus
 
         len = sizeof(client);
 
-#ifdef SL_WIN32
         ret = recvfrom(fd, (char *)buf, size, 0, (struct sockaddr *)&client, (socklen_t *)&len);
-#else // SL_WIN32
-        ret = recvfrom(fd, buf, size, 0, (struct sockaddr *)&client, (socklen_t *)&len);
-#endif // SL_WIN32
 
         if (ret < 0)
         {
@@ -660,18 +431,16 @@ namespace stdplus
             return SL_ERROR_NOTINIT;
 
         ret = sl_select(fd, ms);
+
         if (ret < 0)
             return SL_ERROR_SELECT;
+
         else if (ret == 0)
             return SL_TIMEOUT;
 
         len = sizeof(client);
 
-#ifdef SL_WIN32
         ret = recvfrom(fd, (char *)buf, size, 0, (struct sockaddr *)&client, (socklen_t *)&len);
-#else // SL_WIN32
-        ret = recvfrom(fd, buf, size, 0, (struct sockaddr *)&client, (socklen_t *)&len);
-#endif // SL_WIN32
 
         if (ret < 0)
         {
@@ -699,11 +468,8 @@ namespace stdplus
         to_addr.sin_port = htons((unsigned short)port);
         to_addr.sin_addr.s_addr = ipaddr;
 
-#ifdef SL_WIN32
         ret = sendto(fd, (const char *)buf, size, 0, (struct sockaddr *)&to_addr, sizeof(to_addr));
-#else // SL_WIN32
-        ret = sendto(fd, buf, size, 0, (struct sockaddr *)&to_addr, sizeof(to_addr));
-#endif // SL_WIN32
+
         if (ret < 0)
             return SL_ERROR_WRITE;
 
@@ -731,11 +497,8 @@ namespace stdplus
         to_addr.sin_port = htons((unsigned short)port);
         to_addr.sin_addr.s_addr = inet_addr(host);
 
-#ifdef SL_WIN32
         ret = sendto(fd, (const char *)buf, size, 0, (struct sockaddr *)&to_addr, sizeof(to_addr));
-#else // SL_WIN32
-        ret = sendto(fd, buf, size, 0, (struct sockaddr *)&to_addr, sizeof(to_addr));
-#endif // SL_WIN32
+
         if (ret < 0)
             return SL_ERROR_WRITE;
 
@@ -784,4 +547,3 @@ namespace stdplus
     }
 
 }
-#endif // SockLibPLus_h__
