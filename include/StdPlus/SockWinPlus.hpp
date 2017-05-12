@@ -57,7 +57,7 @@ namespace stdplus
     }
 
     // make server TCP/IP socket
-    inline int sl_make_server_socket_ex(const char *host_ip, int port, int backlog, bool isNonBlock = false)
+    inline int sl_make_server_socket_ex(const char *host_ip, int port, int backlog)
     {
         if (!sl_initialized)
             return SL_ERROR_NOTINIT;
@@ -67,16 +67,7 @@ namespace stdplus
 
         if (sock < 0)
             return SL_ERROR_SOCKET;
-
-        if (isNonBlock)
-        {
-            unsigned long NOT_BLOCKING = 1;
-            int result = ioctlsocket(sock, FIONBIO, &NOT_BLOCKING);
-
-            if (result < 0)
-                return SL_ERROR_NOT_BLOKING_INIT;
-        }
-
+        
         // bind(...)
         struct sockaddr_in saddr = { 0 }; // address of socket
         struct in_addr iaddr;
@@ -216,7 +207,13 @@ namespace stdplus
     {
         if (timeout_ms >= 0)
         {
-            int result = sl_select(server_socket, timeout_ms);
+            unsigned long NOT_BLOCKING = 1;
+            int result = ioctlsocket(server_socket, FIONBIO, &NOT_BLOCKING);
+
+            if (result < 0)
+                return SL_ERROR_NOT_BLOKING_INIT;
+
+            result = sl_select(server_socket, timeout_ms);
             if (result < 0)
                 return result;
         }
