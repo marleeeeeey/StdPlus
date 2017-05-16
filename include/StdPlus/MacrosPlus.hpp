@@ -16,11 +16,14 @@
 
 // ********************** DEBUG PRINT FUNCTIONs ***************************
 
+//#    define ATHREAD       
+#    define ATHREAD       << "[" << std::this_thread::get_id() << "] " 
+
 #ifndef STD_PLUS_DEBUG_PRINT_OFF
-#    define AVAR(var)     std::cout << stdplus::logCnt() << " VAR " << #var << "=" << stdplus::to_string(var) << std::endl
-#    define AMSG(var)     std::cout << stdplus::logCnt() << " MSG " <<  (var) << std::endl
-#    define AFUN          std::cout << stdplus::logCnt() << " FUN " << AFUNSIG << std::endl
-#    define AFUN_COUNTER  static unsigned funCounter___ = 0; funCounter___++; std::cout << stdplus::logCnt() << " AFUN_COUNTER <" << std::setw(5) << funCounter___ << "> " << AFUNSIG << std::endl
+#    define AVAR(var)     std::cout << stdplus::logCnt() << " VAR " ATHREAD << #var << "=" << stdplus::to_string(var) << std::endl
+#    define AMSG(var)     std::cout << stdplus::logCnt() << " MSG " ATHREAD <<  (var) << std::endl
+#    define AFUN          std::cout << stdplus::logCnt() << " FUN " ATHREAD << AFUNSIG << std::endl
+#    define AFUN_COUNTER  static unsigned funCounter___ = 0; funCounter___++; std::cout << stdplus::logCnt() << " AFUN_COUNTER <" ATHREAD << std::setw(5) << funCounter___ << "> " << AFUNSIG << std::endl
 #    define ASPLIT        std::cout << "-------------------------------------------------------------------------------------\n"
 #    define ASPACE        std::cout << "\n"
 #    define ABEEP         std::cout << '\a';
@@ -38,7 +41,7 @@
 
 // ************************* LOGIC FUNCTIONs ******************************
 
-#define APAUSE        std::cout << stdplus::logCnt() << " PAUSE (press any key for continue)"; std::cin.get()
+#define APAUSE        std::cout << stdplus::logCnt() << " PSE " ATHREAD << "(press any key for continue)"; std::cin.get()
 
 
 
@@ -76,7 +79,7 @@ namespace stdplus
     {
         const std::string prefix = " EXCEPT: ";
         AMSG(prefix + errormessage);
-        std::cerr << dateTimeStr() << prefix << errormessage << "\n" << std::endl;
+        //std::cerr << dateTimeStr() << prefix << errormessage << "\n" << std::endl;
         throw std::logic_error(errormessage);
     }
 
@@ -84,7 +87,7 @@ namespace stdplus
     {
         const std::string prefix = " RT_ERROR: ";
         AMSG(prefix + errormessage);
-        std::cerr << dateTimeStr() << prefix << errormessage << "\n" << std::endl;
+        //std::cerr << dateTimeStr() << prefix << errormessage << "\n" << std::endl;
     }
 
 }
