@@ -2,6 +2,7 @@
 
 #include <map>
 #include <ostream>
+#include <string>
 #define SHUT_RDWR 2
 typedef int socklen_t;
 
