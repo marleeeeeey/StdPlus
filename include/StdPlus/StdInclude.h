@@ -25,7 +25,9 @@
 #include <thread>
 #include <mutex>
 
-#include <ctime>        
+#include <ctime>      
+
+#include <memory>
 
 
 #endif // StdInclude_h__
