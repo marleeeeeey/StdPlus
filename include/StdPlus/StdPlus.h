@@ -1,6 +1,8 @@
 #ifndef StdPlus_h__
 #define StdPlus_h__
 
+#include "StdInclude.h"
+
 #ifdef _MSC_VER
 #  include "WindowsPlus.hpp"
 #endif
