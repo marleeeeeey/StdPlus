@@ -7,7 +7,7 @@
 
 namespace stdplus
 {    
-    static int sl_initialized = 0;    
+    //static int sl_initialized = 1;    
 
     // emulate BSD inet_aton for win32
     inline static int inet_aton(const char *name, struct in_addr *addr)
@@ -24,18 +24,20 @@ namespace stdplus
     // initialize network subsystem
     inline int sl_init(void)
     {
+        AFUN;
+
         WSADATA data;
         WORD ver;
 
-        if (sl_initialized)
-            return SL_ERROR_ALREADY_INIT;
+//         if (sl_initialized)
+//             return SL_ERROR_ALREADY_INIT;
 
         ver = 0x0202;
 
         if (WSAStartup(ver, &data))
             return SL_ERROR_INIT;
 
-        sl_initialized = 1;
+//        sl_initialized = 1;
 
         return SL_SUCCESS;
     }
@@ -43,15 +45,17 @@ namespace stdplus
     // finalize network subsystem
     inline void sl_term(void)
     {
+        AFUN;
+
         WSACleanup();
-        sl_initialized = 0;
+//        sl_initialized = 0;
     }
 
     // get extra error code (useful for win32 WSA functions)
     inline int sl_get_last_error()
     {
-        if (!sl_initialized)
-            return SL_ERROR_NOTINIT;
+//         if (!sl_initialized)
+//             return SL_ERROR_NOTINIT;
 
         return WSAGetLastError();
     }
@@ -59,8 +63,8 @@ namespace stdplus
     // make server TCP/IP socket
     inline int sl_make_server_socket_ex(const char *host_ip, int port, int backlog)
     {
-        if (!sl_initialized)
-            return SL_ERROR_NOTINIT;
+//         if (!sl_initialized)
+//             return SL_ERROR_NOTINIT;
 
         // socket(...)
         int sock = (int)socket(AF_INET, SOCK_STREAM, 0); // get socket
@@ -106,8 +110,8 @@ namespace stdplus
     // make client TCP/IP socket
     inline int sl_connect_to_server(const char *host, int port)
     {
-        if (!sl_initialized)
-            return SL_ERROR_NOTINIT;
+//         if (!sl_initialized)
+//             return SL_ERROR_NOTINIT;
 
         // socket(...)
         int sock = (int)socket(AF_INET, SOCK_STREAM, 0); // get socket
@@ -151,8 +155,8 @@ namespace stdplus
     // close socket
     inline int sl_disconnect(int fd)
     {
-        if (!sl_initialized)
-            return SL_ERROR_NOTINIT;
+//         if (!sl_initialized)
+//             return SL_ERROR_NOTINIT;
 
         int ret = shutdown(fd, SHUT_RDWR);
 
@@ -218,8 +222,8 @@ namespace stdplus
                 return result;
         }
 
-        if (!sl_initialized)
-            return SL_ERROR_NOTINIT;
+//         if (!sl_initialized)
+//             return SL_ERROR_NOTINIT;
 
         struct sockaddr addr;
         socklen_t addrlen = sizeof(struct sockaddr);
@@ -240,8 +244,8 @@ namespace stdplus
     // read wraper
     inline int sl_read(int fd, void *buf, int size)
     {
-        if (!sl_initialized)
-            return SL_ERROR_NOTINIT;
+//         if (!sl_initialized)
+//             return SL_ERROR_NOTINIT;
 
         if (size > 0)
         {
@@ -262,8 +266,8 @@ namespace stdplus
     // read `size` bytes from stream `fd` to `buf` at once
     inline int sl_read_all(int fd, void *buf, int size)
     {
-        if (!sl_initialized)
-            return SL_ERROR_NOTINIT;
+//         if (!sl_initialized)
+//             return SL_ERROR_NOTINIT;
 
         int cnt = 0;
         char *ptr = (char*)buf;
@@ -292,8 +296,8 @@ namespace stdplus
         int cnt = 0;
         char *ptr = (char*)buf;
 
-        if (!sl_initialized)
-            return SL_ERROR_NOTINIT;
+//         if (!sl_initialized)
+//             return SL_ERROR_NOTINIT;
 
         while (size > 0)
         {
@@ -323,8 +327,8 @@ namespace stdplus
     // write `size` bytes to stream `fd` from `buf` at once
     inline int sl_write(int fd, const void *buf, int size)
     {
-        if (!sl_initialized)
-            return SL_ERROR_NOTINIT;
+//         if (!sl_initialized)
+//             return SL_ERROR_NOTINIT;
 
         int cnt = 0;
         char *ptr = (char*)buf;
@@ -347,8 +351,8 @@ namespace stdplus
     inline int sl_udp_make_server_socket(int port)
     {
 
-        if (!sl_initialized)
-            return SL_ERROR_NOTINIT;
+//         if (!sl_initialized)
+//             return SL_ERROR_NOTINIT;
 
         int sock = (int)socket(AF_INET, SOCK_DGRAM, 0);
 
@@ -372,8 +376,8 @@ namespace stdplus
     // make client UDP socket
     inline int sl_udp_make_client_socket()
     {
-        if (!sl_initialized)
-            return SL_ERROR_NOTINIT;
+//         if (!sl_initialized)
+//             return SL_ERROR_NOTINIT;
 
         int ret = (int)socket(AF_INET, SOCK_DGRAM, 0);
         if (ret < 0)
@@ -385,8 +389,8 @@ namespace stdplus
     // read datagram from UDP socket (blocked)
     inline int sl_udp_read(int fd, void *buf, int size, unsigned *ipaddr)
     {
-        if (!sl_initialized)
-            return SL_ERROR_NOTINIT;
+//         if (!sl_initialized)
+//             return SL_ERROR_NOTINIT;
 
         struct sockaddr_in client;
         int len = sizeof(client);
@@ -407,8 +411,8 @@ namespace stdplus
     // read datagram from UDP socket (timeout)
     inline int sl_udp_read_to(int fd, void *buf, int size, unsigned *ipaddr, int ms)
     {
-        if (!sl_initialized)
-            return SL_ERROR_NOTINIT;
+//         if (!sl_initialized)
+//             return SL_ERROR_NOTINIT;
 
         int ret = sl_select(fd, ms);
 
@@ -437,8 +441,8 @@ namespace stdplus
     // send datagram to peer via UDP to ip
     inline int sl_udp_sendto(int fd, unsigned ipaddr, int port, const void *buf, int size)
     {
-        if (!sl_initialized)
-            return SL_ERROR_NOTINIT;
+//         if (!sl_initialized)
+//             return SL_ERROR_NOTINIT;
         
         struct sockaddr_in to_addr = { 0 };
         to_addr.sin_family = AF_INET;
@@ -456,8 +460,8 @@ namespace stdplus
     // send datagram to peer via UDP to host
     inline int sl_udp_sendto_addr(int fd, const char *host, int port, const void *buf, int size)
     {
-        if (!sl_initialized)
-            return SL_ERROR_NOTINIT;
+//         if (!sl_initialized)
+//             return SL_ERROR_NOTINIT;
 
         unsigned ip_addr = inet_addr(host);
 
