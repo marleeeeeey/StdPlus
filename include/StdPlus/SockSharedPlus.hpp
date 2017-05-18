@@ -4,7 +4,7 @@
 #include <ostream>
 #include <string>
 #define SHUT_RDWR 2
-typedef int socklen_t;
+//typedef int socklen_t;
 
 namespace stdplus
 {

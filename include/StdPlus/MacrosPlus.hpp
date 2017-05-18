@@ -41,7 +41,8 @@
 
 // ************************* LOGIC FUNCTIONs ******************************
 
-#define APAUSE        std::cout << stdplus::logCnt() << " PSE " ATHREAD << "(press any key for continue)"; std::cin.get()
+#define APAUSE_MSG(var) std::cout << stdplus::logCnt() << " PSE " ATHREAD << var; std::cin.get()
+#define APAUSE          APAUSE_MSG("(press any key for continue)")
 
 
 
