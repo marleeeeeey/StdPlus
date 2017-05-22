@@ -94,7 +94,7 @@ namespace stdplus
         //std::cerr << dateTimeStr() << prefix << errormessage << "\n" << std::endl;
     }
 
-    void consoleRead(double & val, const std::string & msg)
+    inline void consoleRead(double & val, const std::string & msg)
     {
         std::cout << stdplus::logCnt() << " INP " << msg << ":";
         std::cin >> val;
