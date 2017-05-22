@@ -41,12 +41,16 @@ namespace stdplus
         int index = 0;
         for (const auto & el : vec)
         {
-// 			os << std::endl;
-// 			os << "Vector index [" << std::setw(2) << index << "]" << std::endl;
-// 			os << el;
 
-			os << el << ", ";
-
+#ifdef STDPLUS_MULTILINE_PRINT 
+            os 
+                << std::endl
+                << "[" << std::setw(3) << index << "]: " 
+                << el
+                ;
+#else
+            os << el << ", ";
+#endif
             index++;
         }
 
