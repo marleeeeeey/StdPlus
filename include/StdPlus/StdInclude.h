@@ -1,6 +1,8 @@
 #ifndef StdInclude_h__
 #define StdInclude_h__
 
+#define STDPLUS_MULTILINE_PRINT
+
 #define _USE_MATH_DEFINES
 #include <math.h>
 
