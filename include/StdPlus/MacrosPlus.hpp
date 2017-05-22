@@ -98,6 +98,7 @@ namespace stdplus
     {
         std::cout << stdplus::logCnt() << " INP " << msg << ":";
         std::cin >> val;
+        std::cin.get();
     }
 
 }
