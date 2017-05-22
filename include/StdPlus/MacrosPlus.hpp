@@ -3,6 +3,7 @@
 
 #include "StdInclude.h"
 #include "TimePlus.hpp"
+#include "OtherPlus.hpp"
 
 
 // *********************** PREPARE FUNCTIONS ******************************
@@ -17,7 +18,7 @@
 // ********************** DEBUG PRINT FUNCTIONs ***************************
 
 //#    define ATHREAD       
-#    define ATHREAD       << "[" << std::this_thread::get_id() << "] " 
+#    define ATHREAD       << stdplus::thisThreadIdString() << " "
 
 #ifndef STD_PLUS_DEBUG_PRINT_OFF
 #    define AVAR(var)     std::cout << stdplus::logCnt() << " VAR " ATHREAD << #var << "=" << stdplus::to_string(var) << std::endl
@@ -43,6 +44,8 @@
 
 #define APAUSE_MSG(var) std::cout << stdplus::logCnt() << " PSE " ATHREAD << var; std::cin.get()
 #define APAUSE          APAUSE_MSG("(press any key for continue)")
+
+#define ARED(val)       stdplus::consoleRead(val, #val)
 
 
 
@@ -89,6 +92,12 @@ namespace stdplus
         const std::string prefix = " RT_ERROR: ";
         AMSG(prefix + errormessage);
         //std::cerr << dateTimeStr() << prefix << errormessage << "\n" << std::endl;
+    }
+
+    void consoleRead(double & val, const std::string & msg)
+    {
+        std::cout << stdplus::logCnt() << " INP " << msg << ":";
+        std::cin >> val;
     }
 
 }
