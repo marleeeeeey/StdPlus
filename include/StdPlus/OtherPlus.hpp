@@ -5,6 +5,13 @@
 
 namespace stdplus
 {
+    inline std::string thisThreadIdString()
+    {
+        std::stringstream os;
+        os << "[" << std::setw(5) << std::this_thread::get_id() << "]";
+        return os.str();
+    }
+
     inline void thread_sleep(unsigned time_ms)
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(time_ms));
