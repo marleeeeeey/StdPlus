@@ -96,9 +96,16 @@ namespace stdplus
 
     inline void consoleRead(double & val, const std::string & msg)
     {
-        std::cout << stdplus::logCnt() << " INP " << msg << ":";
-        std::cin >> val;
+        std::cout
+            << stdplus::logCnt() << " INP "
+            << msg << "[" << val << "]" << ":";
+
+        char ch = std::cin.peek();
+        if (ch != '\n')
+            std::cin >> val;
+        
         std::cin.get();
+
     }
 
 }
