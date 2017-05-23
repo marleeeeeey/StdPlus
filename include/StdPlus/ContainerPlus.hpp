@@ -36,8 +36,6 @@ namespace stdplus
         if (vec.empty())
             return os;
 
-
-
         int index = 0;
         for (const auto & el : vec)
         {
@@ -57,7 +55,61 @@ namespace stdplus
         return os;
     }
 
-    
+
+    template<class T>
+    std::ostream & operator<<(std::ostream & os, const std::set<T> & vec)
+    {
+        os << " SET_SIZE=" << vec.size() << ": ";
+
+        if (vec.empty())
+            return os;
+
+        int index = 0;
+        for (const auto & el : vec)
+        {
+
+#ifdef STDPLUS_MULTILINE_PRINT 
+            os
+                << std::endl
+                << "[" << std::setw(3) << index << "]: "
+                << el
+                ;
+#else
+            os << el << ", ";
+#endif
+            index++;
+        }
+
+        return os;
+    }
+
+    template<class T, class T2>
+    std::ostream & operator<<(std::ostream & os, const std::map<T, T2> & vec)
+    {
+        os << " MAP_SIZE=" << vec.size() << ": ";
+
+        if (vec.empty())
+            return os;
+
+        int index = 0;
+        for (const auto & el : vec)
+        {
+
+#ifdef STDPLUS_MULTILINE_PRINT 
+            os
+                << std::endl
+                << "[" << std::setw(10) << el.first << "]: "
+                << el.second
+                ;
+#else
+            os << el << ", ";
+#endif
+            index++;
+        }
+
+        return os;
+    }
+
 	template<typename T>
 	std::vector<T> evenly(const std::vector<T> vec, int dev)
 	{

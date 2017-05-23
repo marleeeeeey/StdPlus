@@ -73,6 +73,16 @@ namespace stdplus
         return val;
     }
 
+    template<typename T>
+    inline T to(const std::string & str)
+    {
+        T val;
+        std::istringstream ss(str);
+        ss >> val;
+
+        return val;
+    }
+
     template<>
     inline std::string to_string(const bool& t)
     {
