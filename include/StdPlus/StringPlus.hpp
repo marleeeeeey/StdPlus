@@ -2,6 +2,7 @@
 #define StringPlus_h__
 
 #include "StdInclude.h"
+#include "StringPlus.hpp"   // split
 
 namespace stdplus
 {

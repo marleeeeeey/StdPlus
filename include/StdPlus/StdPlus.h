@@ -21,6 +21,7 @@
 #include "KeyboardControl.hpp"
 #include "EarthPlus.hpp"
 #include "TestedPlus.hpp"
+#include "CmdParserPlus.hpp"
 
 
 #endif // StdPlus_h__
