@@ -21,15 +21,17 @@
 #    define ATHREAD       << stdplus::thisThreadIdString() << " "
 
 #ifndef STD_PLUS_DEBUG_PRINT_OFF
-#    define AVAR(var)     std::cout << stdplus::logCnt() << " VAR " ATHREAD << #var << "=" << stdplus::to_string(var) << std::endl
-#    define AMSG(var)     std::cout << stdplus::logCnt() << " MSG " ATHREAD <<  (var) << std::endl
-#    define AFUN          std::cout << stdplus::logCnt() << " FUN " ATHREAD << AFUNSIG << std::endl
-#    define AFUN_COUNTER  static unsigned funCounter___ = 0; funCounter___++; std::cout << stdplus::logCnt() << " AFUN_COUNTER <" ATHREAD << std::setw(5) << funCounter___ << "> " << AFUNSIG << std::endl
-#    define ASPLIT        std::cout << "-------------------------------------------------------------------------------------\n"
-#    define ASPACE        std::cout << "\n"
-#    define ABEEP         std::cout << '\a';
+#    define AVAR(var)      std::cout << stdplus::logCnt() << " VAR " ATHREAD << #var << "=" << stdplus::to_string(var) << std::endl
+#    define ANMD(var, str) std::cout << stdplus::logCnt() << " NMD " ATHREAD << str  << "=" << stdplus::to_string(var) << std::endl
+#    define AMSG(var)      std::cout << stdplus::logCnt() << " MSG " ATHREAD <<  (var) << std::endl
+#    define AFUN           std::cout << stdplus::logCnt() << " FUN " ATHREAD << AFUNSIG << std::endl
+#    define AFUN_COUNTER   static unsigned funCounter___ = 0; funCounter___++; std::cout << stdplus::logCnt() << " AFUN_COUNTER <" ATHREAD << std::setw(5) << funCounter___ << "> " << AFUNSIG << std::endl
+#    define ASPLIT         std::cout << "-------------------------------------------------------------------------------------\n"
+#    define ASPACE         std::cout << "\n"
+#    define ABEEP          std::cout << '\a';
 #else  // STD_PLUS_DEBUG_PRINT_OFF
 #    define AVAR(var)     
+#    define ANMD(var, str)
 #    define AMSG(var)     
 #    define AFUN          
 #    define AFUN_COUNTER  
