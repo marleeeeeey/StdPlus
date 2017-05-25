@@ -58,6 +58,19 @@ namespace stdplus
             return m_indexedValue;
         }
 
+        template<typename T>
+        T getValue(const std::string & key, const T & defaultValue)
+        {
+            try
+            {
+                return getValue(key);
+            }
+            catch (std::logic_error & e)
+            {
+                return defaultValue;
+            }
+        }
+
     private:
         inline void fillRawData()
         {
@@ -66,7 +79,7 @@ namespace stdplus
                 m_rawItems.push_back(m_argv[i]);
             }
 
-            AVAR(m_rawItems);
+            //AVAR(m_rawItems);
         }
 
         inline void fillNamedData()
@@ -90,9 +103,9 @@ namespace stdplus
                 m_indexedValue.push_back(raw);
             }
 
-            AVAR(m_fullNamed);
-            AVAR(m_shortNamed);
-            AVAR(m_indexedValue);
+//             AVAR(m_fullNamed);
+//             AVAR(m_shortNamed);
+//             AVAR(m_indexedValue);
         }
 
         inline void splitAssignData(const std::vector<std::string> strings, bool isShort = false)
