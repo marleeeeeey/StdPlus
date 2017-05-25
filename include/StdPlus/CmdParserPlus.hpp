@@ -23,9 +23,9 @@ namespace stdplus
             splitAssignData(m_fullNamed, false);
             splitAssignData(m_shortNamed, true);
 
-            AVAR(m_keys);
-            AVAR(m_keyValues);
-            AVAR(m_indexedValue);
+//             AVAR(m_keys);
+//             AVAR(m_keyValues);
+//             AVAR(m_indexedValue);
         }
 
         inline std::string getValue(const std::string & key)
@@ -65,7 +65,7 @@ namespace stdplus
             {
                 return getValue<T>(key);
             }
-            catch (std::logic_error & e)
+            catch (std::logic_error &)
             {
                 return defaultValue;
             }
