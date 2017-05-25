@@ -63,7 +63,7 @@ namespace stdplus
         {
             try
             {
-                return getValue(key);
+                return getValue<T>(key);
             }
             catch (std::logic_error & e)
             {
