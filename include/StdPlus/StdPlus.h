@@ -1,3 +1,14 @@
+/*!
+ * \file StdPlus.h
+ * \date 2017/05/26 0:07
+ *
+ * \author Tyulenev Sergey
+ * Contact: marleeeeeey@gmail.com
+ *
+ * last version https://github.com/marleeeeeey
+ *
+*/
+
 #ifndef StdPlus_h__
 #define StdPlus_h__
 
