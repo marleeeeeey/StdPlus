@@ -22,7 +22,7 @@ namespace Transfer
     }
 
     template<>
-    size_t send(TCPSocketPtr sock, const std::string & str)
+    inline size_t send(TCPSocketPtr sock, const std::string & str)
     {
         size_t numberBytes = 0;
 
@@ -34,7 +34,7 @@ namespace Transfer
     }
 
     template<>
-    size_t recv(TCPSocketPtr sock, std::string * pData)
+    inline size_t recv(TCPSocketPtr sock, std::string * pData)
     {
         size_t numberBytes = 0;
 
@@ -73,7 +73,6 @@ namespace Transfer
     size_t recv(TCPSocketPtr sock, std::vector<T> * pData)
     {
         size_t numberBytes = 0;
-
 
         size_t numElements;
         numberBytes += Transfer::recv(sock, &numElements);
