@@ -23,16 +23,11 @@ namespace stdplus
             splitAssignData(m_fullNamed, false);
             splitAssignData(m_shortNamed, true);
 
-//             AVAR(m_keys);
-//             AVAR(m_keyValues);
-//             AVAR(m_indexedValue);
+            AVAR(m_keys);
+            AVAR(m_keyValues);
+            AVAR(m_indexedValue);
         }
-
-        inline std::string getValue(const std::string & key)
-        {
-            return getValue<std::string>(key);
-        }
-
+        
         template<typename T>
         T getValue(const std::string & key)
         {
@@ -53,10 +48,31 @@ namespace stdplus
             throw std::logic_error("Not found key " + key);
         }
 
+        template<>
+        bool getValue<bool>(const std::string & key)
+        {
+            if (key.size() == 0)
+                throw std::logic_error("Empty key");
+
+            auto itKey = m_keys.find(key);
+            if (itKey != m_keys.end())
+                return true;
+
+            auto itKeyValue = m_keyValues.find(key);
+            if (itKeyValue != m_keyValues.end())
+            {
+                const std::string & strValue = itKeyValue->second;
+                return stdplus::to<bool>(strValue);
+            }
+
+            throw std::logic_error("Not found key " + key);
+        }
+
         inline const std::vector<std::string> & indexedValues()
         {
             return m_indexedValue;
         }
+
 
         template<typename T>
         T getValue(const std::string & key, const T & defaultValue)
@@ -70,7 +86,7 @@ namespace stdplus
                 return defaultValue;
             }
         }
-
+        
     private:
         inline void fillRawData()
         {
@@ -79,7 +95,7 @@ namespace stdplus
                 m_rawItems.push_back(m_argv[i]);
             }
 
-            //AVAR(m_rawItems);
+            AVAR(m_rawItems);
         }
 
         inline void fillNamedData()
