@@ -100,7 +100,8 @@ namespace stdplus
         //std::cerr << dateTimeStr() << prefix << errormessage << "\n" << std::endl;
     }
 
-    inline void consoleRead(double & val, const std::string & msg)
+    template<typename T>
+    inline void consoleRead(T & val, const std::string & msg)
     {
         std::cout
             << ALOG_INDEX << " INP "
