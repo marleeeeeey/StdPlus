@@ -17,15 +17,19 @@
 
 // ********************** DEBUG PRINT FUNCTIONs ***************************
 
-//#    define ATHREAD       
-#    define ATHREAD       << stdplus::thisThreadIdString() << " "
+//#    define ATHREAD       std::string()
+#    define ATHREAD       stdplus::thisThreadIdString() + " "
+
+//#    define ALOG_INDEX  std::string()
+#    define ALOG_INDEX  stdplus::logCnt()
+//#    define ALOG_INDEX  stdplus::timeStr()
 
 #ifndef STD_PLUS_DEBUG_PRINT_OFF
-#    define AVAR(var)      std::cout << stdplus::logCnt() << " VAR " ATHREAD << #var << "=" << stdplus::to_string(var) << std::endl
-#    define ANMD(var, str) std::cout << stdplus::logCnt() << " NMD " ATHREAD << str  << "=" << stdplus::to_string(var) << std::endl
-#    define AMSG(var)      std::cout << stdplus::logCnt() << " MSG " ATHREAD <<  (var) << std::endl
-#    define AFUN           std::cout << stdplus::logCnt() << " FUN " ATHREAD << AFUNSIG << std::endl
-#    define AFUN_COUNTER   static unsigned funCounter___ = 0; funCounter___++; std::cout << stdplus::logCnt() << " AFUN_COUNTER <" ATHREAD << std::setw(5) << funCounter___ << "> " << AFUNSIG << std::endl
+#    define AVAR(var)      std::cout << ALOG_INDEX << " VAR " << ATHREAD << #var << "=" << stdplus::to_string(var) << std::endl
+#    define ANMD(var, str) std::cout << ALOG_INDEX << " NMD " << ATHREAD << str  << "=" << stdplus::to_string(var) << std::endl
+#    define AMSG(var)      std::cout << ALOG_INDEX << " MSG " << ATHREAD <<  (var) << std::endl
+#    define AFUN           std::cout << ALOG_INDEX << " FUN " << ATHREAD << AFUNSIG << std::endl
+#    define AFUN_COUNTER   static unsigned funCounter___ = 0; funCounter___++; std::cout << ALOG_INDEX << " AFUN_COUNTER <" << ATHREAD << std::setw(5) << funCounter___ << "> " << AFUNSIG << std::endl
 #    define ASPLIT         std::cout << "-------------------------------------------------------------------------------------\n"
 #    define ASPACE         std::cout << "\n"
 #    define ABEEP          std::cout << '\a';
@@ -44,7 +48,7 @@
 
 // ************************* LOGIC FUNCTIONs ******************************
 
-#define APAUSE_MSG(var) std::cout << stdplus::logCnt() << " PSE " ATHREAD << var; std::cin.get()
+#define APAUSE_MSG(var) std::cout << ALOG_INDEX << " PSE " << ATHREAD << var; std::cin.get()
 #define APAUSE          APAUSE_MSG("(press any key for continue)")
 
 #define ARED(val)       stdplus::consoleRead(val, #val)
@@ -99,7 +103,7 @@ namespace stdplus
     inline void consoleRead(double & val, const std::string & msg)
     {
         std::cout
-            << stdplus::logCnt() << " INP "
+            << ALOG_INDEX << " INP "
             << msg << "[" << val << "]" << ":";
 
         char ch = std::cin.peek();
