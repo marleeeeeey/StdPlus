@@ -45,14 +45,41 @@ namespace stdplus
         return f;
     }
 
-    inline std::string readText(std::ifstream & inpf)
+    inline std::string readText(std::ifstream & ifs)
     {
-        char ch;
-        std::string inputT;
-        while (inpf.get(ch))
-            inputT += ch;
+        std::string retString;
 
-        return inputT;
+        char ch;
+        while (ifs.get(ch))
+            retString += ch;
+
+        return retString;
+    }
+
+    inline std::string readText(std::string & fileName)
+    {
+        std::ifstream ifs(fileName);
+
+        std::string retString;
+
+        char ch;
+        while (ifs.get(ch))
+            retString += ch;
+
+        return retString;
+    }
+
+    inline std::string tolower(const std::string & orig)
+    {
+        std::string ret;
+        ret.reserve(orig.size());
+        for_each(orig.begin(), orig.end(),
+            [&ret](const char & ch)
+        {
+            ret.push_back(::tolower(ch));
+        });
+
+        return ret;
     }
 
 	inline std::vector<std::string> fillingVectorFromCMD(int mainArgc, char *mainArgv[])
