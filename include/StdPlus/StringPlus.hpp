@@ -7,6 +7,42 @@
 namespace stdplus
 {
 
+    inline void replaceAll(std::string & source, const std::string & oldValue, const std::string & newValue)
+    {
+        size_t index = 0;
+
+        while ((index = source.find(oldValue, index)) != std::string::npos)
+        {
+            size_t charAfterWordIndex = index + oldValue.size();
+            if (charAfterWordIndex >= source.size())
+                return;
+
+            char charAfterWord = source.at(charAfterWordIndex);
+            if (isalpha(charAfterWord))
+            {
+                index = charAfterWordIndex;
+                continue;
+            }
+
+
+            size_t charBeforeWordIndex = index - 1;
+            if (charBeforeWordIndex > 0)
+            {
+                char charBeforeWord = source.at(charBeforeWordIndex);
+                if (isalpha(charBeforeWord))
+                {
+                    index = charAfterWordIndex;
+                    continue;
+                }
+            }
+
+
+            source.replace(index, oldValue.size(), newValue);
+            index += newValue.size();
+        };
+    }
+
+
     inline std::vector<std::string> split(const std::string &s, char delim)
     {
         std::stringstream ss(s);
