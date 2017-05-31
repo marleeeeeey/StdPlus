@@ -4,6 +4,7 @@
 #include "StdInclude.h"
 #include "TimePlus.hpp"
 #include "OtherPlus.hpp"
+#include "StringPlus.hpp"
 
 
 // *********************** PREPARE FUNCTIONS ******************************
