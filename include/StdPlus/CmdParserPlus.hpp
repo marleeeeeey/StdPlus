@@ -7,6 +7,8 @@ namespace stdplus
 {
     class CmdParser
     {
+        friend std::ostream & operator<<(std::ostream & os, const stdplus::CmdParser & d);
+
     public:
         CmdParser()
         {
@@ -23,9 +25,9 @@ namespace stdplus
             splitAssignData(m_fullNamed, false);
             splitAssignData(m_shortNamed, true);
 
-            AVAR(m_keys);
-            AVAR(m_keyValues);
-            AVAR(m_indexedValue);
+//             AVAR(m_keys);
+//             AVAR(m_keyValues);
+//             AVAR(m_indexedValue);
         }
         
         template<typename T>
@@ -87,7 +89,33 @@ namespace stdplus
             }
         }
         
+        inline void print(std::ostream & os) const 
+        {
+            if (!m_indexedValue.empty())
+            {
+                os << "indexes: \n";
+                int i = 0;
+                for (auto & v : m_indexedValue)
+                    os << i++ << ": " << v << "\n";
+            }
+
+            if (!m_keys.empty())
+            {
+                os << "bool_keys: ";
+                for (auto & key : m_keys)
+                    os << key << "; ";
+            }
+
+            if (!m_keyValues.empty())
+            {
+                os << "keys: \n";
+                for (auto & kv : m_keyValues)
+                    os << kv.first << ": " << kv.second << "\n";
+            }
+        }
+
     private:
+
         inline void fillRawData()
         {
             for (int i = 0; i < m_argc; ++i)
@@ -95,7 +123,7 @@ namespace stdplus
                 m_rawItems.push_back(m_argv[i]);
             }
 
-            AVAR(m_rawItems);
+            //AVAR(m_rawItems);
         }
 
         inline void fillNamedData()
@@ -180,8 +208,15 @@ namespace stdplus
         std::vector<std::string>           m_rawItems;
         std::vector<std::string>           m_fullNamed;
         std::vector<std::string>           m_shortNamed;
+
         std::set<std::string>              m_keys;
         std::map<std::string, std::string> m_keyValues;
         std::vector<std::string>           m_indexedValue;
     };
+}
+
+inline std::ostream & operator<<(std::ostream & os, const stdplus::CmdParser & d)
+{
+    d.print(os);
+    return os;
 }
