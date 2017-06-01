@@ -56,7 +56,7 @@ namespace stdplus
         return retString;
     }
 
-    inline std::string readText(std::string & fileName)
+    inline std::string readText(const std::string & fileName)
     {
         std::ifstream ifs(fileName);
 
