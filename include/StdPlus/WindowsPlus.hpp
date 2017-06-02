@@ -1,5 +1,11 @@
-#ifndef WindowsPlus_h__
-#define WindowsPlus_h__
+/*!
+ * \author Tyulenev Sergey
+ * Contact: marleeeeeey@gmail.com
+ * last version https://github.com/marleeeeeey/StdPlus
+*/
+
+
+#define STD_PLUS_WINDOWS_INCLUDE
 
 
 #include "StdInclude.h"
@@ -35,4 +41,3 @@ namespace stdplus
 
 }
 
-#endif // WindowsPlus_h__

@@ -1,5 +1,10 @@
-#ifndef StdInclude_h__
-#define StdInclude_h__
+/*!
+ * \author Tyulenev Sergey
+ * Contact: marleeeeeey@gmail.com
+ * last version https://github.com/marleeeeeey/StdPlus
+*/
+
+#pragma once
 
 #define STDPLUS_MULTILINE_PRINT
 
@@ -32,4 +37,3 @@
 #include <memory>
 
 
-#endif // StdInclude_h__

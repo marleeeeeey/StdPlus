@@ -1,5 +1,11 @@
-#ifndef EarthPlus_h__
-#define EarthPlus_h__
+/*!
+ * \author Tyulenev Sergey
+ * Contact: marleeeeeey@gmail.com
+ * last version https://github.com/marleeeeeey/StdPlus
+*/
+
+
+#pragma once
 
 #include "StdInclude.h"
 
@@ -177,5 +183,3 @@ inline std::ostream & operator<<(std::ostream & os, const stdplus::EarthDirectio
     return os;
 }
 
-
-#endif // EarthPlus_h__

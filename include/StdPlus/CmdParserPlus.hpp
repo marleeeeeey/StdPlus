@@ -1,3 +1,9 @@
+/*!
+ * \author Tyulenev Sergey
+ * Contact: marleeeeeey@gmail.com
+ * last version https://github.com/marleeeeeey/StdPlus
+*/
+
 #pragma once
 
 #include "StdInclude.h"

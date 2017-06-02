@@ -1,3 +1,11 @@
+/*!
+ * \author Tyulenev Sergey
+ * Contact: marleeeeeey@gmail.com
+ * last version https://github.com/marleeeeeey/StdPlus
+*/
+
+
+
 #ifndef OtherPlus_h__
 #define OtherPlus_h__
 

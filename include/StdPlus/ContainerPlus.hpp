@@ -1,5 +1,11 @@
-#ifndef ContainerPlus_h__
-#define ContainerPlus_h__
+/*!
+ * \author Tyulenev Sergey
+ * Contact: marleeeeeey@gmail.com
+ * last version https://github.com/marleeeeeey/StdPlus
+*/
+
+
+#pragma once
 
 #include "StdInclude.h"
 
@@ -130,4 +136,4 @@ namespace stdplus
     
 }
 
-#endif // ContainerPlus_h__
+

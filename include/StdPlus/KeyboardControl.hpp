@@ -1,5 +1,10 @@
-#ifndef KeyboardControl_h__
-#define KeyboardControl_h__
+/*!
+ * \author Tyulenev Sergey
+ * Contact: marleeeeeey@gmail.com
+ * last version https://github.com/marleeeeeey/StdPlus
+*/
+
+#pragma once
 
 // How to use
 // key - valueUP, shift+key - valueDown, h - help (print all keys and values)
@@ -285,7 +290,4 @@ namespace stdplus
     std::vector<T *> Keyboard<T>::m_values;
 
 }
-
-
-#endif // KeyboardControl_h__
 

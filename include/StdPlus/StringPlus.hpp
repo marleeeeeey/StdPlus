@@ -1,5 +1,11 @@
-#ifndef StringPlus_h__
-#define StringPlus_h__
+/*!
+ * \author Tyulenev Sergey
+ * Contact: marleeeeeey@gmail.com
+ * last version https://github.com/marleeeeeey/StdPlus
+*/
+
+
+#pragma once
 
 #include "StdInclude.h"
 #include "StringPlus.hpp"   // split
@@ -182,5 +188,3 @@ namespace stdplus
 
 }
 
-
-#endif // StringPlus_h__

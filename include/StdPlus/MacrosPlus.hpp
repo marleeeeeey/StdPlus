@@ -1,5 +1,10 @@
-#ifndef MacrosPlus_h__
-#define MacrosPlus_h__
+/*!
+ * \author Tyulenev Sergey
+ * Contact: marleeeeeey@gmail.com
+ * last version https://github.com/marleeeeeey/StdPlus
+*/
+
+#pragma once
 
 #include "StdInclude.h"
 #include "TimePlus.hpp"
@@ -9,11 +14,17 @@
 
 // *********************** PREPARE FUNCTIONS ******************************
 
-#define AFUNSIG       stdplus::funSigPrepare(__FUNCSIG__) 
-#define AFILENAME     stdplus::fileNamePrepare(__FILE__) 
-#define AFILELINE     stdplus::to_string(__LINE__)
-#define APOSFILE      (AFILENAME + "(" + AFILELINE + ")")
-#define AFUNPOS       AFUNSIG + " " + APOSFILE
+#define AFUNSIG           stdplus::funSigPrepare(__FUNCSIG__) 
+#define AFILENAME         stdplus::fileNamePrepare(__FILE__) 
+#define AFILELINE         stdplus::to_string(__LINE__)
+#define APOSFILE          (AFILENAME + "(" + AFILELINE + ")")
+#define AFUNPOS           AFUNSIG + " " + APOSFILE
+
+#define LOG_STD_FUNSIG    AFUNSIG    
+#define LOG_STD_FILENAME  AFILENAME  
+#define LOG_STD_FILELINE  AFILELINE  
+#define LOG_STD_POSFILE   APOSFILE   
+#define LOG_STD_FUNPOS    AFUNPOS    
 
 
 // ********************** DEBUG PRINT FUNCTIONs ***************************
@@ -45,15 +56,25 @@
 #    define ABEEP         
 #endif // STD_PLUS_DEBUG_PRINT_OFF
 
+#define LOG_STD_VAR(var)        AVAR(var)      
+#define LOG_STD_NMD(var, str)   ANMD(var, str) 
+#define LOG_STD_MSG(var)        AMSG(var)      
+#define LOG_STD_FUN             AFUN           
+#define LOG_STD_FUN_COUNTER     AFUN_COUNTER   
+#define LOG_STD_SPLIT           ASPLIT         
+#define LOG_STD_SPACE           ASPACE         
+#define LOG_STD_BEEP            ABEEP          
 
 
 // ************************* LOGIC FUNCTIONs ******************************
 
 #define APAUSE_MSG(var) std::cout << ALOG_INDEX << " PSE " << ATHREAD << var; std::cin.get()
 #define APAUSE          APAUSE_MSG("(press any key for continue)")
-
 #define ARED(val)       stdplus::consoleRead(val, #val)
 
+#define LOG_STD_PAUSE_MSG(var)  APAUSE_MSG(var) 
+#define LOG_STD_PAUSE           APAUSE          
+#define LOG_STD_RED(val)        ARED(val)       
 
 
 // ********************* EASY EXCEPTION AND ERROR *************************
@@ -63,7 +84,10 @@
 #define AEXCEPT_IF(var)  if(var) stdplus::throwExcept(ADEBUGMSG(var))
 #define AERR_IF(var)     if(var) stdplus::throwError (ADEBUGMSG(var))
 
-
+#define LOG_STD_DEBUGMSG(var)    ADEBUGMSG(var)  
+#define LOG_STD_EXCEPT           AEXCEPT         
+#define LOG_STD_EXCEPT_IF(var)   AEXCEPT_IF(var) 
+#define LOG_STD_ERR_IF(var)      AERR_IF(var)    
 
 
 namespace stdplus
@@ -117,8 +141,3 @@ namespace stdplus
     }
 
 }
-
-
-
-
-#endif // MacrosPlus_h__

@@ -1,5 +1,11 @@
-#ifndef TimePlus_h__
-#define TimePlus_h__
+/*!
+ * \author Tyulenev Sergey
+ * Contact: marleeeeeey@gmail.com
+ * last version https://github.com/marleeeeeey/StdPlus
+*/
+
+
+#pragma once
 
 
 #include "StdInclude.h"
@@ -25,7 +31,7 @@ namespace stdplus
         return retStr;
     }
 
-#ifndef WindowsPlus_h__
+#ifndef STD_PLUS_WINDOWS_INCLUDE
 
     inline std::string timeStr()
     {
@@ -36,7 +42,7 @@ namespace stdplus
         return retStr;
     }
 
-#endif
+#endif // STD_PLUS_WINDOWS_INCLUDE
 
     inline std::string dateTimeStr()
     {
@@ -45,4 +51,3 @@ namespace stdplus
 
 }
 
-#endif // TimePlus_h__

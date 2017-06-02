@@ -1,16 +1,10 @@
 /*!
- * \file StdPlus.h
- * \date 2017/05/26 0:07
- *
  * \author Tyulenev Sergey
  * Contact: marleeeeeey@gmail.com
- *
- * last version https://github.com/marleeeeeey
- *
+ * last version https://github.com/marleeeeeey/StdPlus
 */
 
-#ifndef StdPlus_h__
-#define StdPlus_h__
+#pragma once
 
 #include "StdInclude.h"
 
@@ -34,5 +28,3 @@
 #include "TestedPlus.hpp"
 #include "CmdParserPlus.hpp"
 
-
-#endif // StdPlus_h__
