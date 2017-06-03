@@ -12,19 +12,27 @@
 
 namespace stdplus
 {
+    bool isWordSplitter(const char ch)
+    {
+        if (isalpha(ch) || ch == '\'')
+            return false;
 
-    inline void replaceAll(std::string & source, const std::string & oldValue, const std::string & newValue)
+        return true;
+    }
+
+
+    inline void replaceWordAtAll(std::string & source, const std::string & oldWord, const std::string & newValue)
     {
         size_t index = 0;
 
-        while ((index = source.find(oldValue, index)) != std::string::npos)
+        while ((index = source.find(oldWord, index)) != std::string::npos)
         {
-            size_t charAfterWordIndex = index + oldValue.size();
+            size_t charAfterWordIndex = index + oldWord.size();
             if (charAfterWordIndex >= source.size())
                 return;
 
             char charAfterWord = source.at(charAfterWordIndex);
-            if (isalpha(charAfterWord))
+            if (!isWordSplitter(charAfterWord))
             {
                 index = charAfterWordIndex;
                 continue;
@@ -35,7 +43,7 @@ namespace stdplus
             if (charBeforeWordIndex > 0)
             {
                 char charBeforeWord = source.at(charBeforeWordIndex);
-                if (isalpha(charBeforeWord))
+                if (!isWordSplitter(charBeforeWord))
                 {
                     index = charAfterWordIndex;
                     continue;
@@ -43,7 +51,7 @@ namespace stdplus
             }
 
 
-            source.replace(index, oldValue.size(), newValue);
+            source.replace(index, oldWord.size(), newValue);
             index += newValue.size();
         };
     }
