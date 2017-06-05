@@ -4,10 +4,7 @@
  * last version https://github.com/marleeeeeey/StdPlus
 */
 
-
-
-#ifndef OtherPlus_h__
-#define OtherPlus_h__
+#pragma once
 
 #include "StdInclude.h"
 
@@ -33,5 +30,3 @@ namespace stdplus
         return val;
     }
 }
-
-#endif // OtherPlus_h__

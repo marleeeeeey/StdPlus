@@ -12,7 +12,7 @@
 
 namespace stdplus
 {
-    bool isWordSplitter(const char ch)
+    inline bool isWordSplitter(const char ch)
     {
         if (isalpha(ch) || ch == '\'')
             return false;
