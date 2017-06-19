@@ -94,10 +94,23 @@ TEST(EarthPoint, MunisAndPlusEquale)
     ASSERT_FALSE(p2 == p1);
 }
 
+TEST(WindowsMBCS, GetSubFolders)
+{
+    std::vector<std::string> files = stdplus::getSubFiles();
+    AVAR(files);
+
+    std::vector<std::string> folders = stdplus::getSubFolders();
+    AVAR(folders);    
+
+    std::vector<std::string> subFiles = stdplus::getSubFilesIncludeSubfolders();
+    AVAR(subFiles);
+}
+
 int main(int argc, char **argv)
 {
     ::testing::InitGoogleTest(&argc, argv);
-    int ret = RUN_ALL_TESTS();
+    int googleTestResult = RUN_ALL_TESTS();
+    AVAR(googleTestResult);
     APAUSE;
-    return ret;
+    return googleTestResult;
 }

@@ -12,7 +12,7 @@
 
 namespace stdplus
 {
-	inline std::vector<std::string> getSubFolders(const std::string & mainPath, const std::string & mask)
+	inline std::vector<std::string> getSubFolders(const std::string & mainPath = ".", const std::string & mask = "*")
 	{
 		std::vector<std::string> folders;
 
@@ -24,7 +24,8 @@ namespace stdplus
 
 		if (folderHandle != INVALID_HANDLE_VALUE)
 		{
-			do {
+			do 
+            {
 				if (inFold.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
 				{
 
@@ -45,7 +46,7 @@ namespace stdplus
 		return folders;
 	}
 
-	inline std::vector<std::string> getSubFiles(const std::string & dir, const std::string & mask)
+	inline std::vector<std::string> getSubFiles(const std::string & dir = ".", const std::string & mask = "*")
 	{
 		std::vector<std::string> files;
 
@@ -57,7 +58,8 @@ namespace stdplus
 
 		if (fileHandle != INVALID_HANDLE_VALUE)
 		{
-			do {
+			do 
+            {
 				if (!(inFile.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
 				{
 					files.push_back(dir + "\\" + inFile.cFileName);
@@ -68,4 +70,22 @@ namespace stdplus
 
 		return files;
 	}
+
+
+    inline std::vector<std::string> getSubFilesIncludeSubfolders(
+        const std::string & dir = ".", const std::string & maskFile = "*", const std::string & maskDir = "*")
+    {
+        std::vector<std::string> subFolders = getSubFolders(dir, maskDir);
+        subFolders.push_back(dir);
+        
+        std::vector<std::string> allFiles;
+
+        for (const auto & subFolder : subFolders)
+        {
+            std::vector<std::string> subFiles = getSubFiles(subFolder, maskFile);
+            allFiles.insert(allFiles.end(), subFiles.begin(), subFiles.end());
+        }
+
+        return allFiles;
+    }
 }
