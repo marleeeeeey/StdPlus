@@ -102,7 +102,7 @@ TEST(WindowsMBCS, GetSubFolders)
     std::vector<std::string> folders = stdplus::getSubFolders();
     AVAR(folders);    
 
-    std::vector<std::string> subFiles = stdplus::getSubFilesIncludeSubfolders();
+    std::vector<std::string> subFiles = stdplus::getSubFilesIncludeSubfolders(".", "*rit*");
     AVAR(subFiles);
 }
 
