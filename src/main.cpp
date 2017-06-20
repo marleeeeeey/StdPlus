@@ -106,6 +106,31 @@ TEST(WindowsMBCS, GetSubFolders)
     AVAR(subFiles);
 }
 
+TEST(SimpleCmdParser, ManualCmd)
+{
+    using CString = char *;
+    const int argc = 5;
+    CString argv[argc] =
+    {
+        "test=5",
+        "mama=natasha",
+        "papa=gena",
+        "isTest=true",
+        "years_old=27",
+    };
+
+    stdplus::SimpleCmdParser cmd;
+    cmd.parseData(argc, argv);
+
+    cmd.print(std::cout);
+
+    ASSERT_TRUE(cmd.getValue<int>("test") == 5);
+    ASSERT_TRUE(cmd.getValue<bool>("isTest") == true);
+    ASSERT_TRUE(cmd.getValue<std::string>("mama") == "natasha");
+    ASSERT_FALSE(cmd.getValue<std::string>("papa") == "wrongName");
+    ASSERT_TRUE(cmd.getValue<int>("karamba", 10) == 10);
+}
+
 int main(int argc, char **argv)
 {
     std::ofstream ofs("ttt.txt");

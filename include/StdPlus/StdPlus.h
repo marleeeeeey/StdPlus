@@ -27,4 +27,5 @@
 #include "EarthPlus.hpp"
 #include "TestedPlus.hpp"
 #include "CmdParserPlus.hpp"
+#include "SimpleCmdParserPlus.hpp"
 
