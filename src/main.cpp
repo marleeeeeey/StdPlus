@@ -108,6 +108,9 @@ TEST(WindowsMBCS, GetSubFolders)
 
 int main(int argc, char **argv)
 {
+    std::ofstream ofs("ttt.txt");
+    stdplus::globalOS().addOStream(&ofs);
+
     ::testing::InitGoogleTest(&argc, argv);
     int googleTestResult = RUN_ALL_TESTS();
     AVAR(googleTestResult);

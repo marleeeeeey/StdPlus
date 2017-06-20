@@ -10,6 +10,7 @@
 #include "TimePlus.hpp"
 #include "OtherPlus.hpp"
 #include "StringPlus.hpp"
+#include "OutputSystemPlus.hpp"
 
 
 // *********************** PREPARE FUNCTIONS ******************************
@@ -36,15 +37,22 @@
 #    define ALOG_INDEX  stdplus::logCnt()
 //#    define ALOG_INDEX  stdplus::timeStr()
 
+
+// std::ostringstream os;
+// globalOS().printString(os.str());
+
+#define SP_BEGIN { std::ostringstream os___; os___
+#define SP_END   stdplus::globalOS().printString(os___.str()); } stdplus::globalOS() 
+
 #ifndef STD_PLUS_DEBUG_PRINT_OFF
-#    define AVAR(var)      std::cout << ALOG_INDEX << " VAR " << ATHREAD << #var << "=" << stdplus::to_string(var) << std::endl
-#    define ANMD(var, str) std::cout << ALOG_INDEX << " NMD " << ATHREAD << str  << "=" << stdplus::to_string(var) << std::endl
-#    define AMSG(var)      std::cout << ALOG_INDEX << " MSG " << ATHREAD <<  (var) << std::endl
-#    define AFUN           std::cout << ALOG_INDEX << " FUN " << ATHREAD << AFUNSIG << std::endl
-#    define AFUN_COUNTER   static unsigned funCounter___ = 0; funCounter___++; std::cout << ALOG_INDEX << " AFUN_COUNTER <" << ATHREAD << std::setw(5) << funCounter___ << "> " << AFUNSIG << std::endl
-#    define ASPLIT         std::cout << "-------------------------------------------------------------------------------------\n"
-#    define ASPACE         std::cout << "\n"
-#    define ABEEP          std::cout << '\a';
+#    define AVAR(var)      SP_BEGIN << ALOG_INDEX << " VAR " << ATHREAD << #var << "=" << stdplus::to_string(var) << std::endl; SP_END
+#    define ANMD(var, str) SP_BEGIN << ALOG_INDEX << " NMD " << ATHREAD << str  << "=" << stdplus::to_string(var) << std::endl; SP_END
+#    define AMSG(var)      SP_BEGIN << ALOG_INDEX << " MSG " << ATHREAD <<  (var) << std::endl; SP_END
+#    define AFUN           SP_BEGIN << ALOG_INDEX << " FUN " << ATHREAD << AFUNSIG << std::endl; SP_END
+#    define AFUN_COUNTER   static unsigned funCounter___ = 0; funCounter___++; SP_BEGIN << ALOG_INDEX << " AFUN_COUNTER <" << ATHREAD << std::setw(5) << funCounter___ << "> " << AFUNSIG << std::endl; SP_END
+#    define ASPLIT         SP_BEGIN << "-------------------------------------------------------------------------------------\n"; SP_END
+#    define ASPACE         SP_BEGIN << "\n"; SP_END
+#    define ABEEP          stdplus::stdConsoleOut() << '\a'    //TODO
 #else  // STD_PLUS_DEBUG_PRINT_OFF
 #    define AVAR(var)     
 #    define ANMD(var, str)
@@ -68,7 +76,7 @@
 
 // ************************* LOGIC FUNCTIONs ******************************
 
-#define APAUSE_MSG(var) std::cout << ALOG_INDEX << " PSE " << ATHREAD << var; std::cin.get()
+#define APAUSE_MSG(var) SP_BEGIN << ALOG_INDEX << " PSE " << ATHREAD << var; SP_END; std::cin.get()
 #define APAUSE          APAUSE_MSG("(press any key for continue)")
 #define ARED(val)       stdplus::consoleRead(val, #val)
 
@@ -128,7 +136,8 @@ namespace stdplus
     template<typename T>
     inline void consoleRead(T & val, const std::string & msg)
     {
-        std::cout
+
+        stdplus::stdConsoleOut()
             << ALOG_INDEX << " INP "
             << msg << "[" << val << "]" << ":";
 

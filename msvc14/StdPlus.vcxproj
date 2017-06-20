@@ -158,6 +158,7 @@
     <ClInclude Include="..\include\StdPlus\MacrosPlus.hpp" />
     <ClInclude Include="..\include\StdPlus\MathPlus.hpp" />
     <ClInclude Include="..\include\StdPlus\OtherPlus.hpp" />
+    <ClInclude Include="..\include\StdPlus\OutputSystemPlus.hpp" />
     <ClInclude Include="..\include\StdPlus\StdInclude.h" />
     <ClInclude Include="..\include\StdPlus\StdPlus.h" />
     <ClInclude Include="..\include\StdPlus\StringPlus.hpp" />
