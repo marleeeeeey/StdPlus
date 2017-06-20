@@ -65,8 +65,5 @@
     <ClInclude Include="..\include\StdPlus\WindowsMBCS.hpp">
       <Filter>hpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\StdPlus\OutputSystemPlus.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

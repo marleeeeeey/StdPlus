@@ -38,9 +38,6 @@
 //#    define ALOG_INDEX  stdplus::timeStr()
 
 
-// std::ostringstream os;
-// globalOS().printString(os.str());
-
 #define SP_BEGIN { std::ostringstream os___; os___
 #define SP_END   stdplus::globalOS().printString(os___.str()); } stdplus::globalOS() 
 
