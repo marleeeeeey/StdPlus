@@ -51,7 +51,7 @@ namespace stdplus
                 if (intValue != 0)
                     return true;
             }
-            catch (std::logic_error & e)
+            catch (std::logic_error & )
             {
                 return false;
             }

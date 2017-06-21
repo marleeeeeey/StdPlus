@@ -15,7 +15,7 @@ namespace stdplus
     public:
         inline OutputSystem()
         {
-
+            addOStream(std::cout);
         }
 
         inline ~OutputSystem()

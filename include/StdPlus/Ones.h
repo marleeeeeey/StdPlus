@@ -15,10 +15,10 @@
 #    define STD_PLUS_API __declspec(dllexport)
 #  else
 #    pragma message("USED IMPORT API")
+#    pragma comment(lib, "StdPlus.lib")
 #    define STD_PLUS_API __declspec(dllimport)  
 #  endif
 
-#  pragma comment(lib, "StdPlus.lib")
 
 namespace stdplus
 {
@@ -26,6 +26,7 @@ namespace stdplus
 }
 
 #else    
+#  pragma message("USED STD_PLUS_INCLUDE_MODE")
 
 namespace stdplus
 {
