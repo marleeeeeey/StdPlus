@@ -143,11 +143,7 @@ TEST(SimpleCmdParser, ManualCmd)
 
 int main(int argc, char **argv)
 {
-    //std::ofstream ofs("ttt.txt");
-    //std::ofstream ofs2("tt2.txt");
-    //stdplus::globalOS().addOStream(ofs);
-    //stdplus::globalOS().addOStream(ofs2);
-    //stdplus::globalOS().removeOstream(std::cout);
+    LOG_STD_REGISTER_STREAM(std::cout);
 
     ::testing::InitGoogleTest(&argc, argv);
     int googleTestResult = RUN_ALL_TESTS();

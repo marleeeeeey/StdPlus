@@ -4,3 +4,6 @@
 *.VC.VC.opendb
 /test.txt
 /Isolated.txt
+/Debug/
+/Release/
+/Win32/

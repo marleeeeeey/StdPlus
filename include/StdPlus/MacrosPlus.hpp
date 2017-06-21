@@ -10,7 +10,7 @@
 #include "TimePlus.hpp"
 #include "OtherPlus.hpp"
 #include "StringPlus.hpp"
-#include "OutputSystemPlus.hpp"
+#include "Ones.h"
 
 
 // *********************** PREPARE FUNCTIONS ******************************
@@ -37,9 +37,11 @@
 #    define ALOG_INDEX  stdplus::logCnt()
 //#    define ALOG_INDEX  stdplus::timeStr()
 
+#define LOG_STD_REGISTER_STREAM(var) stdplus::oneOutputSystem().addOStream(var)
+#define LOG_STD_UNREGISTER_STREAM(var) stdplus::oneOutputSystem().removeOstream(var)
 
 #define SP_BEGIN { std::ostringstream os___; os___
-#define SP_END   stdplus::globalOS().printString(os___.str()); } stdplus::globalOS() 
+#define SP_END   stdplus::oneOutputSystem().printString(os___.str()); } stdplus::oneOutputSystem() 
 
 #ifndef STD_PLUS_DEBUG_PRINT_OFF
 #    define AVAR(var)      SP_BEGIN << ALOG_INDEX << " VAR " << ATHREAD << #var << "=" << stdplus::to_string(var) << std::endl; SP_END

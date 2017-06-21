@@ -12,13 +12,23 @@ namespace stdplus
 {
     class OutputSystem
     {
-        friend OutputSystem & globalOS();
-
     public:
+        inline OutputSystem()
+        {
+
+        }
+
+        inline ~OutputSystem()
+        {
+
+        }
         
         inline void addOStream(std::ostream & os)
         {
-            m_ostreams.push_back(&os);
+            auto it = std::find(m_ostreams.begin(), m_ostreams.end(), &os);
+
+            if (it == m_ostreams.end())
+                m_ostreams.push_back(&os);            
         }
 
         inline void removeOstream(std::ostream & os)
@@ -37,16 +47,6 @@ namespace stdplus
         }
 
     private:
-        inline OutputSystem()
-        {
-            addOStream(std::cout);
-        }
-
-        inline ~OutputSystem()
-        {
-            std::cout << "Count stream = " << m_ostreams.size();
-            std::cin.get();
-        }
 
         OutputSystem(const OutputSystem &) = delete;
         void operator=(const OutputSystem &) = delete;
@@ -54,12 +54,6 @@ namespace stdplus
         std::vector<std::ostream *> m_ostreams;
     };
 
-
-    inline OutputSystem & globalOS()
-    {
-        static OutputSystem os;
-        return os;
-    }
 
     inline std::ostream & stdConsoleOut()
     {
