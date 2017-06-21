@@ -39,6 +39,7 @@
 
 #define LOG_STD_REGISTER_STREAM(var) stdplus::oneOutputSystem().addOStream(var)
 #define LOG_STD_UNREGISTER_STREAM(var) stdplus::oneOutputSystem().removeOstream(var)
+#define LOG_STD_CLEAR_STREAM stdplus::oneOutputSystem().clear()
 
 #define SP_BEGIN { std::ostringstream os___; os___
 #define SP_END   stdplus::oneOutputSystem().printString(os___.str()); } stdplus::oneOutputSystem() 

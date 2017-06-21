@@ -37,13 +37,24 @@ namespace stdplus
             m_ostreams.erase(it);
         }
 
+        inline void clear()
+        {
+            m_ostreams.clear();
+        }
+
         inline void printString(const std::string & str)
         {
             for (std::ostream * pOStream : m_ostreams)
             {
                 std::ostream & os = *pOStream;
                 os << str;
+                os.flush();
             }
+        }
+
+        inline size_t size()
+        {
+            return m_ostreams.size();
         }
 
     private:

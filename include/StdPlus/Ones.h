@@ -9,12 +9,12 @@
 
 
 #if defined(STD_PLUS_DLL)    
-#  pragma message("USED STD_PLUS_DLL")
+//#  pragma message("USED STD_PLUS_DLL")
 #  if defined(STD_PLUS_EXPORT)
-#    pragma message("USED EXPORT API")
+//#    pragma message("USED EXPORT API")
 #    define STD_PLUS_API __declspec(dllexport)
 #  else
-#    pragma message("USED IMPORT API")
+//#    pragma message("USED IMPORT API")
 #    pragma comment(lib, "StdPlus.lib")
 #    define STD_PLUS_API __declspec(dllimport)  
 #  endif
@@ -26,7 +26,7 @@ namespace stdplus
 }
 
 #else    
-#  pragma message("USED STD_PLUS_INCLUDE_MODE")
+//#  pragma message("USED STD_PLUS_INCLUDE_MODE")
 
 namespace stdplus
 {
@@ -37,9 +37,6 @@ namespace stdplus
     }
 }
 
-
-#  define STD_PLUS_API_EXPORT
-#  define STD_PLUS_API_IMPORT
 #endif
 
 
