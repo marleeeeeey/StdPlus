@@ -14,8 +14,6 @@ namespace stdplus
 {
     class SimpleCmdParser
     {
-        friend std::ostream & operator<<(std::ostream & os, const stdplus::SimpleCmdParser & d);
-
     public:
         SimpleCmdParser()
         {
@@ -47,9 +45,16 @@ namespace stdplus
             if (strValue == "true")
                 return true;
 
-            int intValue = stdplus::to<int>(strValue);
-            if (intValue != 0)
-                return true;
+            try
+            {
+                int intValue = stdplus::to<int>(strValue);
+                if (intValue != 0)
+                    return true;
+            }
+            catch (std::logic_error & e)
+            {
+                return false;
+            }
 
             return false;
         }
@@ -65,6 +70,26 @@ namespace stdplus
             {
                 return defaultValue;
             }
+        }
+
+        inline bool isExistKey(const std::string & key)
+        {
+            auto itKeyValue = m_keyValues.find(key);
+
+            if (itKeyValue != m_keyValues.end())
+                return true;
+
+            return false;
+        }
+
+        inline bool isExistIdx(const std::string & indexedValue)
+        {
+            auto itIndexedValue = std::find(m_indexedValue.begin(), m_indexedValue.end(), indexedValue);
+
+            if (itIndexedValue != m_indexedValue.end())
+                return true;
+
+            return false;
         }
 
         inline const std::vector<std::string> & indexedValues()
@@ -106,21 +131,11 @@ namespace stdplus
             }
             else if (splits.size() == 2)
             {
-                if (isExist(splits[0]))
+                if (isExistKey(splits[0]))
                     throw std::logic_error("Try insert existing element " + splits[0]);
 
                 m_keyValues[splits[0]] = splits[1];
             }
-        }
-
-        inline bool isExist(const std::string & key)
-        {
-            auto itKeyValue = m_keyValues.find(key);
-            
-            if (itKeyValue != m_keyValues.end())
-                return true;
-
-            return false;
         }
 
         std::map<std::string, std::string> m_keyValues;
@@ -128,10 +143,4 @@ namespace stdplus
         
         const char SPLITTER = '=';
     };
-}
-
-inline std::ostream & operator<<(std::ostream & os, const stdplus::SimpleCmdParser & d)
-{
-    d.print(os);
-    return os;
 }
