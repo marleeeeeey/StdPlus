@@ -23,9 +23,10 @@
 #include "StringPlus.hpp"
 #include "TimePlus.hpp"
 #include "MacrosPlus.hpp"
-#include "KeyboardControl.hpp"
+#include "KeyboardControlPlus.hpp"
 #include "EarthPlus.hpp"
 #include "TestedPlus.hpp"
 #include "CmdParserPlus.hpp"
 #include "SimpleCmdParserPlus.hpp"
+#include "SimpleSettingsPlus.hpp"
 

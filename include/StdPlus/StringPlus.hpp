@@ -197,10 +197,24 @@ namespace stdplus
         { "__thiscall ", "__cdecl " });
     }
 
+    inline std::string fileNameFromFullPath(std::string fileName)
+    {
+        return split(fileName, '\\').back();
+    }
+
+    // TODO - delete this
     inline std::string fileNamePrepare(std::string fileName)
     {
         return split(fileName, '\\').back();
     }
+
+
+    // TODO
+//     inline std::string onlyPathFromFullPath(std::string fileName)
+//     {
+//         return split(fileName, '\\').back();
+//     }
+
 
 }
 

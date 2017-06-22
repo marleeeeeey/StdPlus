@@ -76,7 +76,7 @@
 
 // ************************* LOGIC FUNCTIONs ******************************
 
-#define APAUSE_MSG(var) SP_BEGIN << ALOG_INDEX << " PSE " << ATHREAD << var; SP_END; std::cin.get()
+#define APAUSE_MSG(var) SP_BEGIN << ALOG_INDEX << " PSE " << ATHREAD << var << std::endl; SP_END; std::cin.get()
 #define APAUSE          APAUSE_MSG("(press any key for continue)")
 #define ARED(val)       stdplus::consoleRead(val, #val)
 

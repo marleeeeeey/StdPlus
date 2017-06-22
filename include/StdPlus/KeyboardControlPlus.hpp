@@ -6,7 +6,7 @@
 
 #pragma once
 
-// How to use
+// How to use (this is old style)
 // key - valueUP, shift+key - valueDown, h - help (print all keys and values)
 //													name       key   step   init
 // double minAreaRatio = Keyboard<double>::get("minAreaRatio", 'a', 0.0001, 0.01);
@@ -18,6 +18,12 @@
 #define ABIND_INT_STEP(var, initValue, step)   (var) = stdplus::Keyboard<int>::   get(#var, (initValue), 0, step)
 #define ABIND_DBL(var, initValue)              (var) = stdplus::Keyboard<double>::get(#var, (initValue), 0,    1)
 #define ABIND_DBL_STEP(var, initValue, step)   (var) = stdplus::Keyboard<double>::get(#var, (initValue), 0, step)
+
+
+#define LOG_STD_BIND_INT(var, initValue)               ABIND_INT(var, initValue)           
+#define LOG_STD_BIND_INT_STEP(var, initValue, step)    ABIND_INT_STEP(var, initValue, step)
+#define LOG_STD_BIND_DBL(var, initValue)               ABIND_DBL(var, initValue)           
+#define LOG_STD_BIND_DBL_STEP(var, initValue, step)    ABIND_DBL_STEP(var, initValue, step)
 
 
 namespace stdplus

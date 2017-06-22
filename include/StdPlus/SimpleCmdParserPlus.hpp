@@ -14,14 +14,35 @@ namespace stdplus
 {
     class SimpleCmdParser
     {
+        friend class SimpleSettingsPlus;
+
     public:
+
         SimpleCmdParser()
         {
 
         }
 
+        inline void clearData()
+        {
+            m_keyValues.clear();
+            m_indexedValue.clear();
+        }
+
+        inline void parseData(const std::vector<std::string> & lines)
+        {
+            clearData();
+
+            for (auto & line : lines)
+            {
+                processSeparateData(line);
+            }
+        }
+
         inline void parseData(int argc, char** argv)
         {
+            clearData();
+
             for (int i = 0; i < argc; ++i)
             {
                 processSeparateData(argv[i]);
@@ -31,14 +52,14 @@ namespace stdplus
         template<typename T>
         T getValue(const std::string & key)
         {
-            std::string strValue = m_keyValues.at(key);
+            std::string strValue = getStrValueByKey(key);
             return stdplus::to<T>(strValue);
         }
 
         template<>
         bool getValue<bool>(const std::string & key)
         {
-            std::string strValue = m_keyValues.at(key);
+            std::string strValue = getStrValueByKey(key);
             strValue = stdplus::trim(strValue);
             strValue = stdplus::tolower(strValue);
 
@@ -66,10 +87,22 @@ namespace stdplus
             {
                 return getValue<T>(key);
             }
-            catch (std::out_of_range &)
+            catch (std::exception &)
             {
                 return defaultValue;
             }
+        }
+
+        template<typename T>
+        inline void setValue(const std::string & key, const T & value)
+        {
+            m_keyValues[key] = stdplus::to_string(value);
+        }
+
+        template<typename T>
+        inline void updateValue(const std::string & key, const T & value)
+        {
+            m_keyValues.at(key) = stdplus::to_string(value);
         }
 
         inline bool isExistKey(const std::string & key)
@@ -117,6 +150,30 @@ namespace stdplus
 
     private:
         
+        // ******************* FOR FRIENDS *******************
+
+        using Store = std::map<std::string, std::string>;
+
+        inline Store & getRawKeyValues() { return m_keyValues; }
+
+        inline const char getSplitter() { return SPLITTER; }        
+
+        // ***************************************************
+
+
+        inline std::string getStrValueByKey(const std::string & key)
+        {
+            try
+            {
+                std::string strValue = m_keyValues.at(key);
+                return strValue;
+            }
+            catch (std::out_of_range & e)  
+            {
+                throw std::logic_error("Not found key \'" + key + "\'. " + e.what());
+            }
+        }
+
         inline void processSeparateData(const std::string separateData)
         {
             std::vector<std::string> splits = stdplus::split(separateData, SPLITTER);
@@ -138,8 +195,8 @@ namespace stdplus
             }
         }
 
-        std::map<std::string, std::string> m_keyValues;
-        std::vector<std::string>           m_indexedValue;
+        Store                    m_keyValues;
+        std::vector<std::string> m_indexedValue;
         
         const char SPLITTER = '=';
     };
