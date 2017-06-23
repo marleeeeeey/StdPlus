@@ -142,6 +142,14 @@ namespace stdplus
         return val;
     }
 
+
+    template<>
+    inline std::string to(const std::string & str)
+    {
+        return str;
+    }
+
+
     template<>
     inline std::string to_string(const bool& t)
     {

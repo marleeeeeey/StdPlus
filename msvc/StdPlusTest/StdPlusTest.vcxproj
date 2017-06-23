@@ -158,20 +158,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\StdPlus\ContainerPlus.hpp" />
-    <ClInclude Include="..\include\StdPlus\EarthPlus.hpp" />
-    <ClInclude Include="..\include\StdPlus\FilePlus.hpp" />
-    <ClInclude Include="..\include\StdPlus\KeyboardControl.hpp" />
-    <ClInclude Include="..\include\StdPlus\MacrosPlus.hpp" />
-    <ClInclude Include="..\include\StdPlus\MathPlus.hpp" />
-    <ClInclude Include="..\include\StdPlus\OtherPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\CmdParserPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\ContainerPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\EarthPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\FilePlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\KeyboardControlPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\MacrosPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\MathPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\Ones.h" />
+    <ClInclude Include="..\..\include\StdPlus\OtherPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\OutputSystemPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\SimpleCmdParserPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\SimpleSettingsPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\StdInclude.h" />
+    <ClInclude Include="..\..\include\StdPlus\StdPlus.h" />
+    <ClInclude Include="..\..\include\StdPlus\StringPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\TestedPLus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\TimePlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\WindowsMBCS.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\WindowsPlus.hpp" />
     <ClInclude Include="..\include\StdPlus\StdInclude.h" />
     <ClInclude Include="..\include\StdPlus\StdPlus.h" />
-    <ClInclude Include="..\include\StdPlus\StringPlus.hpp" />
-    <ClInclude Include="..\include\StdPlus\TestedPLus.hpp" />
-    <ClInclude Include="..\include\StdPlus\TimePlus.hpp" />
-    <ClInclude Include="..\include\StdPlus\WindowsMBCS.hpp" />
-    <ClInclude Include="..\include\StdPlus\WindowsPlus.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\TestMain.cpp" />

@@ -14,15 +14,15 @@ namespace stdplus
         }
 
         template<typename T>
-        T getValue(const std::string & key)
+        inline T getValue(const std::string & key)
         {
-            m_cmdParser.getValue<T>(key);
+            return m_cmdParser.getValue<T>(key);
         }
 
         template<typename T>
-        T getValue(const std::string & key, const T & defaultValue)
+        inline T getValue(const std::string & key, const T & defaultValue)
         {
-            m_cmdParser.getValue<T>(key, defaultValue);
+            return m_cmdParser.getValue<T>(key, defaultValue);
         }
 
         template<typename T>
