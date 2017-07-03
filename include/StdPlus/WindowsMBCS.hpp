@@ -46,6 +46,19 @@ namespace stdplus
 		return folders;
 	}
 
+    inline std::vector<std::string> getSubFolders(const std::string & mainPath, const std::vector<std::string> & masks)
+    {
+        std::vector<std::string> allFolders;
+
+        for (const auto & mask : masks)
+        {
+            auto curFolders = getSubFolders(mainPath, mask);
+            allFolders.insert(allFolders.end(), curFolders.begin(), curFolders.end());
+        }
+
+        return allFolders;
+    }
+    
 	inline std::vector<std::string> getSubFiles(const std::string & dir = ".", const std::string & mask = "*")
 	{
 		std::vector<std::string> files;
@@ -70,7 +83,18 @@ namespace stdplus
 
 		return files;
 	}
+    
+    inline std::vector<std::string> getSubFiles(const std::string & dir, const std::vector<std::string> & masks)
+    {
+        std::vector<std::string> allSubFiles;
+        for (const auto & mask : masks)
+        {
+            auto curFiles = getSubFiles(dir, mask);
+            allSubFiles.insert(allSubFiles.end(), curFiles.begin(), curFiles.end());
+        }
 
+        return allSubFiles;
+    }
 
     inline std::vector<std::string> getSubFilesIncludeSubfolders(
         const std::string & dir = ".", const std::string & maskFile = "*", const std::string & maskDir = "*")
@@ -87,5 +111,29 @@ namespace stdplus
         }
 
         return allFiles;
+    }    
+
+    inline std::vector<std::string> getSubFilesIncludeSubfolders(
+        const std::string & dir, 
+        const std::vector<std::string> & fileMasks, 
+        const std::vector<std::string> & dirMasks = { "*" })
+    {
+        std::vector<std::string> allSubFiles;
+
+        for (const auto & dirMask : dirMasks)
+        {
+            for (const auto & fileMask : fileMasks)
+            {
+                std::vector<std::string> curSubFiles;
+                curSubFiles = getSubFilesIncludeSubfolders(dir, fileMask, dirMask);
+                allSubFiles.insert(allSubFiles.end(), curSubFiles.begin(), curSubFiles.end());
+            }
+        }
+
+        std::sort(allSubFiles.begin(), allSubFiles.end());
+        allSubFiles.erase(
+            std::unique(allSubFiles.begin(), allSubFiles.end()), allSubFiles.end());
+
+        return allSubFiles;
     }
 }
