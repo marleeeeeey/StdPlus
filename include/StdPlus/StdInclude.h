@@ -19,6 +19,7 @@
 #include <sstream>      // std::ostringstream
 #include <fstream>
 
+#include <array>
 #include <vector>
 #include <map>
 #include <set>
