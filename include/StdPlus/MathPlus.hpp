@@ -21,6 +21,32 @@ namespace stdplus
     };
 
 
+    inline double deg2rad(double angle_deg)
+    {
+        return angle_deg * (M_PI) / 180;
+    }
+
+    inline double rad2deg(double angle_deg)
+    {
+        return angle_deg * 180 / (M_PI);
+    }
+
+    inline double normal_rad(double var)
+    {
+        return var - ((2 * M_PI)*floor((var / (2 * M_PI))));
+    }
+
+
+    inline double sin_deg(double d_deg)
+    {
+        return sin(deg2rad(d_deg));
+    }
+
+
+    inline double cos_deg(double d_deg)
+    {
+        return cos(deg2rad(d_deg));
+    }
 
 	inline std::vector<int> isolatedIndex(std::vector<double> d, double val)
 	{

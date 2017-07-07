@@ -8,6 +8,7 @@
 #pragma once
 
 #include "StdInclude.h"
+#include "MathPlus.hpp"
 
 namespace stdplus
 {
@@ -40,21 +41,6 @@ namespace stdplus
         double az_rad = 0;
         double um_rad = 0;
     };
-
-    inline double deg2rad(double angle_deg)
-    {
-        return angle_deg * (M_PI) / 180;
-    }
-
-    inline double rad2deg(double angle_deg)
-    {
-        return angle_deg * 180 / (M_PI);
-    }
-
-    inline double normal_rad(double var)
-    {
-        return var - ((2 * M_PI)*floor((var / (2 * M_PI))));
-    }
 
     inline EarthPoint getEarthPoint(const EarthPoint & p, const EarthDirection & ed)
     {
