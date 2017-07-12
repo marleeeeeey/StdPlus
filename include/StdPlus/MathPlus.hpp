@@ -37,6 +37,23 @@ namespace stdplus
     }
 
 
+    inline double normal_deg(double deg, double min_deg = -180, double max_deg = 180)
+    {
+        if (min_deg > max_deg)
+            throw std::logic_error("ERROR: stdplus::normal_deg: min_deg > max_deg");
+
+        double diff_deg = max_deg - min_deg;
+        
+        while (deg < min_deg)
+            deg += diff_deg;
+
+        while (deg > max_deg)
+            deg -= diff_deg;
+
+        return deg;
+    }
+
+
     inline double sin_deg(double d_deg)
     {
         return sin(deg2rad(d_deg));
