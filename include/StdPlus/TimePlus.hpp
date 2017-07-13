@@ -67,7 +67,7 @@ namespace stdplus
 
     inline std::string getLogFileName(const std::string & mainName)
     {
-        return stdplus::dateTimeStr() + " " + mainName;
+        return stdplus::dateTimeStr() + " " + mainName + " log.txt";
     }
 
 }
