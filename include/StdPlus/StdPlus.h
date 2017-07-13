@@ -8,9 +8,9 @@
 
 #include "StdInclude.h"
 
-#ifdef _MSC_VER
-#  include "WindowsPlus.hpp"
-#endif
+// #ifdef _MSC_VER
+// #  include "WindowsPlus.hpp"
+// #endif
 
 #ifdef _MBCS
 #  include "WindowsMBCS.hpp"
