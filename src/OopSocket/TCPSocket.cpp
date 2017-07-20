@@ -10,9 +10,8 @@ int TCPSocket::Connect(const SocketAddress& inAddress)
     int err = connect(mSocket, &inAddress.mSockAddr, inAddress.GetSize());
     if (err < 0)
     {
-        throw std::logic_error("TCPSocket::Connect");
-//         SocketUtil::ReportError("TCPSocket::Connect");
-//         return -SocketUtil::GetLastError();
+        std::string err = std::to_string(SocketUtil::GetLastError());
+        throw std::logic_error("ERROR: TCPSocket::Connect. ErrorNum=" + err);
     }
     return NO_ERROR;
 }
@@ -22,9 +21,8 @@ int TCPSocket::Listen(int inBackLog)
     int err = listen(mSocket, inBackLog);
     if (err < 0)
     {
-        throw std::logic_error("TCPSocket::Listen");
-//         SocketUtil::ReportError("TCPSocket::Listen");
-//         return -SocketUtil::GetLastError();
+        std::string err = std::to_string(SocketUtil::GetLastError());
+        throw std::logic_error("ERROR: TCPSocket::Listen. ErrorNum=" + err);
     }
     return NO_ERROR;
 }
@@ -40,9 +38,8 @@ TCPSocketPtr TCPSocket::Accept(SocketAddress& inFromAddress)
     }
     else
     {
-        throw std::logic_error("TCPSocket::Accept");
-//         SocketUtil::ReportError("TCPSocket::Accept");
-//         return nullptr;
+        std::string err = std::to_string(SocketUtil::GetLastError());
+        throw std::logic_error("ERROR: TCPSocket::Accept. ErrorNum=" + err);
     }
 }
 
@@ -51,9 +48,8 @@ int32_t TCPSocket::Send(const void* inData, size_t inLen)
     int bytesSentCount = send(mSocket, static_cast<const char*>(inData), inLen, 0);
     if (bytesSentCount < 0)
     {
-        throw std::logic_error("TCPSocket::Send");
-//         SocketUtil::ReportError("TCPSocket::Send");
-//         return -SocketUtil::GetLastError();
+        std::string err = std::to_string(SocketUtil::GetLastError());
+        throw std::logic_error("ERROR: TCPSocket::Send. ErrorNum=" + err);
     }
     return bytesSentCount;
 }
@@ -63,9 +59,8 @@ int32_t TCPSocket::Receive(void* inData, size_t inLen)
     int bytesReceivedCount = recv(mSocket, static_cast<char*>(inData), inLen, 0);
     if (bytesReceivedCount < 0)
     {
-        throw std::logic_error("TCPSocket::Receive");
-//         SocketUtil::ReportError("TCPSocket::Receive");
-//         return -SocketUtil::GetLastError();
+        std::string err = std::to_string(SocketUtil::GetLastError());
+        throw std::logic_error("ERROR: TCPSocket::Receive. ErrorNum=" + err);
     }
     return bytesReceivedCount;
 }
@@ -92,9 +87,8 @@ int TCPSocket::Bind(const SocketAddress& inBindAddress)
     int error = bind(mSocket, &inBindAddress.mSockAddr, inBindAddress.GetSize());
     if (error != 0)
     {
-        throw std::logic_error("TCPSocket::Bind");
-//         SocketUtil::ReportError("TCPSocket::Bind");
-//         return SocketUtil::GetLastError();
+        std::string err = std::to_string(SocketUtil::GetLastError());
+        throw std::logic_error("ERROR: TCPSocket::Bind. ErrorNum=" + err);
     }
 
     return NO_ERROR;
