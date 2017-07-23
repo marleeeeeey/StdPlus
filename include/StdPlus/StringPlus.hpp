@@ -8,7 +8,8 @@
 #pragma once
 
 #include "StdInclude.h"
-//#include "MacrosPlus.hpp"
+#include "ConvertPlus.hpp"
+
 
 namespace stdplus
 {
@@ -104,58 +105,6 @@ namespace stdplus
     inline std::string& trim(std::string& s, const char* t = " \t\n\r\f\v")
     {
         return ltrim(rtrim(s, t), t);
-    }
-
-
-    template<class T>
-    std::string to_string(const T& t)
-    {
-        std::ostringstream os;
-        os << t;
-        return os.str();
-    }
-
-    inline int to_int(const std::string & str)
-    {
-        int val;
-        std::istringstream ss(str);
-        ss >> val;
-
-        return val;
-    }
-
-    template<typename T>
-    inline T to(const std::string & str)
-    {
-        T val;
-        std::istringstream ss(str);
-        
-        if (ss.eof())
-            throw std::logic_error("Probably empty value \'" + str + "\' in " /* + AFUNSIG*/); // TODO
-        
-        ss >> val;
-        
-        if (ss.fail())
-            throw std::logic_error("Error convert " + str + " to special type in " /* + AFUNSIG*/);	// TODO
-
-        return val;
-    }
-
-
-    template<>
-    inline std::string to(const std::string & str)
-    {
-        return str;
-    }
-
-
-    template<>
-    inline std::string to_string(const bool& t)
-    {
-        if (t == true)
-            return "true";
-
-        return "false";
     }
 
 

@@ -12,6 +12,7 @@
 #  include "WindowsMBCS.hpp"
 #endif
 
+#include "ConvertPlus.hpp"
 #include "ContainerPlus.hpp"
 #include "FilePlus.hpp"
 #include "MathPlus.hpp"
@@ -22,7 +23,6 @@
 #include "KeyboardControlPlus.hpp"
 #include "EarthPlus.hpp"
 #include "TestedPlus.hpp"
-//#include "CmdParserPlus.hpp"  // obsolete
 #include "SimpleCmdParserPlus.hpp"
 #include "SimpleSettingsPlus.hpp"
 
