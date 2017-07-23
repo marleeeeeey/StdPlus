@@ -15,7 +15,12 @@
 
 // *********************** PREPARE FUNCTIONS ******************************
 
-#define AFUNSIG           stdplus::funSigPrepare(__FUNCSIG__) 
+#if defined(__GNUC__) || defined(__GNUG__)
+#  define AFUNSIG           stdplus::funSigPrepare(__PRETTY_FUNCTION__)
+#elif defined(_MSC_VER)
+#  define AFUNSIG           stdplus::funSigPrepare(__FUNCSIG__) 
+#endif
+
 #define AFILENAME         stdplus::fileNamePrepare(__FILE__) 
 #define AFILELINE         stdplus::to_string(__LINE__)
 #define APOSFILE          (AFILENAME + "(" + AFILELINE + ")")

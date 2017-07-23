@@ -8,8 +8,7 @@
 #pragma once
 
 #include "StdInclude.h"
-#include "StringPlus.hpp"   // split
-#include "MacrosPlus.hpp"
+//#include "MacrosPlus.hpp"
 
 namespace stdplus
 {
@@ -132,12 +131,12 @@ namespace stdplus
         std::istringstream ss(str);
         
         if (ss.eof())
-            throw std::logic_error("Probably empty value \'" + str + "\' in " + AFUNSIG);
+            throw std::logic_error("Probably empty value \'" + str + "\' in " /* + AFUNSIG*/); // TODO
         
         ss >> val;
         
         if (ss.fail())
-            throw std::logic_error("Error convert " + str + " to special type in " + AFUNSIG);
+            throw std::logic_error("Error convert " + str + " to special type in " /* + AFUNSIG*/);	// TODO
 
         return val;
     }

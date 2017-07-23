@@ -56,30 +56,6 @@ namespace stdplus
             return stdplus::to<T>(strValue);
         }
 
-        template<>
-        bool getValue<bool>(const std::string & key)
-        {
-            std::string strValue = getStrValueByKey(key);
-            strValue = stdplus::trim(strValue);
-            strValue = stdplus::tolower(strValue);
-
-            if (strValue == "true")
-                return true;
-
-            try
-            {
-                int intValue = stdplus::to<int>(strValue);
-                if (intValue != 0)
-                    return true;
-            }
-            catch (std::logic_error & )
-            {
-                return false;
-            }
-
-            return false;
-        }
-
         template<typename T>
         T getValue(const std::string & key, const T & defaultValue)
         {
@@ -200,4 +176,30 @@ namespace stdplus
         
         const char SPLITTER = '=';
     };
+	
+	
+	template<>
+	inline bool SimpleCmdParser::getValue<bool>(const std::string & key)
+	{
+		std::string strValue = getStrValueByKey(key);
+		strValue = stdplus::trim(strValue);
+		strValue = stdplus::tolower(strValue);
+
+		if (strValue == "true")
+			return true;
+
+		try
+		{
+			int intValue = stdplus::to<int>(strValue);
+			if (intValue != 0)
+				return true;
+		}
+		catch (std::logic_error & )
+		{
+			return false;
+		}
+
+		return false;
+	}
+
 }
