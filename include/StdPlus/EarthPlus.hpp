@@ -1,7 +1,9 @@
 /*!
- * \author Tyulenev Sergey
- * Contact: marleeeeeey@gmail.com
- * last version https://github.com/marleeeeeey/StdPlus
+ * \file
+ * \brief Instruments for calcularing geo coordinates.
+ * \author Tyulenev Sergey (marleeeeeey@gmail.com)
+ *
+ * last version you can download https://github.com/marleeeeeey/StdPlus
 */
 
 
@@ -42,6 +44,13 @@ namespace stdplus
         double um_rad = 0;
     };
 
+
+    /*!
+     * \brief Calculate geo point from source point and direction.
+     * \param [in] p  Source point
+     * \param [in] ed Direction
+     * \return geo point = source point + direction
+    */
     inline EarthPoint getEarthPoint(const EarthPoint & p, const EarthDirection & ed)
     {
         const double & dist_m = ed.dist_km * 1000;

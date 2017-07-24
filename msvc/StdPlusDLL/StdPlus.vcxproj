@@ -28,26 +28,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v140_xp</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v140_xp</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v140_xp</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v140_xp</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -155,20 +155,24 @@
     <ClCompile Include="..\..\src\StdPlus\Ones.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\StdPlus\ContainerPlus.hpp" />
-    <ClInclude Include="..\include\StdPlus\EarthPlus.hpp" />
-    <ClInclude Include="..\include\StdPlus\FilePlus.hpp" />
-    <ClInclude Include="..\include\StdPlus\KeyboardControl.hpp" />
-    <ClInclude Include="..\include\StdPlus\MacrosPlus.hpp" />
-    <ClInclude Include="..\include\StdPlus\MathPlus.hpp" />
-    <ClInclude Include="..\include\StdPlus\OtherPlus.hpp" />
-    <ClInclude Include="..\include\StdPlus\StdInclude.h" />
-    <ClInclude Include="..\include\StdPlus\StdPlus.h" />
-    <ClInclude Include="..\include\StdPlus\StringPlus.hpp" />
-    <ClInclude Include="..\include\StdPlus\TestedPLus.hpp" />
-    <ClInclude Include="..\include\StdPlus\TimePlus.hpp" />
-    <ClInclude Include="..\include\StdPlus\WindowsMBCS.hpp" />
-    <ClInclude Include="..\include\StdPlus\WindowsPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\ContainerPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\ConvertPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\EarthPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\FilePlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\KeyboardControlPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\MacrosPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\MathPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\Ones.h" />
+    <ClInclude Include="..\..\include\StdPlus\OtherPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\OutputSystemPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\SimpleCmdParserPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\SimpleSettingsPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\StdInclude.h" />
+    <ClInclude Include="..\..\include\StdPlus\StdPlus.h" />
+    <ClInclude Include="..\..\include\StdPlus\StringPlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\TestedPLus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\TimePlus.hpp" />
+    <ClInclude Include="..\..\include\StdPlus\WindowsMBCS.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

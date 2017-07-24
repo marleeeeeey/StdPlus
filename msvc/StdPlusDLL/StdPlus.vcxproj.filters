@@ -13,8 +13,8 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="hpp">
-      <UniqueIdentifier>{e5607436-60f4-49eb-b4bf-b7d7f7f9c61e}</UniqueIdentifier>
+    <Filter Include="Header files">
+      <UniqueIdentifier>{21846806-206f-4927-997a-7c1852ea5c81}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -23,47 +23,59 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\StdPlus\ContainerPlus.hpp">
-      <Filter>hpp</Filter>
+    <ClInclude Include="..\..\include\StdPlus\ContainerPlus.hpp">
+      <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\StdPlus\EarthPlus.hpp">
-      <Filter>hpp</Filter>
+    <ClInclude Include="..\..\include\StdPlus\ConvertPlus.hpp">
+      <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\StdPlus\FilePlus.hpp">
-      <Filter>hpp</Filter>
+    <ClInclude Include="..\..\include\StdPlus\EarthPlus.hpp">
+      <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\StdPlus\KeyboardControl.hpp">
-      <Filter>hpp</Filter>
+    <ClInclude Include="..\..\include\StdPlus\FilePlus.hpp">
+      <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\StdPlus\MacrosPlus.hpp">
-      <Filter>hpp</Filter>
+    <ClInclude Include="..\..\include\StdPlus\KeyboardControlPlus.hpp">
+      <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\StdPlus\MathPlus.hpp">
-      <Filter>hpp</Filter>
+    <ClInclude Include="..\..\include\StdPlus\MacrosPlus.hpp">
+      <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\StdPlus\OtherPlus.hpp">
-      <Filter>hpp</Filter>
+    <ClInclude Include="..\..\include\StdPlus\MathPlus.hpp">
+      <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\StdPlus\StringPlus.hpp">
-      <Filter>hpp</Filter>
+    <ClInclude Include="..\..\include\StdPlus\Ones.h">
+      <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\StdPlus\TimePlus.hpp">
-      <Filter>hpp</Filter>
+    <ClInclude Include="..\..\include\StdPlus\OtherPlus.hpp">
+      <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\StdPlus\StdInclude.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\include\StdPlus\OutputSystemPlus.hpp">
+      <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\StdPlus\StdPlus.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\include\StdPlus\SimpleCmdParserPlus.hpp">
+      <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\StdPlus\TestedPLus.hpp">
-      <Filter>hpp</Filter>
+    <ClInclude Include="..\..\include\StdPlus\SimpleSettingsPlus.hpp">
+      <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\StdPlus\WindowsPlus.hpp">
-      <Filter>hpp</Filter>
+    <ClInclude Include="..\..\include\StdPlus\StdInclude.h">
+      <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\StdPlus\WindowsMBCS.hpp">
-      <Filter>hpp</Filter>
+    <ClInclude Include="..\..\include\StdPlus\StdPlus.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\StringPlus.hpp">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\TestedPLus.hpp">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\TimePlus.hpp">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\WindowsMBCS.hpp">
+      <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

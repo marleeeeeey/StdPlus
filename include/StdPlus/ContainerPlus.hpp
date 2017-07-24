@@ -1,17 +1,19 @@
-/*!
+﻿/*!
  * \author Tyulenev Sergey
  * Contact: marleeeeeey@gmail.com
  * last version https://github.com/marleeeeeey/StdPlus
 */
-
 
 #pragma once
 
 #include "StdInclude.h"
 
 namespace stdplus
-{
+{    
 
+    /*!
+    \brief Convert std::vector<Tin> ot std::vector<Tout> 
+    */
 	template<typename Tin, typename Tout>
 	std::vector<Tout> convert(const std::vector<Tin> & dataIn)
 	{
@@ -26,6 +28,10 @@ namespace stdplus
 		return dataOut;
 	}
 
+
+    /*!
+    \brief Convert c-array and c-size to std::vector
+    */
     template<class T>
     std::vector<T> to_vector(const T * begin, const size_t size)
     {
@@ -34,6 +40,10 @@ namespace stdplus
         return vec;
     }
     
+
+    /*!
+    \brief Overload for print std::vector<T> in std::ostream
+    */
     template<class T>
     std::ostream & operator<<(std::ostream & os, const std::vector<T> & vec)
     {
@@ -62,6 +72,9 @@ namespace stdplus
     }
 
 
+    /*!
+    \brief Overload for print std::set<T> in std::ostream
+    */
     template<class T>
     std::ostream & operator<<(std::ostream & os, const std::set<T> & vec)
     {
@@ -89,6 +102,10 @@ namespace stdplus
         return os;
     }
 
+
+    /*!
+    \brief Overload for print std::map<T, T2> in std::ostream
+    */
     template<class T, class T2>
     std::ostream & operator<<(std::ostream & os, const std::map<T, T2> & vec)
     {
@@ -116,6 +133,13 @@ namespace stdplus
         return os;
     }
 
+
+    /*!
+    \brief Get a certain number of items (target vector<T>) from the source vector<T>.
+    \param [in] vec sourse vector<T>
+    \param [in] dev certain number of items
+    \return Target vector<T> of size dev where the values ​​are distributed evenly
+    */
 	template<typename T>
 	std::vector<T> evenly(const std::vector<T> vec, int dev)
 	{

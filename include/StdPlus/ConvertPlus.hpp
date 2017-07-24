@@ -28,17 +28,10 @@ namespace stdplus
 
         return "false";
     }
-
-
-//     inline int to_int(const std::string & str)
-//     {
-//         int val;
-//         std::istringstream ss(str);
-//         ss >> val;
-// 
-//         return val;
-//     }
-
+    
+    /*!
+    \brief Convert std::string to template type T std::istringstream 
+    */
     template<typename T>
     inline T to(const std::string & str)
     {
@@ -59,6 +52,9 @@ namespace stdplus
     }
 
 
+    /*!
+    \brief Template specialization: Convert std::string to type std::string
+    */
     template<>
     inline std::string to(const std::string & str)
     {
