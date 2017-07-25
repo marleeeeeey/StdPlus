@@ -25,6 +25,12 @@
     <Filter Include="Source Files\StdPlus">
       <UniqueIdentifier>{3ead61da-28fc-48e3-884c-c7a341876e8f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Test">
+      <UniqueIdentifier>{0a676165-f087-4488-af60-be95a2fc7250}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Test">
+      <UniqueIdentifier>{620e2c71-1cbf-4fed-b50e-2b16ec3b422a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\OopSocket\SocketAddress.cpp">
@@ -46,7 +52,7 @@
       <Filter>Source Files\StdPlus</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Test\TestMain.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,23 +134,23 @@
     <ClInclude Include="..\..\include\StdPlus\WindowsMBCS.hpp">
       <Filter>Header Files\StdPlus</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\Test\SocketTest.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\Test\WindowsMBCSTest.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\Test\MathTest.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\Test\FileTest.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\src\Test\CmdParserTest.hpp">
+      <Filter>Header Files\Test</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\Test\EarthTest.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Test</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\Test\CmdParserTest.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\src\Test\FileTest.hpp">
+      <Filter>Header Files\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Test\MathTest.hpp">
+      <Filter>Header Files\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Test\SocketTest.hpp">
+      <Filter>Header Files\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Test\WindowsMBCSTest.hpp">
+      <Filter>Header Files\Test</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
