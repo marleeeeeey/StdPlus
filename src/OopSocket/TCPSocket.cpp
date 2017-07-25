@@ -1,5 +1,5 @@
-#include "TCPSocket.h"
-#include "SocketUtil.h"
+#include "OopSocket/TCPSocket.h"
+#include "OopSocket/SocketUtil.h"
 
 
 int TCPSocket::Connect(const SocketAddress& inAddress)

@@ -13,13 +13,138 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="hpp">
-      <UniqueIdentifier>{e5607436-60f4-49eb-b4bf-b7d7f7f9c61e}</UniqueIdentifier>
+    <Filter Include="Source Files\OopSocket">
+      <UniqueIdentifier>{26707c2e-4a42-44a5-a6e1-2193485bf7f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\OopSocket">
+      <UniqueIdentifier>{14b69130-ea1b-475f-b117-bcc717547f0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StdPlus">
+      <UniqueIdentifier>{ba5ed4ab-7520-479c-b8af-f97b82dd01ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StdPlus">
+      <UniqueIdentifier>{3ead61da-28fc-48e3-884c-c7a341876e8f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\TestMain.cpp">
+    <ClCompile Include="..\..\src\OopSocket\SocketAddress.cpp">
+      <Filter>Source Files\OopSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OopSocket\SocketAddressFactory.cpp">
+      <Filter>Source Files\OopSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OopSocket\SocketUtil.cpp">
+      <Filter>Source Files\OopSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OopSocket\TCPSocket.cpp">
+      <Filter>Source Files\OopSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OopSocket\UDPSocket.cpp">
+      <Filter>Source Files\OopSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\StdPlus\Ones.cpp">
+      <Filter>Source Files\StdPlus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Test\TestMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\OopSocket\OopSocket.h">
+      <Filter>Header Files\OopSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\OopSocket\OopSocketShared.h">
+      <Filter>Header Files\OopSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\OopSocket\SocketAddress.h">
+      <Filter>Header Files\OopSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\OopSocket\SocketAddressFactory.h">
+      <Filter>Header Files\OopSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\OopSocket\SocketUtil.h">
+      <Filter>Header Files\OopSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\OopSocket\TCPSocket.h">
+      <Filter>Header Files\OopSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\OopSocket\UDPSocket.h">
+      <Filter>Header Files\OopSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\OopSocket\BaseTcpTransfer.hpp">
+      <Filter>Header Files\OopSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\Ones.h">
+      <Filter>Header Files\StdPlus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\StdInclude.h">
+      <Filter>Header Files\StdPlus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\StdPlus.h">
+      <Filter>Header Files\StdPlus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\ContainerPlus.hpp">
+      <Filter>Header Files\StdPlus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\ConvertPlus.hpp">
+      <Filter>Header Files\StdPlus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\EarthPlus.hpp">
+      <Filter>Header Files\StdPlus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\FilePlus.hpp">
+      <Filter>Header Files\StdPlus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\KeyboardControlPlus.hpp">
+      <Filter>Header Files\StdPlus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\MacrosPlus.hpp">
+      <Filter>Header Files\StdPlus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\MathPlus.hpp">
+      <Filter>Header Files\StdPlus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\OtherPlus.hpp">
+      <Filter>Header Files\StdPlus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\OutputSystemPlus.hpp">
+      <Filter>Header Files\StdPlus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\SimpleCmdParserPlus.hpp">
+      <Filter>Header Files\StdPlus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\SimpleSettingsPlus.hpp">
+      <Filter>Header Files\StdPlus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\StringPlus.hpp">
+      <Filter>Header Files\StdPlus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\TestedPLus.hpp">
+      <Filter>Header Files\StdPlus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\TimePlus.hpp">
+      <Filter>Header Files\StdPlus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\WindowsMBCS.hpp">
+      <Filter>Header Files\StdPlus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Test\SocketTest.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Test\WindowsMBCSTest.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Test\MathTest.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Test\FileTest.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Test\EarthTest.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Test\CmdParserTest.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
