@@ -60,7 +60,8 @@ int32_t TCPSocket::Receive(void* inData, size_t inLen)
     if (bytesReceivedCount < 0)
     {
         std::string err = std::to_string(SocketUtil::GetLastError());
-        throw std::logic_error("ERROR: TCPSocket::Receive. ErrorNum=" + err);
+        throw std::logic_error("ERROR: TCPSocket::Receive. ErrorNum=" + err
+            + "; bytesReceivedCount=" + std::to_string(bytesReceivedCount));
     }
     return bytesReceivedCount;
 }

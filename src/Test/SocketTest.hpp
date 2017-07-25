@@ -20,6 +20,7 @@ TEST(TCPSocket, NonBlockTest)
         char ch = 'a' + i;
         LOG_STD_VAR(ch);
         sock->Send(&ch, sizeof(ch));
+        APAUSE;
     }
 
     SocketUtil::CleanUp();
