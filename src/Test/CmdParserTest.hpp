@@ -4,7 +4,7 @@
 #include "StdPlus/StdPlus.h"
 
 
-TEST(SimpleCmdParser, ManualCmd)
+TEST(CmdParser, ManualCmd)
 {
     using CString = char *;
     std::vector<CString> argv =
@@ -21,7 +21,7 @@ TEST(SimpleCmdParser, ManualCmd)
         "kuka",
     };
 
-    stdplus::SimpleCmdParser cmd;
+    stdplus::CmdParser cmd;
     cmd.parseData(argv.size(), argv.data());
 
     cmd.print(std::cout);

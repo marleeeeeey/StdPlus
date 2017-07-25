@@ -5,10 +5,10 @@
 namespace stdplus
 {
 
-    class SimpleSettingsPlus
+    class Settings
     {
     public:
-        inline SimpleSettingsPlus()
+        inline Settings()
         {
 
         }
@@ -79,7 +79,7 @@ namespace stdplus
 
     private:
         std::string              m_fileName;
-        stdplus::SimpleCmdParser m_cmdParser;
+        stdplus::CmdParser m_cmdParser;
     };
 
 

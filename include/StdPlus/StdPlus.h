@@ -23,6 +23,6 @@
 #include "KeyboardControlPlus.hpp"
 #include "EarthPlus.hpp"
 #include "TestedPlus.hpp"
-#include "SimpleCmdParserPlus.hpp"
-#include "SimpleSettingsPlus.hpp"
+#include "CmdParserPlus.hpp"
+#include "SettingsPlus.hpp"
 

@@ -56,9 +56,6 @@
     <ClInclude Include="..\..\include\StdPlus\SimpleCmdParserPlus.hpp">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\StdPlus\SimpleSettingsPlus.hpp">
-      <Filter>Header files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\StdPlus\StdInclude.h">
       <Filter>Header files</Filter>
     </ClInclude>
@@ -75,6 +72,9 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\StdPlus\WindowsMBCS.hpp">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\Settings.hpp">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

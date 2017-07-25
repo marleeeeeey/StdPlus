@@ -116,12 +116,6 @@
     <ClInclude Include="..\..\include\StdPlus\OutputSystemPlus.hpp">
       <Filter>Header Files\StdPlus</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\StdPlus\SimpleCmdParserPlus.hpp">
-      <Filter>Header Files\StdPlus</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\StdPlus\SimpleSettingsPlus.hpp">
-      <Filter>Header Files\StdPlus</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\StdPlus\StringPlus.hpp">
       <Filter>Header Files\StdPlus</Filter>
     </ClInclude>
@@ -151,6 +145,12 @@
     </ClInclude>
     <ClInclude Include="..\..\src\Test\WindowsMBCSTest.hpp">
       <Filter>Header Files\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\CmdParserPlus.hpp">
+      <Filter>Header Files\StdPlus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StdPlus\SettingsPlus.hpp">
+      <Filter>Header Files\StdPlus</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

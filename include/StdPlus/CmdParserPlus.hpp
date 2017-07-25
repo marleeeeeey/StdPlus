@@ -12,13 +12,13 @@
 
 namespace stdplus
 {
-    class SimpleCmdParser
+    class CmdParser
     {
-        friend class SimpleSettingsPlus;
+        friend class Settings;
 
     public:
 
-        SimpleCmdParser()
+        CmdParser()
         {
 
         }
@@ -179,7 +179,7 @@ namespace stdplus
 	
 	
 	template<>
-	inline bool SimpleCmdParser::getValue<bool>(const std::string & key)
+	inline bool CmdParser::getValue<bool>(const std::string & key)
 	{
 		std::string strValue = getStrValueByKey(key);
 		strValue = stdplus::trim(strValue);
