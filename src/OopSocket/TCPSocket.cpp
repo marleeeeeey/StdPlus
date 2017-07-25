@@ -82,6 +82,28 @@ int32_t TCPSocket::ReceiveFullSize(void* inBuffer, size_t inLen)
     return recvBytes;
 }
 
+int TCPSocket::SetNonBlockingMode(bool inShouldBeNonBlocking)
+{
+#if _WIN32
+    u_long arg = inShouldBeNonBlocking ? 1 : 0;
+    int result = ioctlsocket(mSocket, FIONBIO, &arg);
+#else
+    int flags = fcntl(mSocket, F_GETFL, 0);
+    flags = inShouldBeNonBlocking ? (flags | O_NONBLOCK) : (flags & ~O_NONBLOCK);
+    int result = fcntl(mSocket, F_SETFL, flags);
+#endif
+
+    if (result == SOCKET_ERROR)
+    {
+        std::string err = std::to_string(SocketUtil::GetLastError());
+        throw std::logic_error("ERROR: TCPSocket::SetNonBlockingMode. ErrorNum=" + err);
+    }
+    else
+    {
+        return NO_ERROR;
+    }
+}
+
 int TCPSocket::Bind(const SocketAddress& inBindAddress)
 {
     int error = bind(mSocket, &inBindAddress.mSockAddr, inBindAddress.GetSize());
