@@ -193,7 +193,7 @@ namespace stdplus
 
             if (splits.size() > 2)
             {
-                throw std::logic_error("Too much assing in " + separateData);
+                throw std::logic_error("Too much assign in " + separateData);
             }
             else if (splits.size() == 1 && splits[0] == separateData)
             {

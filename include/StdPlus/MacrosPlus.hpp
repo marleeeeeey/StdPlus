@@ -12,7 +12,6 @@
 #include "StringPlus.hpp"
 #include "Ones.h"
 
-
 // *********************** PREPARE FUNCTIONS ******************************
 
 #if defined(__GNUC__) || defined(__GNUG__)
