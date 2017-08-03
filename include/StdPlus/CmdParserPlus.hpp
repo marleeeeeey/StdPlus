@@ -20,8 +20,11 @@ namespace stdplus
 
         CmdParser()
         {
-
+            
         }
+        
+        inline char getSplitter() const { return m_splitter; }
+        inline void setSplitter(char ch) { m_splitter = ch; }
 
         inline void clearData()
         {
@@ -68,6 +71,40 @@ namespace stdplus
                 return defaultValue;
             }
         }
+
+
+        template<>
+        inline bool CmdParser::getValue<bool>(const std::string & key, const bool & defaultValue)
+        {
+            if (isExistKey(key))
+            {
+                std::string strValue = getStrValueByKey(key);
+                strValue = stdplus::trim(strValue);
+                strValue = stdplus::tolower(strValue);
+        
+                if (strValue == "true")
+                    return true;
+        
+                try
+                {
+                    int intValue = stdplus::to<int>(strValue);
+                    if (intValue != 0)
+                        return true;
+                }
+                catch (std::logic_error &)
+                {
+                    return defaultValue;
+                }
+        
+                return defaultValue;
+            }
+            else
+            {
+                return isExistIdx(key);
+            }
+        
+        }
+
 
         template<typename T>
         inline void setValue(const std::string & key, const T & value)
@@ -132,7 +169,7 @@ namespace stdplus
 
         inline Store & getRawKeyValues() { return m_keyValues; }
 
-        inline const char getSplitter() { return SPLITTER; }        
+        inline const char getSplitter() { return m_splitter; }        
 
         // ***************************************************
 
@@ -152,7 +189,7 @@ namespace stdplus
 
         inline void processSeparateData(const std::string separateData)
         {
-            std::vector<std::string> splits = stdplus::split(separateData, SPLITTER);
+            std::vector<std::string> splits = stdplus::split(separateData, m_splitter);
 
             if (splits.size() > 2)
             {
@@ -172,9 +209,8 @@ namespace stdplus
         }
 
         Store                    m_keyValues;
-        std::vector<std::string> m_indexedValue;
-        
-        const char SPLITTER = '=';
+        std::vector<std::string> m_indexedValue;        
+        char                     m_splitter = '=';
     };
 	
 	
