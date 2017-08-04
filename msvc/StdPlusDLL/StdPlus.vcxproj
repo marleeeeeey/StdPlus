@@ -155,6 +155,7 @@
     <ClCompile Include="..\..\src\StdPlus\Ones.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\LittleHelpers\LittleDebug.hpp" />
     <ClInclude Include="..\..\include\StdPlus\ContainerPlus.hpp" />
     <ClInclude Include="..\..\include\StdPlus\ConvertPlus.hpp" />
     <ClInclude Include="..\..\include\StdPlus\EarthPlus.hpp" />

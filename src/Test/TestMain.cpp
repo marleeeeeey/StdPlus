@@ -1,3 +1,5 @@
+/*
+
 #include "OopSocket/OopSocket.h"
 #include "gtest/gtest.h"
 #include "StdPlus/StdPlus.h"
@@ -19,4 +21,19 @@ int main(int argc, char **argv)
     AVAR(googleTestResult);
     APAUSE;
     return googleTestResult;
+}
+
+*/
+
+
+#include "LittleHelpers/LittleDebug.hpp"
+
+#define __PRETTY_FUNCTION__ __FUNCSIG__
+
+int main(int argc, char **argv)
+{
+    {
+        AFUN;
+    }
+    std::cin.get();
 }

@@ -16,6 +16,9 @@
     <Filter Include="Header files">
       <UniqueIdentifier>{21846806-206f-4927-997a-7c1852ea5c81}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\LittleHelpers">
+      <UniqueIdentifier>{b269200b-1aac-4a3c-9cf3-5fb1808dcda5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\StdPlus\Ones.cpp">
@@ -76,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\StdPlus\Settings.hpp">
       <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\LittleHelpers\LittleDebug.hpp">
+      <Filter>Header Files\LittleHelpers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
