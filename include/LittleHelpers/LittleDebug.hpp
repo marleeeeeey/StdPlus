@@ -1,4 +1,3 @@
-#pragma once
 
 // ************************************************************************
 #include <iostream>
@@ -22,7 +21,10 @@ public:
 };
 #ifdef ADEBUG_ON
 #  define AFUN LiveWatcher ___liveWatcher(std::string("FUN ") + std::string(__PRETTY_FUNCTION__))
-#  define AOBJ LiveWatcher ___liveWatcher(std::string("OBJ (this=") + std::to_string((int)this) + ") " + std::string(__PRETTY_FUNCTION__))
+#  define AOBJ \
+    std::ostringstream ___oss; \
+    ___oss << "OBJ (this=" << this << ") " << __PRETTY_FUNCTION__; \
+    LiveWatcher ___liveWatcher(___oss.str()) 
 #  define AVAR(var) std::cout << ATHREAD << "VAR " << #var << "=" << var << std::endl
 #  define AMSG(var) std::cout << ATHREAD << "MSG " << var << std::endl
 #  define ATHIS     std::cout << ATHREAD << "THIS=" << this << std::endl
