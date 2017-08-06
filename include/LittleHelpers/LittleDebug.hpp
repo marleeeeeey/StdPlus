@@ -4,28 +4,31 @@
 #include <iostream>
 #include <thread>
 #include <iomanip>
+#include <string>
 #define ADEBUG_ON
 #define ATHREAD "[" << std::setw(5) << std::this_thread::get_id() << "] "
-class ObjectWatcher
+class LiveWatcher
 {
-    const char * m_name = nullptr;
+    const std::string m_name = nullptr;
 public:
-    ObjectWatcher(const char * name) : m_name(name)
+    LiveWatcher(const std::string name) : m_name(name)
     {
-        std::cout << ATHREAD << "FUN START  " << m_name << std::endl;
+        std::cout << ATHREAD << " START  " << m_name << std::endl;
     }
-    ~ObjectWatcher()
+    ~LiveWatcher()
     {
-        std::cout << ATHREAD << "FUN FINISH " << m_name << std::endl;
+        std::cout << ATHREAD << " FINISH " << m_name << std::endl;
     }
 };
 #ifdef ADEBUG_ON
-#  define AFUN ObjectWatcher ___objectWatcher(__PRETTY_FUNCTION__)
+#  define AFUN LiveWatcher ___liveWatcher(std::string("FUN ") + std::string(__PRETTY_FUNCTION__))
+#  define AOBJ LiveWatcher ___liveWatcher(std::string("OBJ (this=") + std::to_string((int)this) + ") " + std::string(__PRETTY_FUNCTION__))
 #  define AVAR(var) std::cout << ATHREAD << "VAR " << #var << "=" << var << std::endl
 #  define AMSG(var) std::cout << ATHREAD << "MSG " << var << std::endl
 #  define ATHIS     std::cout << ATHREAD << "THIS=" << this << std::endl
 #else
-#  define AFUN      
+#  define AFUN  
+#  define AOBJ      
 #  define AVAR(var) 
 #  define AMSG(var) 
 #  define ATHIS

@@ -30,10 +30,26 @@ int main(int argc, char **argv)
 
 #define __PRETTY_FUNCTION__ __FUNCSIG__
 
+class A
+{
+public:
+    A()
+    {
+        AOBJ;
+    }
+
+    void testFunc()
+    {
+        AOBJ;
+    }
+};
+
 int main(int argc, char **argv)
 {
     {
         AFUN;
+        A a;
+        a.testFunc();
     }
     std::cin.get();
 }
