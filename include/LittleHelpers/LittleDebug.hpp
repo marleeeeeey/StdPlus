@@ -11,7 +11,7 @@ class LiveWatcher
 {
     const std::string m_name = nullptr;
 public:
-    LiveWatcher(const std::string name) : m_name(name)
+    LiveWatcher(const std::string & name) : m_name(name)
     {
         std::cout << ATHREAD << " START  " << m_name << std::endl;
     }
