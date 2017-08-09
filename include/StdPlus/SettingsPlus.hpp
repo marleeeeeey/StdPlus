@@ -78,7 +78,7 @@ namespace stdplus
         }
 
     private:
-        std::string              m_fileName;
+        std::string        m_fileName;
         stdplus::CmdParser m_cmdParser;
     };
 
