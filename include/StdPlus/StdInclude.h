@@ -23,6 +23,7 @@
 #include <vector>
 #include <map>
 #include <set>
+#include <list>
 #include <bitset>
 #include <algorithm>    // std::min
 #include <utility>      // algorithm in c++11 swap
