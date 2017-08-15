@@ -130,6 +130,8 @@ namespace stdplus
 
         inline bool isExistIdx(const std::string & indexedValue)
         {
+            m_requests.push_back(indexedValue);
+
             auto itIndexedValue = std::find(m_indexedValue.begin(), m_indexedValue.end(), indexedValue);
 
             if (itIndexedValue != m_indexedValue.end())
@@ -161,6 +163,8 @@ namespace stdplus
             }
         }
 
+        std::vector<std::string> getRequests() const { return m_requests; }
+
     private:
         
         // ******************* FOR FRIENDS *******************
@@ -176,6 +180,8 @@ namespace stdplus
 
         inline std::string getStrValueByKey(const std::string & key)
         {
+            m_requests.push_back(key + m_splitter + "...");
+
             try
             {
                 std::string strValue = m_keyValues.at(key);
@@ -211,6 +217,7 @@ namespace stdplus
         Store                    m_keyValues;
         std::vector<std::string> m_indexedValue;        
         char                     m_splitter = '=';
+        std::vector<std::string> m_requests;
     };
 	
 	
