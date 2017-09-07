@@ -11,6 +11,13 @@
 
 namespace stdplus
 {
+    template<class T>
+    std::string to_string_hex(const T& t)
+    {
+        std::ostringstream os;
+        os << "0x" << std::setw(8) << std::setfill('0') << std::hex << t;
+        return os.str();
+    }
 
     template<class T>
     std::string to_string(const T& t)

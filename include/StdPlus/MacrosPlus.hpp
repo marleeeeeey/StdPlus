@@ -50,6 +50,7 @@
 
 #ifndef STD_PLUS_DEBUG_PRINT_OFF
 #    define AVAR(var)      SP_BEGIN << ALOG_INDEX << " VAR " << ATHREAD << #var << "=" << stdplus::to_string(var) << std::endl; SP_END
+#    define AHEX(var)      SP_BEGIN << ALOG_INDEX << " HEX " << ATHREAD << #var << "=" << stdplus::to_string_hex(var) << std::endl; SP_END
 #    define ANMD(var, str) SP_BEGIN << ALOG_INDEX << " NMD " << ATHREAD << str  << "=" << stdplus::to_string(var) << std::endl; SP_END
 #    define AMSG(var)      SP_BEGIN << ALOG_INDEX << " MSG " << ATHREAD <<  (var) << std::endl; SP_END
 #    define AFUN           SP_BEGIN << ALOG_INDEX << " FUN " << ATHREAD << AFUNSIG << std::endl; SP_END
@@ -59,6 +60,7 @@
 #    define ABEEP          stdplus::stdConsoleOut() << '\a'    //TODO
 #else  // STD_PLUS_DEBUG_PRINT_OFF
 #    define AVAR(var)     
+#    define AHEX(var)     
 #    define ANMD(var, str)
 #    define AMSG(var)     
 #    define AFUN          
