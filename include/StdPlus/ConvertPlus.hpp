@@ -15,7 +15,7 @@ namespace stdplus
     std::string to_string_hex(const T& t)
     {
         std::ostringstream os;
-        os << "0x" << std::setw(8) << std::setfill('0') << std::hex << t;
+        os << "0x" << std::setw(sizeof(T) * 2) << std::setfill('0') << std::hex << t;
         return os.str();
     }
 
