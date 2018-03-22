@@ -71,10 +71,9 @@ namespace stdplus
                 return defaultValue;
             }
         }
-
-
+        
         template<>
-        inline bool CmdParser::getValue<bool>(const std::string & key, const bool & defaultValue)
+        inline bool getValue<bool>(const std::string & key, const bool & defaultValue)
         {
             if (isExistKey(key))
             {
@@ -104,8 +103,7 @@ namespace stdplus
             }
         
         }
-
-
+        
         template<typename T>
         inline void setValue(const std::string & key, const T & value)
         {

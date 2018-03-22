@@ -54,7 +54,7 @@ namespace stdplus
         if (ss.fail())
             throw std::logic_error("Error convert " + str 
                 + " to special type in to<...> (ConvertPlus.hpp)");	
-
+        
         return val;
     }
 
