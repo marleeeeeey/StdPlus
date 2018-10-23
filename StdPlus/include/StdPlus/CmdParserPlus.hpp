@@ -72,38 +72,6 @@ namespace stdplus
             }
         }
         
-        template<>
-        inline bool getValue<bool>(const std::string & key, const bool & defaultValue)
-        {
-            if (isExistKey(key))
-            {
-                std::string strValue = getStrValueByKey(key);
-                strValue = stdplus::trim(strValue);
-                strValue = stdplus::tolower(strValue);
-        
-                if (strValue == "true")
-                    return true;
-        
-                try
-                {
-                    int intValue = stdplus::to<int>(strValue);
-                    if (intValue != 0)
-                        return true;
-                }
-                catch (std::logic_error &)
-                {
-                    return defaultValue;
-                }
-        
-                return defaultValue;
-            }
-            else
-            {
-                return isExistIdx(key);
-            }
-        
-        }
-        
         template<typename T>
         inline void setValue(const std::string & key, const T & value)
         {
@@ -218,6 +186,38 @@ namespace stdplus
         std::vector<std::string> m_requests;
     };
 	
+
+    template<>
+        inline bool CmdParser::getValue<bool>(const std::string & key, const bool & defaultValue)
+        {
+            if (isExistKey(key))
+            {
+                std::string strValue = getStrValueByKey(key);
+                strValue = stdplus::trim(strValue);
+                strValue = stdplus::tolower(strValue);
+        
+                if (strValue == "true")
+                    return true;
+        
+                try
+                {
+                    int intValue = stdplus::to<int>(strValue);
+                    if (intValue != 0)
+                        return true;
+                }
+                catch (std::logic_error &)
+                {
+                    return defaultValue;
+                }
+        
+                return defaultValue;
+            }
+            else
+            {
+                return isExistIdx(key);
+            }
+        
+        }
 	
 	template<>
 	inline bool CmdParser::getValue<bool>(const std::string & key)
