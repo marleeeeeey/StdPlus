@@ -9,7 +9,7 @@
 
 #include "StdInclude.h"
 #include "MacrosPlus.hpp"
-#include ".\..\persistence1d.hpp"
+#include "./../persistence1d.hpp"
 
 namespace stdplus
 {

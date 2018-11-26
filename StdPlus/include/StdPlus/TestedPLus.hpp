@@ -40,7 +40,7 @@ namespace stdplus
 		return "Error, the specified delimiter was not found";
 	}
 
-    // MARLEEEEEEY check reference return!!!
+/*    // MARLEEEEEEY check reference return!!!
     inline std::ifstream openTextFile(const std::string & fName)
     {
         std::ifstream  f;
@@ -52,7 +52,7 @@ namespace stdplus
         }
         return f;
     }
-
+*/
     inline std::string readText(std::ifstream & ifs)
     {
         std::string retString;

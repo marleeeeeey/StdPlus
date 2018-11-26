@@ -6,10 +6,7 @@
 
 
 #pragma once
-
-
 #include "StdInclude.h"
-#include <windows.h>        // GetSystemTime(...)
 
 namespace stdplus
 {
@@ -42,21 +39,21 @@ inline std::ostream & operator<<(std::ostream & os, const stdplus::Time & d)
 
 namespace stdplus
 {
-
     inline Time getCurrentTime()
     {
-        SYSTEMTIME st;        
-        GetSystemTime(&st); // WINDOWS ONLY
+		time_t seconds = time(NULL);
+		tm* timeInfo = localtime(&seconds);
 
-        Time t = { 0 };
-        t.year = st.wYear;
-        t.month = st.wMonth;
-        t.day = st.wDay;
-        t.hour = st.wHour;
-        t.minute = st.wMinute;
-        t.second = st.wSecond;
-        t.millisecond = st.wMilliseconds;
-
+		Time t = { 0 };
+        t.year = timeInfo->tm_year + 1900;
+        t.month = timeInfo->tm_mon;
+        t.day = timeInfo->tm_mday;
+        t.hour = timeInfo->tm_hour;
+        t.minute = timeInfo->tm_min;
+        t.second = timeInfo->tm_sec;
+		
+		t.millisecond = timeInfo->tm_sec*1000; // ctime doesnt have milliseconds TODO it Later
+		
         return t;
     }
 
@@ -74,7 +71,6 @@ namespace stdplus
         return ss.str();
     }
        
-
     inline std::string timeStr(const char splitter = '-')
     {
         Time t = getCurrentTime();
@@ -99,6 +95,5 @@ namespace stdplus
     {
         return stdplus::dateTimeStr() + " " + mainName + " log.txt";
     }
-
 }
 

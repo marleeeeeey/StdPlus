@@ -7,36 +7,37 @@
 #pragma once
 #include "OutputSystemPlus.hpp"
 
+#if (defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__))
+	#define STD_PLUS_WIN32
+#elif (defined(__linux__))
+	#define STD_PLUS_LINUX
+#endif
 
 #if defined(STD_PLUS_DLL)    
-//#  pragma message("USED STD_PLUS_DLL")
-#  if defined(STD_PLUS_EXPORT)
-//#    pragma message("USED EXPORT API")
-#    define STD_PLUS_API __declspec(dllexport)
-#  else
-//#    pragma message("USED IMPORT API")
-#    pragma comment(lib, "StdPlus.lib")
-#    define STD_PLUS_API __declspec(dllimport)  
-#  endif
+	#if (defined(STD_PLUS_WIN32))
+		#ifdef STD_PLUS_EXPORT
+			#define STD_PLUS_API __declspec(dllexport)
+		#else 
+			#pragma comment(lib, "StdPlus.lib")
+			#define STD_PLUS_API __declspec(dllimport)  
+		#endif 
+	#elif (defined(STD_PLUS_LINUX))
+		#define STD_PLUS_API
+	#endif 
 
-
-namespace stdplus
-{
-    STD_PLUS_API OutputSystem & oneOutputSystem();
-}
-
+	namespace stdplus
+	{
+		STD_PLUS_API OutputSystem & oneOutputSystem();
+	}
 #else    
-//#  pragma message("USED STD_PLUS_INCLUDE_MODE")
-
-namespace stdplus
-{
-    inline OutputSystem & oneOutputSystem()
-    {
-        static OutputSystem os;
-        return os;
-    }
-}
-
+	namespace stdplus
+	{
+		inline OutputSystem & oneOutputSystem()
+		{
+			static OutputSystem os;
+			return os;
+		}
+	}
 #endif
 
 

@@ -14,7 +14,7 @@
 #include <iostream>
 #include <iomanip>      // std::setw
 #include <string>
-#include <conio.h>
+
 
 #include <sstream>      // std::ostringstream
 #include <fstream>
