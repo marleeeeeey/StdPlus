@@ -24,7 +24,7 @@ namespace stdplus
 
     inline char waitKeyboardKey()
     {
-        char val = _getch();
+        char val = std::cin.get(); //_getch();
         val = tolower(val);
 
         return val;

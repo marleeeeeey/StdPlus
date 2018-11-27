@@ -200,7 +200,7 @@ namespace stdplus
 
             while (true)
             {
-                char ch = _getch();
+                char ch = std::cin.get();//_getch();
 
                 if (ch == m_keyExit)
                     exit(0);
