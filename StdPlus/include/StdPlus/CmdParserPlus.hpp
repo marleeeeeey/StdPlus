@@ -7,8 +7,8 @@
 #pragma once
 
 #include "StdInclude.h"
-
-
+#include "StringPlus.hpp"
+#include "TestedPlus.hpp"
 
 namespace stdplus
 {
