@@ -67,5 +67,9 @@ int main()
     //example_convert_plus();
     example_container_plus();
 
+	stdplus::Time t = stdplus::getCurrentTime();
+	std::cout << t << std::endl;
+	
+	
     LOG_STD_PAUSE;
 }

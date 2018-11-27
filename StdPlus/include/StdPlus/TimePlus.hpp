@@ -4,9 +4,12 @@
  * last version https://github.com/marleeeeeey/StdPlus
 */
 
-
 #pragma once
 #include "StdInclude.h"
+
+#if (defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__))
+	#include <Windows.h>
+#endif
 
 namespace stdplus
 {
@@ -41,19 +44,41 @@ namespace stdplus
 {
     inline Time getCurrentTime()
     {
-		time_t seconds = time(NULL);
-		tm* timeInfo = localtime(&seconds);
+		#if (defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__))
+			SYSTEMTIME st;
+			GetSystemTime(&st); // WINDOWS ONLY
 
-		Time t = { 0 };
-        t.year = timeInfo->tm_year + 1900;
-        t.month = timeInfo->tm_mon;
-        t.day = timeInfo->tm_mday;
-        t.hour = timeInfo->tm_hour;
-        t.minute = timeInfo->tm_min;
-        t.second = timeInfo->tm_sec;
-		
-		t.millisecond = timeInfo->tm_sec*1000; // ctime doesnt have milliseconds TODO it Later
-		
+			Time t = { 0 };
+			t.year = st.wYear;
+			t.month = st.wMonth;
+			t.day = st.wDay;
+			t.hour = st.wHour;
+			t.minute = st.wMinute;
+			t.second = st.wSecond;
+			t.millisecond = st.wMilliseconds;
+	
+		#elif (defined(__linux__))	
+			std::time_t seconds = time(NULL);
+			std::tm timeInfo{};
+			#if defined(__unix__)
+				localtime_r(&seconds, &timeInfo);
+			#elif defined(_MSC_VER)
+				localtime_s(&timeInfo, &seconds);
+			#else
+				static std::mutex mtx;
+				std::lock_guard<std::mutex> lock(mtx);
+				timeInfo = *std::localtime(&seconds);
+			#endif
+
+			Time t = { 0 };
+			t.year = timeInfo.tm_year + 1900;
+		t.month = timeInfo.tm_mon;
+		t.day = timeInfo.tm_mday;
+		t.hour = timeInfo.tm_hour;
+		t.minute = timeInfo.tm_min;
+		t.second = timeInfo.tm_sec;
+		t.millisecond = timeInfo.tm_sec;
+		#endif		
         return t;
     }
 
