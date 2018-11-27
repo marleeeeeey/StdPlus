@@ -13,7 +13,7 @@ namespace qtplus
 {    
     inline void qtConsoleOn(bool isInputToo = false)
     {
-       // AllocConsole();
+        AllocConsole();
     
         freopen("CONOUT$", "wt", stdout);
         freopen("CONOUT$", "wt", stderr);
